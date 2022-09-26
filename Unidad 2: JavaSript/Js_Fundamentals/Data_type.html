@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript: Date type</title>
+</head>
+
+<body>
+    <h4> Data type</h4>
+    <p>
+        los tipos de datos de JavaScript y sus características únicas.
+
+        <b>datos primitivos: </b>
+        null
+        undefined
+        boolean
+        number
+        string
+
+        <b>datos complejo:</b>
+        object
+    </p>
+    <script>
+
+
+        // Js es un lengujae dinamico que no necesita que un variable esté asociada con un tipo. 
+        // una variable puede contener un valor de diferentes tipos. 
+
+        let counter = 120; // counter is a number
+        counter = false;   // counter is now a boolean
+        counter = "foo";   // counter is now a string
+
+
+        // para obtener el tipo actual del valor que almacena la variable, 
+        //utiliza el operador typeof:
+
+        let numero = 120;
+        console.log(Number(numero));
+
+        let boleano = false;
+        console.log(Boolean(boleano));
+
+        let cadena = "Hi";
+        console.log(String(cadena));
+
+
+        // TIPO INDEFINIDO: cuando se declara una variable pero no se inicializa, 
+        //se le asigna el valor de undefined
+
+        let indefinido;
+        console.log(indefinido);        // undefined
+        console.log(typeof indefinido); // undefined
+
+        console.log(typeof undeclaredVar); // undefined
+
+
+        //TIPO NULL: 
+        let obj = null;
+        console.log(typeof obj); // object
+
+        console.log(null == undefined); // true
+
+        // TIPO NUMÉRICO: tanto enteros como flotantes
+        let num = 100;
+        let num2 = 0.05;
+
+        let price = 200.00; // interpreted as an integer 200
+
+        // obtencion de rangos
+        console.log(Number.MAX_VALUE); // 1.7976931348623157e+308
+        console.log(Number.MIN_VALUE); // 5e-324
+
+        //representacion del infinito.
+        console.log(Number.MAX_VALUE + Number.MAX_VALUE); // Infinity
+        console.log(-Number.MAX_VALUE - Number.MAX_VALUE); // -Infinity
+
+        // TIPO NaN: no es un número (o invalido). no es igual a ningun valor. incluido el mismo.
+        // culaquier operacion con el da NaN
+        console.log('a' / 2); // NaN;
+        console.log(NaN / 2); // NaN
+        console.log(NaN == NaN); // false
+
+        /*TIPO CADENA: ecuencia de cero o más caracteres. 
+        Si desea usar comillas simples o dobles en una cadena literal, debe usar la barra invertida
+        las cadenas son inmutables, se puede crear una apartir de otra 
+        */
+
+        let message = 'I\'m also a valid string'; // use \ to escape the single quote (')
+        let str = 'JavaScript';
+        str = str + ' String'; // 'Javascript String'
+
+        /*TIPO BOOLEANO: dos valores, true y false*/
+        let inProgress = true;
+        let completed = false;
+
+        console.log(typeof completed); // boolean
+
+        // Para convertir un valor de otro tipo de datos en un valor booleano,
+        //utilice la Boolean()
+        console.log(Boolean('Hi'));// true
+        console.log(Boolean(''));  // false
+
+        console.log(Boolean(20));  // true
+        console.log(Boolean(Infinity));  // true
+        console.log(Boolean(0));  // false
+
+        console.log(Boolean({ foo: 100 }));  // true on non-empty object
+        console.log(Boolean(null));// false
+
+        /*TIPO OBJETO: un objeto es una colección de  propiedades , 
+        donde cada propiedad se define como un par clave-valor.*/
+
+        let person = {
+            firstName: 'John',
+            lastName: 'Doe'
+        };
+
+        // un objeto puede tener otro objeto
+        let contact = {
+            firstName: 'John',
+            lastName: 'Doe',
+            email: 'john.doe@example.com',
+            phone: '(408)-555-9999',
+            address: {// objetp dentro de objeto
+                building: '4000',
+                street: 'North 1st street',
+                city: 'San Jose',
+                state: 'CA',
+                country: 'USA'
+            }
+        }
+
+        // anotacion para obtener propiedas: 
+        console.log(contact.firstName);
+        console.log(contact.lastName);
+    </script>
+</body>
+
+</html>

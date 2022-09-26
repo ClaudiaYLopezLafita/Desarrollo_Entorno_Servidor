@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript: Variables</title>
+</head>
+
+<body>
+    <h4> JavaScript varibales and how to use </h4>
+    <script>
+        // declarar: se puede realizar con un valor inicial o no
+
+        var message; // no libera memoria
+
+        let Message; // libera memoria
+
+
+        // inicializar una variable: identificador seguido de un = y el valor correspondiente. 
+
+        let item;
+        item = "Hello";
+
+        let nom = "Adiós";
+
+        // podemos declarar dos o mas varibles usando una sola declaración
+
+        let varUno = "primera variable",
+            varDos = "segunda variable";
+
+
+        // Cambio: del valor de una variable
+
+        let message = "Hello";
+        message = 'Bye';
+
+
+        //Variables no definidad VS no declaradas. 
+
+        //V. no definida: se ha declarado pero que no se ha inicializado conun valor
+
+        let message;
+        console.log(message); // undefined
+
+        //V no declarada: es una variable que no ha sido declrada-
+
+        console.log(counter); // ReferenceError: counter is not defined
+
+
+        //CONSTANTES: tiene un valor que n o cambia. 
+
+        const workDay = 5;
+
+        workDay = 2; //  Uncaught TypeError: Assignment to constant variable.
+
+    </script>
+</body>
+
+</html>
