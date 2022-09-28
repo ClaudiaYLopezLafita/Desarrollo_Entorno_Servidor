@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Ejercicio 5</h3>
+    <pre>
+        Crear un input y un button, cuando le demos al botón, se añadirá el texto que
+        hemos puesto en el input en un div vacío. Recuerda se añadirá el texto, no se
+        machaca lo que haya en el div.
+    </pre>
+
+    <div>
+        <label for="myText">Introduce un texto:</label>
+        <input type="text" id="myText">
+        <button onclick="addText()">Add</button>
+    </div>
+
+    <p>Texto añadido: </p>
+    <p id="addText"></p>
+    
+    <script>
+
+        function addText(){
+            var texto = document.getElementById("myText");
+            var mostrar = document.getElementById("addText");
+            mostrar.innerHTML += texto.value;
+        }
+    </script>
+</body>
+</html>

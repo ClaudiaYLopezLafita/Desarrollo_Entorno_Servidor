@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Ejercicio 3</h3>
+    <pre>
+        Escribir un programa en el cual se ingresen cuatro números enteros, calcular e
+        informar la suma de los dos primeros y el producto del tercero y el cuarto.
+    </pre>
+    
+    <button onclick="myFunction()">Operations</button>
+
+    <p>La suma de los dos primeros numeros es: </p>
+    <p id="sum"></p>
+    <p> El producto de los dos ultimos numeros es: </p>
+    <p id="produc"></p>
+
+    <script>
+        
+        let result;
+        let result2;
+
+        function myFunction() {
+           
+            let num = prompt("Introduce el primero");
+            let numDos = prompt("Introduce el segundo");
+            let numTres = prompt("Introduce el tercero");
+            let numCuatro = prompt("Introduce el cuarto");
+
+            result = parseInt(num)+parseInt(numDos);
+            result2 = parseInt(numTres)+parseInt(numCuatro);
+
+            document.getElementById("sum").innerHTML = result;
+            document.getElementById("produc").innerHTML = result2;
+        }
+
+    </script>
+</body>
+</html>
