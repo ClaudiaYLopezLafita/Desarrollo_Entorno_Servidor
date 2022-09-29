@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>Ejercicio 3</h3>
+    <pre>
+        Crea tres radiobuttons, cuando uno de ellos se seleccione que muestre un
+        mensaje diciendo que opción se seleccionó
+    </pre>
+
+    <label for="type"> Escoja una opcion: </label>
+    <ul style="list-style-type: none;">
+        <li>
+            <input type="radio" name="optionA" id="typeA" onclick="election()">Gato
+        </li>
+        <li>
+            <input type="radio" name="optionA" id="typeB" onclick="election()">Perro
+        </li>
+        <li>
+            <input type="radio" name="optionA" id="typeC" onclick="election()">Serpiente
+        </li>
+    </ul>
+
+    <script>
+        function election() {
+
+            if ( document.getElementById("typeA").checked){
+                alert(" Usted a elegido Gato");
+            } else if (document.getElementById("typeB").checked) {
+                alert(" Usted a elegido Perro");
+            } else if(document.getElementById("typeC").checked){
+                alert(" Usted a elegido Serpiente")
+            }
+            
+        }
+    </script>
+</body>
+
+</html>

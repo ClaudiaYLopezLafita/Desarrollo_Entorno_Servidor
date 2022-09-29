@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Ejercicio 2</h3>
+    <pre>
+        Dado un input y un botón, escribir nombres de personas (solo controlamos que
+        no esté vacío) y lo mostramos en una lista desordenada.
+    </pre>
+
+    <label for="name"> Intruduce un nombre</label> 
+    <input type="text" id="myName" placeholder="Inserte nombre">
+    <button type="submit" onclick="addName()">Insertar</button>
+
+    <p><b>Lista de nombres:</b></p>
+    <ul id="listName"></ul>
+
+    <script>
+        function addName(){
+                var newName = document.getElementById("myName");
+                isEmpty(newName.value);
+
+                var list = document.createElement("li");
+                list.innerHTML = newName.value;
+                listName.appendChild(list);
+                
+
+        }
+
+        function isEmpty(str) {
+            if (str === ""){
+                alert( "Introduce un nombre");
+            }
+        }
+
+    </script>
+</body>
+</html>
