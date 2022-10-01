@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 12</title>
+</head>
+<body>
+    <h3>Ejercicio 12</h3>
+    <pre>
+        Mostrar un mensaje indicando si el número introducido en una caja de texto es
+        par o impar.
+    </pre>
+
+    <label for="number"> Intriduce un numero: </label>
+    <input type="text" id="number">
+    <button type="submit" onclick="isEven()">validar</button>
+
+    <p>El numero ingresado es: </p>
+    <p id="result"></p>
+
+    <script>
+        function isEven(){
+            let num = document.getElementById('number').value;
+            var number = parseInt(num);
+
+            if(number%2==0){
+                document.getElementById('result').innerHTML = 'PAR';
+            } else{
+                document.getElementById('result').innerHTML = 'IMPAR';
+            }
+        }
+    </script>
+</body>
+</html>
