@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 17</title>
+</head>
+<body>
+    <h3>Ejercicio 17</h3>
+    <pre>
+        De un aspirante a un empleo, que realizó un test de capacitación, se obtuvo la
+        siguiente información: nombre del aspirante, cantidad total de preguntas que se
+        le realizaron y cantidad de preguntas que contestó correctamente. Se pide
+        confeccionar un programa que lea los datos del aspirante e informe el nivel del
+        mismo según el porcentaje de respuestas correctas que ha obtenido, y
+        sabiendo que:
+            ● Nivel superior: Porcentaje>=90%.
+            ● Nivel medio: Porcentaje>=75%.
+            ● Nivel bajo: Porcentaje>=50%.
+            ● Fuera de nivel: Porcentaje&lt50%.
+    </pre>
+
+    <script>
+        var name, totalQuestion ,totalCorrect, percentage;
+
+        name = prompt('Inserte el nombre: ');
+        totalQuestion = parseInt(prompt('Numero de preguntas realizadas: '));
+        totalCorrect = parseInt(prompt('Numero de preguntas correctas : '));
+        percentage = (totalCorrect/totalQuestion)*100;
+
+        if(percentage>=90){
+            alert('Candidato '+name+'\n'+'Con el puntaje '+totalCorrect+'/'+totalQuestion
+            +' tiene una categoria: NIVEL SUPERIOR.')
+        } else if(percentage>=75){
+            alert('Candidato '+name+'\n'+'Con el puntaje '+totalCorrect+'/'+totalQuestion
+            +' tiene una categoria: NIVEL MEDIO.')
+        } else if(percentage>=50){
+            alert('Candidato '+name+'\n'+'Con el puntaje '+totalCorrect+'/'+totalQuestion
+            +' tiene una categoria: NIVEL BAJO.')
+        } else if(percentage<50){
+            alert('Candidato '+name+'\n'+'Con el puntaje '+totalCorrect+'/'+totalQuestion
+            +' tiene una categoria: FUERA DE NIVEL.')
+        }
+    </script>
+</body>
+</html>

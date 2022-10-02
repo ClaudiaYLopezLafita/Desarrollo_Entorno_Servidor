@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 15</title>
+</head>
+<body>
+    <h3>Ejercicio 15</h3>
+    <pre>
+        Escribe un programa que pida al usuario un día de la semana y que muestre un
+        mensaje con el día siguiente.
+        Si se introduce un valor que no corresponda a un día de la semana, se le    
+        mostrará un mensaje al usuario.
+    </pre>
+
+    <script>
+        var weekDay = prompt('Indique un dia de la semana: ');
+
+        switch(weekDay){
+            case 'Lunes':
+                alert('Martes');
+                break;
+            case 'Martes':
+                alert('Miercoles');
+                break;
+            case 'Miercoles':
+                alert('Jueves');
+                break;
+            case 'Jueves':
+                alert('Viernes');
+                break;
+            case 'Viernes':
+                alert('Sábado');
+                break;
+            case 'Sábado':
+                alert('Domingo');
+                break;
+            case 'Domingo':
+                alert('Lunes');
+                break;
+            default:
+                alert('Día incorrecto...')
+        }
+        
+    </script>
+</body>
+</html>

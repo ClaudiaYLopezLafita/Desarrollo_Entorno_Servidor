@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 13</title>
+</head>
+<body>
+    <h3>Ejercicio 13</h3>
+    <pre>
+        Recorrer mediante for-in una variable llamada texto que representa a la cadena
+        “ejemplo”.
+        ¿Qué resultados obtenemos al ejecutar? ¿Qué conclusión podemos extraer?
+    </pre>
+
+    <p id="result"></p>
+
+    <p>Obtenemos la palabra de nuevo, pero en nuestro caso al indicar que cada ciclo termine 
+        con un '-', vemos como se ha ido deletrando. 
+    </p>
+
+    <script>
+        var texto = 'Ejemplo';
+        let letters = ""
+
+        for(let x in texto){
+            letters += texto[x] + '-';   
+        }
+
+        document.getElementById('result').innerHTML = letters;
+    </script>
+</body>
+</html>

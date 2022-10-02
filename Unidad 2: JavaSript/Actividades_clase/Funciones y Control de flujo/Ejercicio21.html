@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 21</title>
+</head>
+
+<body>
+    <h3>Ejercicio 21</h3>
+    <pre>
+        Escribe una función iterativa que dado un número entero n, retorne un array
+        con todos los números enteros en orden decreciente desde n a 1.
+    </pre>
+
+    <p id="result"></p>
+    <script>
+        var n = prompt("Introduce los números que deseas que contenga el array");
+
+        var array = [];
+        function down(n) {
+
+            if (!n) return array; //Cuando n no sea verdad, porque 0 sabemos que es false.
+            //Los números enteros son verdaderos.
+            array.push(n);
+            down(n - 1);
+
+        }
+        down(n);
+
+        document.getElementById('result').innerHTML = array;
+    </script>
+</body>
+
+</html>

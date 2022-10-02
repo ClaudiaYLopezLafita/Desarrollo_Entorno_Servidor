@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 16</title>
+</head>
+<body>
+    <h3>Ejercicio 16</h3>
+    <pre>
+        Se ingresan tres valores por teclado, si todos son iguales se imprime la suma
+        del primero con el segundo y a este resultado se lo multiplica por el tercero
+        (tener en cuenta que puede haber tres condiciones simples).
+    </pre>
+
+    <script>
+        var num1, num2, num3;
+
+        num1 = parseInt(prompt('Ingrese el primer numero: '));
+        num2 = parseInt(prompt('Ingrese el segundo numero: '));
+        num3 = parseInt(prompt('Ingrese el tercer numero: '));
+
+        if(num1==num2 && num2==num3){
+            alert((num1+num2)*num3);
+        } else{
+            alert('algunos de los numeros no son iguales.')
+        }
+
+    </script>
+</body>
+</html>

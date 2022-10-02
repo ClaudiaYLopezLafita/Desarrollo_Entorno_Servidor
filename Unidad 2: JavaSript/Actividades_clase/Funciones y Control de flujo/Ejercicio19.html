@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 19</title>
+</head>
+<body>
+    <h3>Ejercicio 19</h3>
+    <pre>
+        Realizar un programa que introduciendo el mes y el año devuelva el número de
+        días que tiene dicho mes. Recordar que hay que controlar si el año es bisiesto.
+    </pre>
+
+    <script>
+        var month, year, leapYear;
+
+        month = prompt('Indica el mes: ');
+        year = parseInt(prompt('Indica el año: '));
+
+        if((year%4 == 0) && (year%100 != 0) && (year%400 == 0)){
+            leapYear = true;
+        } else {
+            leapYear = false;
+        }
+
+        if(leapYear){
+           if ( month == 'Abril' || month == 'Junio' 
+                || month == 'Septiembre' || month == 'Noviembre') {
+
+            alert(month+' tiene 30 días');
+
+           } else if ( month == 'Enero' || month == 'Marzo' || month == 'Mayo' || 
+                        month == 'Julio' || month == 'Agosto' || month == 'Octubre' || 
+                        month == 'Diciembte') {
+
+            alert(month+' tiene 31 días'); 
+            
+           } else if(month == 'Febrero') {
+            alert (month+' tiene 29 días (año bisiesto)');
+           }
+        } else{
+            if ( month == 'Abril' || month == 'Junio' 
+                || month == 'Septiembre' || month == 'Noviembre') {
+
+            alert(month+' tiene 30 días');
+
+           } else if ( month == 'Enero' || month == 'Marzo' || month == 'Mayo' || 
+                        month == 'Julio' || month == 'Agosto' || month == 'Octubre' || 
+                        month == 'Diciembte') {
+
+            alert(month+' tiene 31 días'); 
+            
+           } else if(month == 'Febrero') {
+            alert (month+' tiene 28 días (año NO bisiesto)');
+           }
+        }
+    </script>
+</body>
+</html>

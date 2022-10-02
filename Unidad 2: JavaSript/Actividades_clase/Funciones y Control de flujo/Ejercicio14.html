@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejecicio 14</title>
+</head>
+<body>
+    <h3>Ejercicio 14</h3>
+    <pre>
+        Crear un bucle desde 1 hasta 200 donde se muestre en consola únicamente
+        los números múltiplos de 5 y el número de números que no son primos.
+        Nota: Aplicar modulo (%)
+    </pre>
+    
+    <ul id="result"></ul>
+
+    <script>
+        var num;
+        
+        for (let i = 1; i <= 200; i++) {
+             if (i%5 == 0){
+                num += i + '<br>';
+             } 
+        }
+
+        document.getElementById('result').innerHTML = num;
+    </script>
+</body>
+</html>
