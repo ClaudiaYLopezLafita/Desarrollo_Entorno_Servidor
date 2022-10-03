@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 25 </title>
+</head>
+
+<body>
+    <h3>Ejercicio 25</h3>
+    <pre>
+        Leer una cadena de texto en un formulario y generar un array con la función
+        split(). Posteriormente, mostrar la siguiente información: Número de palabras,
+        primera palabra, última palabra.
+    </pre>
+
+    <label for="texto">Introduce una cadena de texto: </label>
+    <input type="text" id="texto">
+    <button type="submit" onclick="text()">Result</button>
+
+    <p><b>Resultado:</b></p>
+    <p id="result"></p>
+
+    <script>
+        function text() {
+        
+            let cadena, array, ultima, primera, numPalabras,separador= ' ';
+
+            cadena =document.getElementById("texto").value;
+            array = cadena.split(separador);
+
+            numPalabras = array.length;
+            primera= array[0];
+            ultima = array[numPalabras-1];
+
+            document.getElementById("result").innerHTML = "Numero de palabras: " + numPalabras + "<br>" +
+                "primera palabra: " + primera + "<br>" +
+                "Ultima palabra: " + ultima + "<br>";
+                
+        }
+    </script>
+</body>
+
+</html>

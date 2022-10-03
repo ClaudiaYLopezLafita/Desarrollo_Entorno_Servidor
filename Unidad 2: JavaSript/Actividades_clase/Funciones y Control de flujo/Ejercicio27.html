@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 27</title>
+</head>
+
+<body>
+    <h3>Ejercicio 27</h3>
+    <pre>
+        Realiza una página que contenga una función JavaScript para hacer
+        estadísticas sobre una cadena de texto que se introduzca, contando el número
+        de veces que aparece cada letra. Se deberá mostrar un listado con las letras
+        del abecedario con el número de veces que aparece cada letra en la cadena
+        que se la pasa. Utilizar un Array para almacenar la información estadística. No
+        se tendrán en cuenta que pudiera haber tildes, consideraremos que no existen.
+    </pre>
+
+    <label for="texto">Introduce una cadena de texto: </label>
+    <input type="text" id="texto">
+    <button type="submit" onclick="text(cadena)">Result</button>
+
+    <p><b>Resultado:</b></p>
+    <p id="result"></p>
+
+    <script>
+        let cadena;
+
+        function text(cadena) {
+
+            let repeticiones, numRepeticiones, resultado;
+
+            numRepeticiones = 0;
+            cadena = document.getElementById('texto').value;
+            repeticiones = {};
+
+            for (let i = 0; i < cadena.length; i++) {
+
+                if (repeticiones.hasOwnProperty(cadena[i])) {
+                    // incremento de cada letra ya existe en repetidos. 
+                    repeticiones[cadena[i]] += 1;
+                } else {
+                    //para la primera vex de cada elemento
+                    repeticiones[cadena[i]] = 1;
+                }
+            }
+
+            // El método hasOwnProperty() devuelve un booleano indicando si el objeto tiene 
+            //la propiedad especificada.
+            // comprobamos si en la cadena repeticiones ya está el caracter que nos interesa
+
+            return console.log(repeticiones.toString());            
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Ejercicio Sencillo 1 Arrays. Mayor, Menor y Media</h1>
+
+    <label for="text">Introduce los enteros separados por comas: </label>
+    <input type="text" id="text"></input>
+    <input type="button" value="Cargar Ejemplo" onclick="ejemplo()"></input>
+    <br><input type="button" value="calcular" onclick="calcular()"></input>
+    <input type="button" value="reiniciar" onclick="reiniciar()">
+
+    <p id="result"></p>
+
+    <script>
+        function ejemplo() {
+
+            document.getElementById("text").value = "1,2,3,85";
+
+        }
+
+        function reiniciar() {
+            location.reload();
+            //se usa para recargar el documento actual. 
+            //Este método actualiza los documentos actuales. 
+            //Es similar al botón de actualización en el navegador. 
+        }
+
+        function calcular() {
+            var array = document.getElementById("text").value.split(/,/);
+
+            var mayor = 0, menor = 0, suma = 0, media = 0;
+
+            for (i = 0; i < array.length; i++) {
+                suma += parseInt(array[i]) ;
+            }
+
+            media = suma/array.length;
+
+            for (i = 0; i < array.length; i++) {
+                if (parseInt(array[i]) < menor){
+                    menor = array[i];
+                }
+            }
+
+            for (i = 0; i < array.length; i++) {
+                if (parseInt(array[i]) > mayor){
+                    mayor = array[i];
+                }
+            }
+
+            document.getElementById("result").innerHTML = "La suma es: " + suma + "<br>" +
+                "La media es: " + media + "<br>" +
+                "El mayor es: " + mayor + "<br>" +
+                "El menor es: " + menor + "<br>"
+
+        }
+
+    </script>
+</body>
+
+</html>

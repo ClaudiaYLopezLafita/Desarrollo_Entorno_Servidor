@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 23</title>
+</head>
+<body>
+    <h3>Ejercicio 23</h3>
+    <pre>
+        Calcular el precio de un producto introduciendo la base imponible (BI) y
+        seleccionando el tipo de iva que se le aplica (normal:21%, reducido:10%) e
+        introduciendo el peso para calcular los gastos de envío (Peso &lt 1Kg: 3€, Peso &lt
+        3kg:5€ y Peso>=3Kg 10€).
+
+        Precio= BI + Cuota IVA (%sobreBI) + Gastos envío
+    </pre>
+
+    <label for="bi">Base Imponible: </label>
+    <input type="text" id="bi"><br>
+    <label for="iva">I.V.A</label>
+    <input type="text" id="iva"><br>
+    <label for="peso"> Peso: </label>
+    <input type="text" id="peso">
+    <br>
+    <button type="submit" onclick="finalPrice()">Calcular</button>
+
+    <p>Precio del producto:</p>
+    <p id="result"></p>
+
+    <script>
+        function finalPrice(){
+            let priceFinal, bi, iva, peso;
+
+        bi = parseFloat(document.getElementById('bi').value);
+        iva = document.getElementById('iva').value;
+        peso = parseFloat(document.getElementById('peso').value);
+        
+        if(peso < 1){
+            if(iva=='normal'){
+                priceFinal = bi+ (bi*0.21)+3;
+            } else{
+                priceFinal = bi+ (bi*0.10)+3;
+            }
+        } else if(peso<3){
+            if(iva=='normal'){
+                priceFinal = bi+ (bi*0.21)+5;
+            } else{
+                priceFinal = bi+ (bi*0.10)+5;
+            }
+        } else if(peso>=3){
+            if(iva=='normal'){
+                priceFinal = bi+ (bi*0.21)+10;
+            } else{
+                priceFinal = bi+ (bi*0.10)+10;
+            }
+        }
+
+        document.getElementById('result').innerHTML=priceFinal+'€';
+        }
+    </script>
+
+</body>
+</html>
