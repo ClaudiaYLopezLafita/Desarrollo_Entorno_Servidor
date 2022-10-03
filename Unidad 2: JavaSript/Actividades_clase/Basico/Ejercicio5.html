@@ -9,25 +9,29 @@
 <body>
     <h3>Ejercicio 5</h3>
     <pre>
-        Crear un input y un button, cuando le demos al botón, se añadirá el texto que
-        hemos puesto en el input en un div vacío. Recuerda se añadirá el texto, no se
-        machaca lo que haya en el div.
+        Desarrollar un programa que pida el ingreso del precio de un artículo y la
+        cantidad que lleva el cliente. Mostrar lo que debe abonar el comprador.
+        Ingresar por teclado un precio con decimales y la cantidad sin decimales, es
+        decir un entero.
     </pre>
 
-    <div>
-        <label for="myText">Introduce un texto:</label>
-        <input type="text" id="myText">
-        <button onclick="addText()">Add</button>
-    </div>
+    <button onclick="myBill()">Factura</button>
 
-    <p>Texto añadido: </p>
-    <p id="addText"></p>
-    
+    <p>El total a pagar es: </p>
+    <p id="total"></p>
+
     <script>
-        function addText(){
-            var texto = document.getElementById("myText");
-            var mostrar = document.getElementById("addText");
-            mostrar.innerHTML += texto.value;
+        
+        let result;
+
+        function myBill() {
+           
+            let price = prompt("El precio");
+            let cantidad = prompt("Introduce la cantidad");
+
+            result = parseFloat(price)*parseInt(cantidad);
+
+            document.getElementById("total").innerHTML = result;
         }
     </script>
 </body>
