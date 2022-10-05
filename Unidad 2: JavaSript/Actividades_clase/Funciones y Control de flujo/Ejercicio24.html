@@ -30,7 +30,7 @@
             if (dado == num) {
 
                 cantidad = apuesta * 2;
-                alert(`Ha salido el número: ${num} y has acertado.`);
+                alert(`Ha salido el número: ${dado} y has acertado.`);
 
                 if (cantidad <= 0) {
                     alert('Game Over. Sin saldo');
@@ -47,7 +47,7 @@
             } else {
                 
                 cantidad = cantidad - apuesta;
-                alert(`Ha salido el número: ${num} y has fallado.`);
+                alert(`Ha salido el número: ${dado} y has fallado.`);
 
                 if (cantidad <= 0) {
                     alert('Game Over. Sin saldo');

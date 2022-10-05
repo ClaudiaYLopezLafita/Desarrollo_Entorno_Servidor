@@ -34,27 +34,38 @@
         }
 
         function calcular() {
-            var array = document.getElementById("text").value.split(/,/);
 
-            var mayor = 0, menor = 0, suma = 0, media = 0;
+            let array, mayor, menor, suma, media;
+
+            array = document.getElementById("text").value.split(/,/);
+            mayor = 0, menor = array[0],suma = 0, media = 0;
 
             for (i = 0; i < array.length; i++) {
-                suma += parseInt(array[i]) ;
+
+                suma += parseInt(array[i]);
+
+                if (parseInt(array[i]) > mayor){
+                    mayor = array[i];  
+                }
+
+                if(parseInt(array[i]) < menor){
+                    menor = array[i];
+                }
             }
 
             media = suma/array.length;
 
+           /*for (i = 0; i < array.length; i++) {
+                if (parseInt(array[i]) > mayor){
+                    mayor = array[i];
+                }
+            }
             for (i = 0; i < array.length; i++) {
                 if (parseInt(array[i]) < menor){
                     menor = array[i];
                 }
             }
-
-            for (i = 0; i < array.length; i++) {
-                if (parseInt(array[i]) > mayor){
-                    mayor = array[i];
-                }
-            }
+            */
 
             document.getElementById("result").innerHTML = "La suma es: " + suma + "<br>" +
                 "La media es: " + media + "<br>" +

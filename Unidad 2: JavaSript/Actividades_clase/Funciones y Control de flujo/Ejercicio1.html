@@ -20,14 +20,16 @@
 
     <script>
         function diferencia(){
-            var numOne = document.getElementById("first").value;
-            var numTwo = document.getElementById("second").value;
+            var numOne = parseInt(document.getElementById("first").value);
+            var numTwo = parseInt(document.getElementById("second").value);
 
-            if(parseInt(numOne) > parseInt(numTwo)){
+            /*if(parseInt(numOne) > parseInt(numTwo)){
                 alert("El mayor es: "+numOne);
             } else{
                 alert("El mayor es: "+numTwo);
-            }
+            }*/
+            
+            numOne > numTwo ? alert("El mayor es: "+numOne) : alert("El mayor es: "+numTwo);
         }
     </script>
 </body>
