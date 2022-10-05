@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 28</title>
+</head>
+
+<body>
+    <h3>Ejercicio 28</h3>
+    <pre>
+        Realizar un programa que se introduzca la fecha de nacimiento y devuelva el
+        signo del zodiaco.
+    </pre>
+
+    <label for="dia">Indica el dia de nacimiento: </label>
+    <input id="dia" required="required" type="number" />
+    <label for="mes">Indica el mes de nacimiento: </label>
+    <input id="mes" required="required" type="number" />
+    <label for="mes">Indica el año de nacimiento: </label>
+    <input id="anio" required="required" type="number" />
+    <button type="submit" onclick="zodiac()">Go</button>
+
+    <script>
+
+        function zodiac() {
+
+            let dia, mes;
+
+            dia = parseInt(document.getElementById('dia').value);
+            mes = parseInt(document.getElementById('mes').value);
+            anio = parseInt(document.getElementById('anio').value);
+
+
+            if ((dia >= 21 && mes == 3) || (dia <= 20 && mes == 4))
+                alert(`${dia}/${mes}/${anio}: Aries`);
+            if ((dia >= 24 && mes == 9) || (dia <= 23 && mes == 10))
+                alert(`${dia}/${mes}/${anio}: Libra`);
+            if ((dia >= 21 && mes == 4) || (dia <= 21 && mes == 5))
+                alert(`${dia}/${mes}/${anio}: Tauro`);
+            if ((dia >= 24 && mes == 10) || (dia <= 22 && mes == 11))
+                alert(`${dia}/${mes}/${anio}: Escorpio`);
+            if ((dia >= 22 && mes == 5) || (dia <= 21 && mes == 6))
+                alert(`${dia}/${mes}/${anio}: Geminis`);
+            if ((dia >= 23 && mes == 11) || (dia <= 21 && mes == 12))
+                alert(`${dia}/${mes}/${anio}: Sagitario`);
+            if ((dia >= 21 && mes == 6) || (dia <= 23 && mes == 7))
+                alert(`${dia}/${mes}/${anio}: Cancer`);
+            if ((dia >= 22 && mes == 12) || (dia <= 20 && mes == 1))
+                alert(`${dia}/${mes}/${anio}: Capricornio`);
+            if ((dia >= 24 && mes == 7) || (dia <= 23 && mes == 8))
+                alert(`${dia}/${mes}/${anio}: Leo`);
+            if ((dia >= 21 && mes == 1) || (dia <= 19 && mes == 2))
+                alert(`${dia}/${mes}/${anio}: Acuario`);
+            if ((dia >= 24 && mes == 8) || (dia <= 23 && mes == 9))
+                alert(`${dia}/${mes}/${anio}: Virgo`);
+            if ((dia >= 20 && mes == 2) || (dia <= 20 && mes == 3))
+                alert(`${dia}/${mes}/${anio}: Piscis`);
+        }
+
+    </script>
+</body>
+
+</html>

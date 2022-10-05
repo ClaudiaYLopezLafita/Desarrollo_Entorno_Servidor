@@ -21,38 +21,41 @@
 
     <label for="texto">Introduce una cadena de texto: </label>
     <input type="text" id="texto">
-    <button type="submit" onclick="text(cadena)">Result</button>
+    <button type="submit" onclick="text()">Result</button>
 
     <p><b>Resultado:</b></p>
     <p id="result"></p>
 
     <script>
-        let cadena;
 
-        function text(cadena) {
 
-            let repeticiones, numRepeticiones, resultado;
+        function text() {
 
-            numRepeticiones = 0;
+            let repeticiones, letras;
+
             cadena = document.getElementById('texto').value;
+            cadenaNew = cadena.replaceAll(" ","").toLowerCase();
             repeticiones = {};
 
-            for (let i = 0; i < cadena.length; i++) {
+            for (let i = 0; i < cadenaNew.length; i++) {
 
-                if (repeticiones.hasOwnProperty(cadena[i])) {
-                    // incremento de cada letra ya existe en repetidos. 
-                    repeticiones[cadena[i]] += 1;
+                if (repeticiones.hasOwnProperty(cadenaNew[i])) {
+                    // incremento +1 cada letra ya existe en repetidos.
+                    repeticiones[cadenaNew[i]] += 1;
                 } else {
-                    //para la primera vex de cada elemento
-                    repeticiones[cadena[i]] = 1;
+                    //para la primera vez de cada caracter.
+                    repeticiones[cadenaNew[i]] = 1 ;
                 }
             }
+
+            document.getElementById('result').innerHTML = JSON.stringify(repeticiones);    
+            console.log(Object.entries(repeticiones)) 
 
             // El método hasOwnProperty() devuelve un booleano indicando si el objeto tiene 
             //la propiedad especificada.
             // comprobamos si en la cadena repeticiones ya está el caracter que nos interesa
 
-            return console.log(repeticiones.toString());            
+            
         }
 
     </script>
