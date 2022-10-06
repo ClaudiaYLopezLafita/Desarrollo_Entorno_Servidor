@@ -9,10 +9,12 @@
 </head>
 
 <body>
-    <h3>Ejercicio 2</h3>
+    <h3>Ejercicio 2 Version 2</h3>
     <pre>
         Dado un input y un botón, escribir nombres de personas (solo controlamos que
         no esté vacío) y lo mostramos en una lista desordenada.
+
+        Optimización de código e introduccion de errores try/cath.
     </pre>
 
     <label for="name"> Intruduce un nombre</label>
@@ -22,23 +24,26 @@
     <p><b>Lista de nombres:</b></p>
     <ul id="listName"></ul>
 
+
     <script>
+
         function addName() {
 
-            let newName = document.getElementById("myName");
-            
-            isEmpty(newName.value);
+            let newName;
 
-            let list = document.createElement("li");
-            list.innerHTML = newName.value;
-            listName.appendChild(list);
+            newName = document.getElementById("myName").value;
 
-        }
+            try {
+                if (newName.length == 0) throw "empty";
 
-        function isEmpty(str) {
-            if (str === "") {
-                alert("Introduce un nombre");
-            }
+                let list = document.getElementById('listName');
+                list.innerHTML += `<li>${newName}</li>`;
+                
+            } catch (err) {
+
+                alert("Input is " + err);
+
+            } 
         }
 
     </script>

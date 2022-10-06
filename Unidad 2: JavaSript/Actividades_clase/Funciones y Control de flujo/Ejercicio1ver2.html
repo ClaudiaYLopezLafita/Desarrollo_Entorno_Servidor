@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+</head>
+
+<body>
+    <h3>Ejercicio 1 version 2</h3>
+    <pre>
+        Crear dos input de números y un botón, al pulsar el botón, mostrar en un alert
+        quien es el mayor de los dos.
+
+        Introduccion de codigo try/cath para implantación de errores
+    </pre>
+
+    <label for="numbers">Introduce dos números:</label> <br>
+    <input type="text" id="first">
+    <input type="text" id="second">
+    <button onclick="diferencia()" type="submit">¿Quién es el mayor?</button>
+
+    <script>
+        function diferencia() {
+
+            let numOne = document.getElementById("first").value;
+            let numTwo = document.getElementById("second").value;
+
+            try {
+                if (numOne == "" || numTwo == "") throw "empty";
+                if (isNaN(numOne) || isNaN(numTwo)) throw "not a number";
+
+                numOne = Number(numOne);
+                numTwo = Number(numTwo);
+                
+                numOne > numTwo ? alert(`El mayor es ${numOne}`) : alert(`El mayor es ${numTwo}`);
+
+            }
+            catch (err) {
+                alert("Input is " + err);
+            }
+
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>Ejercicio 4</h3>
+    <pre>
+        Realizar un programa que lea por teclado dos números, si el primero es mayor
+        al segundo informar su suma y diferencia, en caso contrario informar el
+        producto y la división del primero respecto al segundo.
+
+        Validacion de insersion de numero con try/cath
+    </pre>
+
+    <script>
+
+        let num = prompt("Introduce el primero");
+        let numDos = prompt("Introduce el segundo");
+
+        try {
+
+            if(num.length ==0 || numDos.length==0) throw 'esta vacio';
+            if(isNaN(num) || isNaN(numDos)) throw 'no es un numero';
+
+            num = Number(num);
+            numDos = Number(numDos);
+
+            if (num > numDos) {
+
+                var sum = parseInt(num) + parseInt(numDos);
+                var rest = parseInt(num) - parseInt(numDos);
+
+                alert("La suma de " + num + " y " + numDos + " es de " + sum + "\n" +
+                    "La resta de " + num + " y " + numDos + " es de " + rest);
+            } else {
+
+                var div = parseInt(num) / parseInt(numDos);
+                var product = parseInt(num) * parseInt(numDos);
+
+                alert("La division de " + numDos + " y " + num + " es de " + div + "\n" +
+                    "EL producto de " + num + " y " + numDos + " es de " + product);
+
+            }
+
+        } catch (error) {
+            alert(`Un dato  ${error}`)
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>

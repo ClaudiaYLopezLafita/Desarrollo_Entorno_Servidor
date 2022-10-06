@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>Ejercicio 5</h3>
+    <pre>
+        Programa en el que se ingresen tres notas de un alumno, si el promedio es
+        menor que 5 mostrar el mensaje “Repetidor”, entre 5 y 7 mostrar el mensaje
+        “Superado” y si es mayor o igual a siete mostrar el mensaje ‘Promocionado’.
+        Tener en cuenta que para obtener el promedio debemos operar la suma de las
+        notas; y luego hacer promedio=suma/3;
+
+        Comprobacion try/catch para el lanzamiento de errores. 
+    </pre>
+
+    <script>
+
+
+        try {
+            let note1 = prompt("Introduce la primera nota");
+            let note2 = prompt("Introduce la segunda nota");
+            let note3 = prompt("Introduce la segundo nota");
+
+            if (note1.length == 0 || note2.length == 0 || note3.length == 0) throw "esta vacia";
+
+            note1 = Number(note1);
+            note2 = Number(note2);
+            note3 = Number(note3);
+
+            if (isNaN(note1) || isNaN(note2) || isNaN(note3)) throw "no es un numero";           
+
+            if (note1 < 0 || note2 < 0 || note2 < 0) throw "es menor de 0";
+            if (note1 > 10 || note2 > 10 || note3 > 10) throw "es mayor de 10";
+
+        }
+        catch (err) {
+            alert("Alguna nota " + err);
+        }
+
+        let prom = (parseFloat(note1)+ parseFloat(note2) + parseFloat(note3)) / 3;
+
+        if (prom < 5) {
+            alert("Repetidor");
+        } else if (prom > 5 && prom < 7) {
+            alert("Superado");
+        } else if (prom >= 7) {
+            alert("Promocionado");
+        }
+
+    </script>
+</body>
+
+</html>

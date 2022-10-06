@@ -20,8 +20,11 @@
 
     <script>
         function diferencia(){
+            
             var numOne = parseInt(document.getElementById("first").value);
             var numTwo = parseInt(document.getElementById("second").value);
+
+            numOne > numTwo ? alert("El mayor es: "+numOne) : alert("El mayor es: "+numTwo);
 
             /*if(parseInt(numOne) > parseInt(numTwo)){
                 alert("El mayor es: "+numOne);
@@ -29,7 +32,6 @@
                 alert("El mayor es: "+numTwo);
             }*/
             
-            numOne > numTwo ? alert("El mayor es: "+numOne) : alert("El mayor es: "+numTwo);
         }
     </script>
 </body>
