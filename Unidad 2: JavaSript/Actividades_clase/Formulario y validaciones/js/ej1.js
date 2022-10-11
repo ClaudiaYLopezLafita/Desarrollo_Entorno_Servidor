@@ -1,6 +1,6 @@
 function registrarUsuario() {
 
-    const formmulario = document.getElementById('Ej1').value;
+    const formmulario = document.getElementById('registro').value;
     const name = document.getElementById('nombre').value;
     const surname = document.getElementById('apellido').value;
     const email = document.getElementById('email').value;
