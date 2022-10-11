@@ -1,0 +1,38 @@
+form{
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+fieldset{
+    box-shadow: 2px 2px 2px gray;
+}
+
+fieldset legend{
+    text-align: center;
+    font-weight: bold;
+    font-size: x-large;
+}
+
+tr td:nth-child(2){
+    padding-left: 15%;
+}
+
+td{
+    padding-top: 5%;
+}
+
+label{
+    font-weight: bold;
+}
+input:focus {
+    background: lightblue;
+}
+
+textarea, input{
+    width: 90%;
+}
+

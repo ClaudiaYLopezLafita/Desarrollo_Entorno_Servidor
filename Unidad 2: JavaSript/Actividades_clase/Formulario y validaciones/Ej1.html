@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+
+    <link rel="stylesheet" href="css/ej1.css">
+    <script src="js/ej1.js"></script>
+
+</head>
+
+<body>
+    <h1>Formulario y Validaciones </h1>
+    <form class="registro">
+        
+        <fieldset>
+            <legend>Registro</legend>
+            <table>
+                <tr>
+                    <td><label for="name">Nombre</label></td>
+                    <td><input type="text" name="td_name" id="name"></td>
+                </tr>
+                <tr>
+                    <td><label for="apellido">Apellido</label></td>
+                    <td><input type="text" name="td_apellido" id="apellido"></td>
+                </tr>
+                <tr>
+                    <td><label for="email">Email</label></td>
+                    <td><input type="email" name="td_mail" id="email"></td>
+                </tr>
+                <tr>
+                    <td><label for="password">Password</label></td>
+                    <td><input type="password" name="td_password" id="password"></td>
+                </tr>
+                <tr>
+                    <td><label for="comentario">Comentario</label></td>
+                    <td><textarea name="td_comentarios" id="comentario" cols="30" rows="10"></textarea></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Acepta las <a href="http://">condiciones</a>
+                        <input type="checkbox" name="td_condiciones" id="condiciones" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button type="submit" onclick="registarUsario()">Enviar</button></td>
+                </tr>
+            </table>
+        </fieldset>
+    </form>
+
+</body>
+
+</html>
