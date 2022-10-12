@@ -1,78 +1,108 @@
-function registrarDatos() {
 
-    const formmulario = document.getElementById('formulario').value;
-    const dni = document.getElementById('dni').value;
-    const name = document.getElementById('name').value;
-    const surname = document.getElementById('surname').value;
-    const phone = document.getElementById('phone').value;
-    const commit = document.getElementById('comentrario').value;
-    const date = document.getElementById('hora').value;
+function registerUser() {
+
+    const $FORM = document.getElementById('formulario');
+    const $DNI = document.getElementById('dni')
+    const $NAME = document.getElementById('name');
+    const $SURNAME = document.getElementById('surname');
+    const $PHONE = document.getElementById('phone');
+    const $COMMENT = document.getElementById('comentario');
+    const $HOUR = document.getElementById('datetime');
 
     function handleSubmit(e) {
 
         e.preventDefault();
 
-        if (dni == false || isValidDni(dni) == false) {
+        const dni = $DNI.value;
+        const name = $NAME.value;
+        const surname = $SURNAME.value;
+        const phone = $PHONE.value;
+        const comentario = $COMMENT.value;
+        const hour = $HOUR.checked;
+
+        if(dni == false || isValidDni(dni) == false){
             debugger
-
-            alert('Formato correcto: 99.999.999-X \n -Debe de estar relleno');
-        }
-        else {
-            if (name == false || isValidName(name) == false) {
-
-                alert('El nombre debe ser un valor válido :' +
-                    '\n - Debe estar relleno' +
-                    '\n - Debe estar compuesto por una o dos palabras');
-
+            alert('El dni debe ser un valor válido :'+
+             '\n -Debe estar relleno'+ 
+             '\n -Debe seguir este modelo: 00.000.000-A');
+        } else{
+            
+            if (name == false || isValidText(name) == false) {
+                alert('El nombre debe ser un valor válido :'+
+                '\n -Debe estar relleno \n -Debe estar compuesto por 1 o 2 palabras');
             } else {
-                if (phone == false || isValidPhone(phone) == false) {
-
-                    alert('El teléfono tiene que tener un formato válido :' +
-                        '\n- Debe estar relleno' +
-                        '\n - Formato correcto: (+34) 954556817');
-
-                } else {
-                    if (commit == false || isValidCommit(commit) == false) {
-
-                        alert('El comentario tiene que tener un formato válido: ' +
-                            '\n - Debe estar relleno' +
-                            '\n - Máximo 250 caracteres');
-
+                if (surname == false || isValidText(surname) == false){
+                    alert('El o los apellidos debe ser un valor válido :'+
+                    '\n -Debe estar relleno \n -Debe estar compuesto por 1 o 2 palabras');
+                } else{
+                    if (phone == false || isValidPhone(phone) == false) {
+                        alert('El phone debe ser un valor válido :'+
+                        '\n -Debe estar relleno'+ 
+                        '\n -Debe estar compuesto por un prefijo (+00) y 9 números');
                     } else {
-                        if (date == false || isValidDate(date) == false) {
-                            alert('La hora tiene que tener un formato valido: ' +
-                                '\n - Debe estar relleno' +
-                                '\n - Formato hh:mm')
+                        if (comentario == false || isValidComent(comentario) == false) {
+                            alert('El comentario tiene que tener un formato válido :'+ 
+                            '\n-Debe estar relleno \n -Debe de tener un total de 50 caracteres');
+                        } else {
+                            if (isValidPassword(password) == false) {
+                                alert('El password debe tener:'+ 
+                                '\n - longitud mínima de 6 caracteres' +
+                                '\n - contener al menos una letra minúscula, una letra mayúscula y un dígito');
+                            }
                         }
                     }
                 }
             }
         }
-
-        var regUsuario = {
-            dni: dni, nombre: name, apellido: surname,
-            telefono: phone, comentario: commit, hora: date
-        }; aler(regUsuario);
-        var newUser = JSON.stringify(regUsuario);
-        aler(newUser);
     }
-
-
     function isValidDni(dni) {
+        
+        const validacion = /^\d{2}\.\d{3}\.\d{3}-[A-Z]$/;
 
-        let validacion = /^\d{2}\.\d{3}\.\d{3}-[A-Z]$/;
+        if(validacion.test(dni)==true){
 
-        return validacion.test(dni);
+            var letra = dni.substring(dni.length-1);
+            var num = dni.replaceAll('.','').replace('-','');
+            var numero = num.substring(0, 8);
+            var resto = numero %23;
+            var letras =['T','R','W','A','G','M','Y','F','P','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E','T']; 
 
+            letras = letras.join("");
+
+            var encontrado = letras.charAt(resto);
+            
+            if( letra == encontrado) {
+                
+                return validacion.test(dni);
+
+            } else{
+                alert('El DNI ingresado no es correcto.')
+            }
+
+        }         
+        
     }
 
-    /*function isValidName(name){
+    /*
+    function isValidText(text) {
+        const validacion = /^(([\wáéíóúÁÉÍÓÚ]+)|([\wáéíóúÁÉÍÓÚ]+\s[\wáéíóúÁÉÍÓÚ]+))$/;
+        return validacion.test(text);
+    }
 
-        const validacion =
-            /^(([\wáéíóúÁÉÍÓÚ]+)|([\wáéíóúÁÉÍÓÚ]+\s[\wáéíóúÁÉÍÓÚ]+))$/;
+    function isValidPhone(phone) {
+        const validacion = /^(\+\d{2}\s\d{9})$/;
+        return validacion.test(phone);
+    }
 
-        return validacion.test(name);
-    }*/
+    function isValidComent(comentario) {
+        const validacion = /^[\s\S]{1,50}$/;
+        return validacion.test(comentario);
+    }
 
-    formmulario.addEventListener('submit', handleSubmit);
+    function isValidHour(hour) {
+        const validacion = /^(.+\@.+\..+)$/;
+        return validacion.test(phone);
+    }
+    */
+    $FORM.addEventListener('submit', handleSubmit);
 }
