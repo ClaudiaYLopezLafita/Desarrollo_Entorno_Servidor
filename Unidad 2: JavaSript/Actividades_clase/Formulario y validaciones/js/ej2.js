@@ -19,10 +19,8 @@ function registerUser() {
         const phone = $PHONE.value;
         const comentario = $COMMENT.value;
         const hour = $HOUR.value;
-        debugger
 
         if(dni == false || isValidDni(dni) == false){
-            debugger
             alert('El dni debe ser un valor válido :'+
              '\n -Debe estar relleno'+ 
              '\n -Debe tener esta estructura: 00.000.000-A');
@@ -45,9 +43,7 @@ function registerUser() {
                             alert('El comentario tiene que tener un formato válido :'+ 
                             '\n-Debe estar relleno \n -Debe de tener un máximo de 250 caracteres');
                         } else {
-                            typeof(hour);
-                            console.log(hour)
-                            if(hour == false || isValidHour(hour)==false){
+                            if(isValidHour(hour)==false){
                                 alert('Se debe se registrar una hora obligatoriamente')
                             } 
                         }
@@ -62,7 +58,7 @@ function registerUser() {
             comentario: comentario, hora: hour
         }; console.log(regUsuario);
         var newUser = JSON.stringify(regUsuario);
-        alert(newUser);
+        document.getElementById('newUser').innerHTML=newUser;
         console.log(newUser)
     }
 
@@ -137,7 +133,7 @@ function registerUser() {
 
         let hh = hour.substring(0,2);
         let mm = hour.substring(3,5);
-        debugger
+
         if(hh == true && mm ==true){
             return validacion;
         } else{
