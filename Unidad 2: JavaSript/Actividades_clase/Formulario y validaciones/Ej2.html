@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicio 1</title>
 
-    <script src="js/ej2.js"></script>
     <link rel="stylesheet" href="css/ej2.css">
 </head>
 
@@ -27,6 +26,7 @@
     </pre>
 
     <fieldset>
+        <legend>Registro</legend>
         <form id="formulario">
             <label for="dni">DNI: </label>
             <input type="text" id="dni">
@@ -42,6 +42,7 @@
             <br>
             <textarea  id="comentario" cols="30" rows="10" 
             placeholder="Escriba aquí, por favor" maxlength="250"></textarea>
+            <small><div id="contador">0/250</div></small>
             <br>
             <label for="datetime">Elija una hora: </label>
             <input type="time" name="" id="datetime">
@@ -49,6 +50,9 @@
             <button type="submit" onclick="registerUser()">Registrar</button>
         </form>
     </fieldset>
+
+    <script src="js/ej2.js"></script>
+
 </body>
 
 </html>

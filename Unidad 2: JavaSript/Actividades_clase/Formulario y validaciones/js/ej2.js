@@ -18,43 +18,54 @@ function registerUser() {
         const surname = $SURNAME.value;
         const phone = $PHONE.value;
         const comentario = $COMMENT.value;
-        const hour = $HOUR.checked;
+        const hour = $HOUR.value;
+        debugger
 
         if(dni == false || isValidDni(dni) == false){
             debugger
             alert('El dni debe ser un valor válido :'+
              '\n -Debe estar relleno'+ 
-             '\n -Debe seguir este modelo: 00.000.000-A');
+             '\n -Debe tener esta estructura: 00.000.000-A');
         } else{
             
-            if (name == false || isValidText(name) == false) {
+            if (name == false || isValidName(name) == false) {
                 alert('El nombre debe ser un valor válido :'+
                 '\n -Debe estar relleno \n -Debe estar compuesto por 1 o 2 palabras');
             } else {
-                if (surname == false || isValidText(surname) == false){
-                    alert('El o los apellidos debe ser un valor válido :'+
+                if (surname == false || isValidSurname(surname) == false){
+                    alert('El/los apellidos debe ser un valor válido :'+
                     '\n -Debe estar relleno \n -Debe estar compuesto por 1 o 2 palabras');
                 } else{
                     if (phone == false || isValidPhone(phone) == false) {
                         alert('El phone debe ser un valor válido :'+
                         '\n -Debe estar relleno'+ 
-                        '\n -Debe estar compuesto por un prefijo (+00) y 9 números');
+                        '\n -Debe seguir la siguiente estructura: (+00)1234567');
                     } else {
                         if (comentario == false || isValidComent(comentario) == false) {
                             alert('El comentario tiene que tener un formato válido :'+ 
-                            '\n-Debe estar relleno \n -Debe de tener un total de 50 caracteres');
+                            '\n-Debe estar relleno \n -Debe de tener un máximo de 250 caracteres');
                         } else {
-                            if (isValidPassword(password) == false) {
-                                alert('El password debe tener:'+ 
-                                '\n - longitud mínima de 6 caracteres' +
-                                '\n - contener al menos una letra minúscula, una letra mayúscula y un dígito');
-                            }
+                            typeof(hour);
+                            console.log(hour)
+                            if(hour == false || isValidHour(hour)==false){
+                                alert('Se debe se registrar una hora obligatoriamente')
+                            } 
                         }
                     }
                 }
             }
         }
+
+
+        var regUsuario = {
+            dni: dni, nombre: name, apellido: surname, telefono: phone,
+            comentario: comentario, hora: hour
+        }; console.log(regUsuario);
+        var newUser = JSON.stringify(regUsuario);
+        alert(newUser);
+        console.log(newUser)
     }
+
     function isValidDni(dni) {
         
         const validacion = /^\d{2}\.\d{3}\.\d{3}-[A-Z]$/;
@@ -67,8 +78,7 @@ function registerUser() {
             var resto = numero %23;
             var letras =['T','R','W','A','G','M','Y','F','P','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E','T']; 
 
-            letras = letras.join("");
-
+            letras = letras.join(""); // unificacion de los items del array para formar un String
             var encontrado = letras.charAt(resto);
             
             if( letra == encontrado) {
@@ -83,26 +93,69 @@ function registerUser() {
         
     }
 
-    /*
-    function isValidText(text) {
-        const validacion = /^(([\wáéíóúÁÉÍÓÚ]+)|([\wáéíóúÁÉÍÓÚ]+\s[\wáéíóúÁÉÍÓÚ]+))$/;
-        return validacion.test(text);
+    function isValidName(name) {
+        
+        if (isNaN(name)){
+
+            const validacion = /^(([\wáéíóúÁÉÍÓÚ]+)|([\wáéíóúÁÉÍÓÚ]+\s[\wáéíóúÁÉÍÓÚ]+))$/;
+            return validacion.test(name);
+
+        }else{
+            alert('Esto no es un nombre.')
+        }
+        
+    }
+
+    function isValidSurname(surname) {
+        
+        if (isNaN(surname)){
+
+            const validacion = /^(([\wáéíóúÁÉÍÓÚ]+)|([\wáéíóúÁÉÍÓÚ]+\s[\wáéíóúÁÉÍÓÚ]+))$/;
+            return validacion.test(surname);
+
+        }else{
+            alert('Esto no es un Apellido.')
+        }
+        
     }
 
     function isValidPhone(phone) {
-        const validacion = /^(\+\d{2}\s\d{9})$/;
+        
+        const validacion =  /^\(\+\d{2,3}\)\s\d{9}$/;
         return validacion.test(phone);
     }
-
+    
     function isValidComent(comentario) {
-        const validacion = /^[\s\S]{1,50}$/;
+
+        const validacion = /^[\s\S]{1,250}$/;
         return validacion.test(comentario);
     }
 
+    
     function isValidHour(hour) {
-        const validacion = /^(.+\@.+\..+)$/;
-        return validacion.test(phone);
+        var validacion = true;
+
+        let hh = hour.substring(0,2);
+        let mm = hour.substring(3,5);
+        debugger
+        if(hh == true && mm ==true){
+            return validacion;
+        } else{
+            return validacion = false;
+        }
     }
-    */
+    
+
     $FORM.addEventListener('submit', handleSubmit);
 }
+
+// contador de caracteres para el textarea. 
+const mensaje = document.getElementById('comentario');
+const contador = document.getElementById('contador');
+
+mensaje.addEventListener('input', function(e) {
+    const target = e.target;
+    const longitudMax = target.getAttribute('maxlength');
+    const longitudAct = target.value.length;
+    contador.innerHTML = `${longitudAct}/${longitudMax}`;
+});
