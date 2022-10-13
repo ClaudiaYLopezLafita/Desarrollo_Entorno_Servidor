@@ -19,8 +19,9 @@ function registerUser() {
         const phone = $PHONE.value;
         const comentario = $COMMENT.value;
         const hour = $HOUR.value;
-
+        debugger
         if(dni == false || isValidDni(dni) == false){
+            debugger
             alert('El dni debe ser un valor válido :'+
              '\n -Debe estar relleno'+ 
              '\n -Debe tener esta estructura: 00.000.000-A');
@@ -62,11 +63,11 @@ function registerUser() {
     }
 
     function isValidDni(dni) {
-        
+        debugger
+
         const validacion = /^\d{2}\.\d{3}\.\d{3}-[A-Z]$/;
 
         if(validacion.test(dni)==true){
-
             var letra = dni.substring(dni.length-1);
             var num = dni.replaceAll('.','').replace('-','');
             var numero = num.substring(0, 8);
@@ -85,7 +86,7 @@ function registerUser() {
             }
 
         }         
-        
+        return validacion.test(dni);
     }
 
     function isValidName(name) {

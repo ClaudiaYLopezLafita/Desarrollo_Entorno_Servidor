@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3</title>
+
+    <script defer src="js/ej3.js"></script>
+    <link rel="stylesheet" href="css/ej3.css">
+</head>
+<body>
+    <h2>Validación y Formularios</h2>
+    <pre>
+        Valida el formulario con los siguientes campos y en caso de que sean correctos los datos
+        introducidos se almacenen en un objeto y en caso contrario muestre un mensaje de error.
+            - DNI (99.999.999-X)
+            - Nombre (Mínimo 1 nombre y 1 apellido, Máximo 2 nombre y 2 apellidos)
+            - Fecha de Nacimiento (dd/mm/yyyy)
+            - Email (xxxxxx@yyyyy.zzz)
+            - WEB (http://www.xxxx.yyy)
+            - Contraseña (Entre 8 y 10 carácteres)
+        
+        Ningún campo podrá dejarse en blanco.
+        NOTA: puedes utilizar tanto validaciones HTML como lo aprendido en Javascript.
+        En caso de que se informe correctamente guardar la información en un objeto y obtener el
+        JSON correspondiente, en caso contrario mostrar un mensaje de error.
+    </pre>
+    <form id="formulario">
+        <fieldset>
+            <legend> Datos </legend>
+            <table>
+                <tbody>
+                    <tr>
+                        <td><label for="dni">DNI:</label></td>
+                        <td><input type="text" name="text_dni" id="dni"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="name">Nombre:</label></td>
+                        <td><input type="text" name="text_name" id="name"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="fecha">Fecha:</label></td>
+                        <td><input type="date" name="text_fecha" id="fecha"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="email">Correo electrónico:</label></td>
+                        <td><input type="text" name="text_email" id="email"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="web">Página Web:</label></td>
+                        <td><input type="text" name="text_web" id="web"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="password">Contraseña:</label></td>
+                        <td><input type="password" name="text_password" id="password"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><button type="submit">Enviar</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
+    </form>
+</body>
+</html>

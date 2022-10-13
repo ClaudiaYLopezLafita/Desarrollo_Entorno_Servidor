@@ -38,8 +38,12 @@
                             '\n -Debe tener siguiente formato: http://www.xxxx.yyy');
                     } else{
                         var regUsuario = {
-                            nombre: name, apellido: surname, correo:email, web 
-                        }; console.log(regUsuario);
+                            nombre: name,
+                            apellido: surname,
+                            correo:email, 
+                            web: web
+                        }; 
+                        console.log(regUsuario);
                         var newUser = JSON.stringify(regUsuario);
                         document.getElementById('newUser').innerHTML=newUser;
                         console.log(newUser)
@@ -47,7 +51,6 @@
                 }
             }
         }
-
     }
 
     function isValidText(text){

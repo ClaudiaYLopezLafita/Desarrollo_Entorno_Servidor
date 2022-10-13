@@ -3,7 +3,8 @@ form fieldset{
     column-count: 2;
     width: 30%;
     margin-left: 30%;
-    background-color: rgb(231, 220, 120);
+    background-color: rgb(238, 231, 171);
+    box-shadow: 2px 2px 2px gray;
 }
 
 legend{
