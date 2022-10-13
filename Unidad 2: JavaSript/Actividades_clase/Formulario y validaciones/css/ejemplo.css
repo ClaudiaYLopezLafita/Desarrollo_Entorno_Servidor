@@ -1,17 +1,14 @@
 form{
-    width: 89%;
+    width: 45%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items:flex-start;
+    align-items: center;
 
 }
 
 fieldset{
-    background-color: lightgray;
     box-shadow: 2px 2px 2px gray;
-    width: 40%;
-    margin-left: 154px;
 }
 
 fieldset legend{
@@ -20,14 +17,22 @@ fieldset legend{
     font-size: x-large;
 }
 
+tr td:nth-child(2){
+    padding-left: 15%;
+}
+
+td{
+    padding-top: 5%;
+}
+
 label{
     font-weight: bold;
 }
-
 input:focus {
     background: lightblue;
 }
 
-textarea{
-    width: 80%;
+textarea, input{
+    width: 90%;
 }
+
