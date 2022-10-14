@@ -17,7 +17,7 @@ function handleSubmit(e){
     const email = $EMAIL.value;
     const web = $WEB.value;
     const password = $PASSWORD.value;
-   debugger
+   
     if(dni==false || isValidDni(dni)==false){
         alert('El dni es valido cuando:'+
         '\n - Está lleno.'+
@@ -34,11 +34,35 @@ function handleSubmit(e){
                 '\n - Conformato: dd/mm/yyyy');
             } else{
                 if(email==false || isValidEmail(email)==false){
-                    alert('La fecha debe ser un valor válido :'+
+                    alert('El correo debe ser un valor válido :'+
                     '\n -Debe estar relleno'+
                     '\n -Debe tener siguiente formato: xxxxxx@yyyyy.zzz');
                 } else{ 
-                    alert('o')
+                   if(web == false || isValidWeb(web)==false){
+                        alert('La página web debe ser un valor válido :'+
+                        '\n -Debe estar relleno'+
+                        '\n -Debe tener siguiente formato: http://www.xxxx.yyy');
+                   } else{
+                        if(password==false || isValidPassword(password)==false){
+                            alert('La contraseña debe ser un valor válido :'+
+                            '\n -Debe tener entre 8 y 10 caracteres'+
+                            '\n -Debe estar relleno');
+                        } else {
+                            var newFecha = formato(fecha);
+                            var regUsuario = {
+                                dni:dni,
+                                nombre: name,
+                                fecha: newFecha,
+                                correo:email, 
+                                web: web,
+                                contraseña: password
+                            }; 
+                            console.log(regUsuario);
+                            var newUser = JSON.stringify(regUsuario);
+                            document.getElementById('newUser').innerHTML=newUser;
+                            console.log(newUser)
+                        }
+                   }
                 }
             }
         }
@@ -111,12 +135,17 @@ function isValidEmail(email){
     const validacion = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
     return validacion.test(email);
 }
-/*
+
 function isValidWeb(web){
     const validacion=/[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/
     return validacion.test(web);
-}*/
+}
 
+function isValidPassword(password){
+
+    const validacion = /^[a-zA-Z0-9!@#$%^&*]{6,10}$/;
+    return validacion.test(password);
+}
 
 $FORM.addEventListener('submit', handleSubmit);
 
