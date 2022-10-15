@@ -143,7 +143,7 @@ function isValidWeb(web){
 
 function isValidPassword(password){
 
-    const validacion = /^[a-zA-Z0-9!@#$%^&*]{6,10}$/;
+    const validacion = /^[a-zA-Z0-9!@#$%^&*]{8,10}$/;
     return validacion.test(password);
 }
 
