@@ -18,17 +18,13 @@ button, select {
   text-transform: none;
 }
 
-button, input, select, textarea {
+button, input, select {
   color: #5A5A5A;
   margin: 0;
 }
 
 input {
   line-height: normal;
-}
-
-textarea {
-  overflow: auto;
 }
 
 #container {
@@ -63,13 +59,16 @@ h1 {
   width: 100%;
 }
 
-
 .email {
 	float: right;
 	width: 45%;
 }
 
-input[type='text'], [type='email'], select, textarea {
+label{
+  font-family: 'Montserrat', Arial, sans-serif;
+}
+
+input[type='text'], [type='date'], select {
 	background: none;
   border: none;
 	border-bottom: solid 2px #474544;
@@ -79,7 +78,6 @@ input[type='text'], [type='email'], select, textarea {
   letter-spacing: 1px;
 	margin: 0em 0 1.875em 0;
 	padding: 0 0 0.875em 0;
-  text-transform: uppercase;
 	width: 100%;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -110,8 +108,6 @@ input[type='text']:focus, [type='email']:focus, textarea:focus {
 select {
   background: url('https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-arrow-down-32.png') no-repeat right;
   outline: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
 }
 
 select::-ms-expand {
@@ -175,38 +171,3 @@ textarea {
   color: #F2F3EB;
 }
 
-@media screen and (max-width: 768px) {
-  #container {
-    margin: 20px auto;
-    width: 95%;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  h1 {
-    font-size: 26px;
-  }
-  
-  .underline {
-    width: 68px;
-  }
-  
-  #form_button {
-    padding: 15px 25px;
-  }
-}
-
-@media screen and (max-width: 420px) {
-  h1 {
-    font-size: 18px;
-  }
-
-  
-  .underline {
-    width: 53px;
-  }
-  
-  input[type='text'], [type='email'], select, textarea {
-    font-size: 0.875em;
-  }
-}

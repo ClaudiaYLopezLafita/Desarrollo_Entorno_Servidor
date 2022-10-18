@@ -7,7 +7,7 @@
     <title>Ejerciio 4</title>
 
     <link rel="stylesheet" href="css/ej4.css">
-    <script src="js/ej4.js"></script>
+    <script defer src="js/ej4.js"></script>
 </head>
 <body>
 
@@ -19,12 +19,16 @@
             • Fecha de creación: obligatorio y con formato dd/mm/aaaa.
             • Cocinero: será un nombre en clave formado por dos letras en mayúscula, un símbolo
             y cuatro dígitos (ej. WW$1234)
+            
             • Destinatario: estará formado por dos o tres letras mayúsculas correspondientes al
             estado, un guión bajo, el nombre de la ciudad en minúsculas, dos puntos, y el código
             de distrito de 4 digitos (ej. NM_alburquerque:1234).
+
             • Gramos: será un número del 100 al 5000.
+            
             • Composición: estará formado por una cantidad en gramos seguida de dos conjuntos
             de una o dos letras seguidas o no de un número. (ej. 200gC3OH7)
+
             • Número de cuenta bancaria. Supongamos que un número de cuenta
             estadounidense tiene el siguiente formato:
                 o Dos letras: el valor de cada letra es del 1 al 26 (no hay ñ ni ll).
@@ -54,36 +58,34 @@
         <form action="#" method="post" id="formulario">
           <div class="fecha">
             <label for="fecha">Fecha: </label>
-            <input type="date"  id="fecha" required>
-          </div>
-          <div class="email">
-            <label for="email"></label>
-            <input type="email" placeholder="My e-mail is" name="email" id="email_input" required>
+            <input type="date"  id="fecha" >
           </div>
           <div class="cocinero">
             <label for="cocinero"></label>
-            <input type="text" placeholder="Cocinero: (ej. WW$1234)"  id="cocinero" required>
+            <input type="text" placeholder="Cocinero: (ej. WW$1234)"  id="cocinero" >
           </div>
           <div class="destinatario">
             <label for="destinatario"></label>
-            <input type="text" placeholder="Destinatario: (ej. NM_alburquerque:1234)"  id="destinatario" required>
+            <input type="text" placeholder="Destinatario: (ej. NM_alburquerque:1234)"  id="destinatario" >
           </div>
           <div class="gramo">
             <label for="gramo"></label>
-            <input type="text" placeholder="Gramos: ([100-5000])"  id="gramos" required>
+            <input type="text" placeholder="Gramos: ([100-5000])"  id="gramos" >
           </div>
           <div class="composicion">
             <label for="composicion"></label>
-            <input type="text" placeholder="composicion (ej. 200gC3OH7)" id="composicion" required>
+            <input type="text" placeholder="composicion (ej. 200gC3OH7)" id="composicion" >
           </div>
           <div class="numBancario">
             <label for="numBancario"></label>
-            <input type="text" placeholder="Numero: (ej. NM-11)"  id="numBancario" required>
+            <input type="text" placeholder="Numero: (ej. NM11-111111111111-11)"  id="numBancario" >
+            <p id="cuenta"></p>
           </div>
           <div class="submit">
             <input type="submit" value="Send Message" id="form_button" />
           </div>
         </form>
+        <p id="newUser"></p>
       </div>
 </body>
 </html>
