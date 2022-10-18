@@ -43,6 +43,7 @@ function handleSubmit(e){
                         '\n - Debe estar relleno'+
                         '\n - Con formato: 200gC3OH7');
                     } else{
+                        debugger
                         if (numBancario == false || isValidCuenta(numBancario)==false){
                             alert('La cuenta debe ser un valor válido :'+
                             '\n - Debe estar relleno'+
@@ -115,35 +116,43 @@ function isValidComp(composicion){
 }
 
 function isValidCuenta(numBancario){
-
+    debugger
     const validacion = /^([A-Z]{2}\d{2}-\d{12}-\d{2})$/;
 
-    if (validacion.test(numBancario)==true){
-        if (validacion.chartAt(0)=='Ñ' || validacion.chartAt(1)=='Ñ' || validacion.chartAt(0)=='LL' || validacion.chartAt(1)=='LL'){
+        var primero = numBancario.charAt(0);
+        var segundo = numBancario.charAt(1);
+
+
+        if (primero=='Ñ' || segundo=='Ñ' || primero=='LL' || segundo=='LL'){
             alert('La cuenta bancaria no puede tener ni "Ñ" ni "LL"');
         } else {
             var sub1, sub2, sum1, sum2;
-    
-            sub1 = validacion.substring(5,10);
-            sub2 = validacion.substring(11,16);
+
+            let cuenta = numBancario.replaceAll("-","")
+            sub1 = cuenta.substring(4,9);
+            sub2 = cuenta.substring(10,16);
     
             for (let x = 0; x < sub1.length; x++) {
                 
-                sum1 += parseInt(sub1.chartAt(x));
-                sub2 += parseInt(sub2.chartAt(x));
+                sum1 += parseInt(sub1.charAt(x));
+                sub2 += parseInt(sub2.charAt(x));
             }
-            
+
         }
 
-    }
+        let cuenta = numBancario.replaceAll("-","")
 
-    let cuenta = numBancario.replaceAll("-","")
+        document.getElementById('cuenta').hidden;
+        document.getElementById('cuenta').disable;
+        document.getElementById('cuenta').innerHTML = cuenta;
 
-    document.getElementById('cuenta').hidden;
-    document.getElementById('cuenta').disable;
-    document.getElementById('cuenta').innerHTML = cuenta;
 
-// XX11-111111111111-11
+
+    
+
+// XX11 - 111111 111111 - 11
+// XX11 111111 111111 11
+// 0123 456789 123456 78
 }
 
 $FORM.addEventListener('submit', handleSubmit);
