@@ -51,7 +51,7 @@ function handleSubmit(e){
                             var newFecha = formato(fecha);
                             
                             var regUsuario = {
-                                fecha:fecha,
+                                fecha: newFecha,
                                 cocinero: cocinero,
                                 destinatario: destinatario,
                                 gramos:gramos, 
@@ -81,14 +81,6 @@ function isValidFecha(fecha){
 
 }
 
-/**
- * Convierte un texto de la forma 2017-01-10 a la forma
- * 10/01/2017
- *
- * @param {string} texto Texto de la forma 2017-01-10
- * @return {string} texto de la forma 10/01/2017
- *
- */
  function formato(texto){
     return texto.replace(/^(\d{4})-(\d{2})-(\d{2})$/g,'$3/$2/$1');
 }
@@ -119,27 +111,39 @@ function isValidGramo(gramos){
 function isValidComp(composicion){
 
     const validacion = /^(\d{3,4}g[A-Z]{1,2}\d{0,1}[A-Z]{1,2}\d{0,1})$/;
-    var gramo;
+    return validacion.test(composicion);
+}
 
-    if (validacion.test(composicion)==true){
+function isValidCuenta(numBancario){
 
-        for (let x = 0; x < composicion.length; x++) {
+    const validacion = /^([A-Z]{2}\d{2}-\d{12}-\d{2})$/;
 
-            const element = composicion.charAt(x);
-            
-            while(element!='g'){
-                gramo += element;
+    if (validacion.test(numBancario)==true){
+        if (validacion.chartAt(0)=='Ñ' || validacion.chartAt(1)=='Ñ' || validacion.chartAt(0)=='LL' || validacion.chartAt(1)=='LL'){
+            alert('La cuenta bancaria no puede tener ni "Ñ" ni "LL"');
+        } else {
+            var sub1, sub2, sum1, sum2;
+    
+            sub1 = validacion.substring(5,10);
+            sub2 = validacion.substring(11,16);
+    
+            for (let x = 0; x < sub1.length; x++) {
+                
+                sum1 += parseInt(sub1.chartAt(x));
+                sub2 += parseInt(sub2.chartAt(x));
             }
+            
         }
-
-        if (isValidGramo(gramo)==true){
-            return true;
-        } 
 
     }
 
-    return false;
+    let cuenta = numBancario.replaceAll("-","")
 
+    document.getElementById('cuenta').hidden;
+    document.getElementById('cuenta').disable;
+    document.getElementById('cuenta').innerHTML = cuenta;
+
+// XX11-111111111111-11
 }
 
 $FORM.addEventListener('submit', handleSubmit);
