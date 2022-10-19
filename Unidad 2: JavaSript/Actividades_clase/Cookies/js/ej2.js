@@ -67,7 +67,7 @@ function handleSubmit(e){
             }
         }
     }
-
+    checkCookie();
 }
 
 function isValidDni(dni) {

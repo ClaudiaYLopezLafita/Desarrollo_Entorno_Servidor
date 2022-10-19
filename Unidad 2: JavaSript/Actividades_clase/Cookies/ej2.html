@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicio 1</title>
 
-    <script defer src="js/ej1.js"></script>
-    <script defer src="cookie/ej1.js"></script>
+    <script defer src="./js/ej1.js"></script>
+    <script src="./cookie/ej1.js"></script>
+
     <link rel="stylesheet" href="css/ej1.css">
 </head>
 <body>
@@ -43,10 +44,12 @@
                         <td><input type="password" name="text_password" id="password" minlength="8" maxlength="10"></td>
                     </tr>
                     <tr>
-                        <td colspan="2"><button type="submit">Enviar</button></td>
+                        <td><button type="submit">Enviar</button></td>
+                        <td><button type="reset">Reset</button>                        </td>
                     </tr>
                 </tbody>
             </table>
+            <p id="contador"></p>
         </fieldset>
     </form>
     <p id="newUser"></p>
