@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <pre>
+        ¿Qué son las Cookies?
+            - Datos almeacenados en nuestro ordenaor en pequeños archivos de texto.
+            - Recuerdan la informacion de un usurairo aunque se cierre el navegador o se desconecte del servidor
+            - Podemos guardar el nombre de un visitante de la pag., el numero de veces que ha entrado, etc.
+            -Se guarda en forma de pares "nombre =  valor"
+
+            - si se modifica la cookie debedemos poner todos los parámetros. Se aconseja no modificarla
+    </pre>
+
+    <script>
+        function enabledCookie(){
+          navigator.cookieEnabled == true ? alert("Cookies activas") : alert("Cookies desactivadas");
+        }   
+
+        // CREAR UNA COOKIE - separamos los parametros con ";"
+        //document.cookie = "usuario = clodo; expires=Thu, 16 Nov 2022 12:00:00 UTC; path=/;";
+        document.cookie = "usuario = clod;";
+        document.cookie = "sexo = mujer;";
+
+        // LEER UNA COOKIE
+        var miCookie = document.cookie;
+        alert(miCookie);
+
+        //MODIFICAR UNA COOKIE
+        document.cookie = "sexo = hombre";
+        alert(document.cookie);
+
+        //BORRAR UNA COOKIE -- poner una fecha de expiración previa a la que nos encontramos
+        document.cookie = "usuario=; expires=thu, 01 Jan 1970 00:00:01 GMT";
+        document.cookie = "sexo=; expires=thu, 01 Jan 1970 00:00:01 GMT";
+        alert(document.cookie);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+
+    <script defer src="js/ej3.js"></script>
+    <link rel="stylesheet" href="css/ej3.css">
+</head>
+<body>
+    <h2>Validación y Formularios y Cookies</h2>
+    
+    <form id="formulario">
+        <fieldset>
+            <legend> Datos </legend>
+            <table>
+                <tbody>
+                    <tr>
+                        <td><label for="dni">DNI:</label></td>
+                        <td><input type="text" name="text_dni" id="dni"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="name">Nombre:</label></td>
+                        <td><input type="text" name="text_name" id="name"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="fecha">Fecha:</label></td>
+                        <td><input type="date" name="text_fecha" id="fecha"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="email">Correo electrónico:</label></td>
+                        <td><input type="text" name="text_email" id="email"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="web">Página Web:</label></td>
+                        <td><input type="text" name="text_web" id="web"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="password">Contraseña:</label></td>
+                        <td><input type="password" name="text_password" id="password" minlength="8" maxlength="10"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><button type="submit">Enviar</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
+    </form>
+    <p id="newUser"></p>
+</body>
+</html>
