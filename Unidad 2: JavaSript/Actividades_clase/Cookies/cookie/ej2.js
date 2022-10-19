@@ -30,5 +30,10 @@ function checkCookie(){
 
     (contError !="" && contError!=null) ? setCookie("contErr",++contError) : setCookie("contErr",1);
    
-    document.getElementById('contador').innerHTML='Nº de intentos: '+getCookie('contErr');
+    document.getElementById('contador').innerHTML='Nº de intentos: '+ getCookie('contErr');
+}
+
+function resetCookie(){
+    setCookie('contErr',0);
+    document.getElementById('contador').innerHTML='Nº de intentos: '+ getCookie('contErr');
 }
