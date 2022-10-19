@@ -1,0 +1,40 @@
+fieldset{
+    box-shadow: 2px 2px 2px gray;
+    width: 25%;
+    margin-left: 154px;
+}
+
+fieldset legend{
+    text-align: center;
+    font-weight: bold;
+    font-size: x-large;
+}
+
+tr td:nth-child(2){
+    padding-left: 15%;
+}
+
+td{
+    padding-top: 5%;
+}
+
+label{
+    font-weight: bold;
+}
+input:focus {
+    background: lightblue;
+}
+
+button{
+    border-left: 78px;
+    background-color: rgb(70, 168, 70);
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    border: none;
+    border-radius: 15px;
+    padding: 7px;
+    font-weight: bold;
+}
+
+textarea, input{
+    width: 90%;
+}
