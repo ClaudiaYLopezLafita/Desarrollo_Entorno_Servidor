@@ -76,8 +76,15 @@ function deleteCookie() {
 
 // actualizacion de una cookie
 function updateNombre(){
-    nombre = prompt('INdica nombre de nuevo');
+    nombre = prompt('Indica nombre de nuevo');
     if (nombre!="" && nombre!=null){
         setCookie("nombre",nombre);
     }
+}
+
+// ver todas las cookies
+
+function vewCookies(){
+    alert(`Todas las cookies actuales: \n`+document.cookie);
+    
 }

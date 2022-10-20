@@ -116,7 +116,7 @@ function isValidComp(composicion){
 }
 
 function isValidCuenta(numBancario){
-    debugger
+
     const validacion = /^([A-Z]{2}\d{2}-\d{12}-\d{2})$/;
 
     if(validacion.test(numBancario)){
