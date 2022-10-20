@@ -33,6 +33,7 @@ function checkCookie(){
     document.getElementById('contador').innerHTML='Nº de intentos: '+ getCookie('contErr');
 }
 
+// reseto del contador al pulsar boton
 function resetCookie(){
     setCookie('contErr',0);
     document.getElementById('contador').innerHTML='Nº de intentos: '+ getCookie('contErr');

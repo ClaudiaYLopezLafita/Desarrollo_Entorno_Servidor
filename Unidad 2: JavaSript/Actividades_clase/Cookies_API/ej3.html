@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3 Cookie</title>
+
+    <link rel="stylesheet" href="css/ej3.css">
+    <script src="./cookie/ej3.js"></script>
+    <script src="./js/ej3.js"></script>
+</head>
+
+<body>
+    <h1> Cookie ejercicio 3</h1>
+    
+       <!--  Valida el contenido introducido en todos campos según las siguientes especificaciones:
+            - DNI (99.999.999-X)
+            - Nombre (Mínimo 1 nombre, Máximo 2 nombres)
+            - Apellidos (Mínimo 1 apellido, Máximo 2 apellidos)
+            - Teléfono (+34 954556817)
+            - Comentario (texto obligatorio de tamaño máximo 250 caracteres)
+            - Hora (hh:mm)
+        Validar también que no puedan dejarse en blanco.
+        NOTA: puedes utilizar tanto validaciones HTML como lo aprendido en Javascript.
+        En caso de que se informe correctamente guardar la información en un objeto y obtener el
+        JSON correspondiente, en caso contrario mostrar un mensaje de error.
+    -->
+
+    <fieldset>
+        <legend>Registro</legend>
+        <form id="formulario">
+            <label for="dni">DNI: </label>
+            <input type="text" id="dni">
+            <br>
+            <label for="name">Nombre: </label>
+            <input type="text" id="name">
+            <br>
+            <label for="surname">Apellidos: </label>
+            <input type="text" id="surname">
+            <br>
+            <label for="phone">Telefono: </label>
+            <input type="text" id="phone">
+            <br>
+            <textarea  id="comentario" cols="30" rows="10" 
+            placeholder="Escriba aquí, por favor" maxlength="250"></textarea>
+            <small><div id="contador">0/250</div></small>
+            <br>
+            <label for="datetime">Elija una hora: </label>
+            <input type="time" name="" id="datetime">
+            <br>
+            <button type="submit" onclick="registerUser()">Registrar</button>
+        </form>
+    </fieldset>
+
+    <p id="newUser"></p>
+
+    <script defer src="js/ej1.js"></script>
+
+</body>
+
+</html>

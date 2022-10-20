@@ -1,3 +1,12 @@
+/*Modifica los formularios de los ejercicios anteriores para que se guarde la información
+registrada usando la API Web Storage de la siguiente forma:
+
+    ● Ejercicio Form4 en el almacenamiento local del navegador.
+
+Añadir un botón “Recargar” que recargue los campos del formulario con la información
+almacenada.
+NOTA: Prueba posteriormente la persistencia de los datos en cada caso*/
+
 const $FORM = document.getElementById('formulario');
 const $FECHA = document.getElementById('fecha');
 const $COCINERO = document.getElementById('cocinero');
@@ -5,6 +14,20 @@ const $DESTINATARIO = document.getElementById('destinatario');
 const $GRAMOS = document.getElementById('gramos');
 const $COMPOSICION = document.getElementById('composicion');
 const $NUMERO = document.getElementById('numBancario');
+
+function cargarDatos(){
+    
+    var reg = JSON.parse(localStorage.getItem('usuario'));
+
+
+    document.getElementById("fecha").value = reg.fecha;
+    document.getElementById("cocinero").value = reg.cocinero;
+    document.getElementById("destinatario").value = reg.destinatario;
+    document.getElementById("gramos").value = reg.gramos;
+    document.getElementById("composicion").value = reg.composicion;
+    document.getElementById("numBancario").value = reg.numBancario;
+    
+}
 
 function handleSubmit(e){
 
@@ -16,7 +39,7 @@ function handleSubmit(e){
     const gramos = $GRAMOS.value;
     const composicion = $COMPOSICION.value;
     const numBancario = $NUMERO.value;
-    debugger
+    
 
     if (fecha == false || isValidFecha(fecha) == false){
         alert('La fecha debe ser un valor válido :'+
@@ -43,13 +66,12 @@ function handleSubmit(e){
                         '\n - Debe estar relleno'+
                         '\n - Con formato: 200gC3OH7');
                     } else{
-                        debugger
                         if (numBancario == false || isValidCuenta(numBancario)==false){
                             alert('La cuenta debe ser un valor válido :'+
                             '\n - Debe estar relleno'+
                             '\n - Con formato: XX11-111111111111-11');
                         } else {
-                            var newFecha = formato(fecha);
+                            var newFecha = fecha;
                             
                             var regUsuario = {
                                 fecha: newFecha,
@@ -63,6 +85,11 @@ function handleSubmit(e){
                             var newUser = JSON.stringify(regUsuario);
                             document.getElementById('newUser').innerHTML=newUser;
                             console.log(newUser)
+
+                            //recuperar el JASON
+                            localStorage.setItem('usuario',newUser)
+                            // almacenar
+                            localStorage.setItem('usuario',newUser);
                         }
                     }
                 }
@@ -73,18 +100,13 @@ function handleSubmit(e){
 }
 
 function isValidFecha(fecha){
-    const validacion = /^(((0[1-9]|[12][0-9]|3[01])[- /.](0[13578]|1[02])|(0[1-9]|[12][0-9]|30)[- /.](0[469]|11)|(0[1-9]|1\d|2[0-8])[- /.]02)[- /.]\d{4}|29[- /.]02[- /.](\d{2}(0[48]|[2468][048]|[13579][26])|([02468][048]|[1359][26])00))$$/;
-
-    var texto = fecha;
-    var salida = formato(texto);
+    const validacion = /^(\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])*)$$/;
+    var salida = fecha;
 
     return validacion.test(salida);
 
 }
 
- function formato(texto){
-    return texto.replace(/^(\d{4})-(\d{2})-(\d{2})$/g,'$3/$2/$1');
-}
 
 function isValidCocinero(cocinero){
     const validacion = /^([A-Z]{2}.[0-9]{4})$/;
@@ -116,7 +138,6 @@ function isValidComp(composicion){
 }
 
 function isValidCuenta(numBancario){
-    debugger
     const validacion = /^([A-Z]{2}\d{2}-\d{12}-\d{2})$/;
 
     if(validacion.test(numBancario)){
@@ -146,26 +167,19 @@ function isValidCuenta(numBancario){
         
         if((firstLetter==="L" && secondLetter==="L")||(firstLetter==="Ñ" || secondLetter==="Ñ")){
           return false;
-          alert('La cuenta no puede tener ni Ñ ni LL');
         } else{
           if(sumaLettersValue===parseInt(firstDigits)){
             if((sumaLettersValue<10 && parseInt(firstDigits[0])===0) || (sumaLettersValue>=10)){
-              
-                for(let i = 0; i<firstPart.length; i++){
+              for(let i = 0; i<firstPart.length; i++){
                 sumaFirstPart += parseInt(firstPart[i]);
                 sumaSecondPart += parseInt(secondPart[i]);
               }
-
               firstControlDigitValue = parseInt(sumaFirstPart/6);
               secondControlDigitValue = parseInt(sumaSecondPart/6);
-
               if(firstControlDigit === firstControlDigitValue && secondControlDigit === secondControlDigitValue){
-                
                 fullIban = numBancario.replaceAll("-", "");
-               
                 document.getElementById("cuenta").hidden = false;
                 document.getElementById("cuenta").disabled = true;
-               
                 document.getElementById("cuenta").value = fullIban;
               } else{
                 return false;
@@ -180,13 +194,6 @@ function isValidCuenta(numBancario){
       } else{
         return false;
       }
-
-
-    
-
-// XX11 - 111111 111111 - 11
-// XX11 111111 111111 11
-// 0123 456789 123456 78
 }
 
 $FORM.addEventListener('submit', handleSubmit);
