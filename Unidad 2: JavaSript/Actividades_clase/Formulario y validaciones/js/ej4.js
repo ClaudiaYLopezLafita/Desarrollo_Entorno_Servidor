@@ -181,12 +181,6 @@ function isValidCuenta(numBancario){
         return false;
       }
 
-
-    
-
-// XX11 - 111111 111111 - 11
-// XX11 111111 111111 11
-// 0123 456789 123456 78
 }
 
 $FORM.addEventListener('submit', handleSubmit);
