@@ -1,0 +1,36 @@
+input, label {
+    width:150px;
+    float:left;
+    margin-bottom:5px;
+}
+  
+fieldset{
+    width:350px;
+    border: thick solid #306;
+}
+  
+/* legend{
+    border-top-width: medium;
+    border-right-width: medium;
+    border-bottom-width: medium;
+    border-left-width: medium;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    background-color: #FFF;	
+} */
+  
+#errores{
+    float: left;
+    background:#FF6633;
+    width: 325px;
+ }
+
+.error {
+    border-color: #FF0000;
+ }
+
+.correcto {
+    border-color: #00CC00;
+}

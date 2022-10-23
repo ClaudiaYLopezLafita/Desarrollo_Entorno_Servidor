@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio complementario 2</title>
+
+    <!-- css link-->
+    <link rel="stylesheet" href="./style/style2.css">
+    <!-- logic scrip-->
+    <script defer src="./js/logic2.js"></script>
+
+
+</head>
+<body>
+    <fieldset>
+  <legend>YOUTUBE</legend>
+  
+  <form name="formulario" id="formulario" action="" method="get">
+   
+    <label for="titulo">Título:</label>
+    <input type="text" name="titulo" id="titulo">
+    
+    <label for="descripcion">Descripción:</label>
+    <input name="descripcion" type="textarea" id="descripcion">
+ 
+    <input name="kids" type="checkbox" id="kids">
+    <label for="kids">Niños</label>
+    
+    <label for="etiquetas">Etiquetas:</label>
+    <input name="etiquetas" type="text" id="etiquetas" disabled>
+
+    <label for="fecha">Fecha:</label>
+    <input name="fecha" type="date" id="fecha">
+
+    <label for="hora">Hora:</label>
+    <input name="hora" type="time" id="hora">
+
+    <label for="password">Password:</label>
+    <input name="password" type="password" id="password">
+
+
+    <input name="username" type="hidden" id="username" value="chemaduran">
+
+
+    <input type="reset" name="limpiar" id="button" value="Limpiar">
+    <input type="submit" name="enviar" id="enviar" value="Enviar">
+  </form> 
+  
+  <div id="errores"></div>
+  <p id="newUser"></p>
+  
+</fieldset>
+</body>
+</html>

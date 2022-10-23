@@ -1,0 +1,25 @@
+fieldset {
+    width: 350px;
+    border: solid #306;
+}
+
+label {
+    width: 150px;
+    float: left;
+    margin-bottom: 5px;
+}
+
+input,
+select {
+    width: 150px;
+    float: left;
+    margin-bottom: 5px;
+}
+
+.error {
+    border: solid 2px #e08484;
+}
+
+.correcto {
+    border: solid 2px #90ec8b;
+}

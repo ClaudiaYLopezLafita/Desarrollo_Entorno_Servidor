@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!--style link-->
+    <link rel="stylesheet" href="./style/style3.css">
+
+    <!--script javascript-->
+    <script defer src="./js/logic3.js"></script>
+    <script defer src="./js/cookie3.js"></script>
+
+</head>
+<body>
+    <h1 id="cookieRef"></h1>
+    <fieldset>
+        <form name="formulario" id="formulario" action="" method="get">
+            <label for="nombre">Nombre modelo:</label>
+            <input type="text" name="nombre" id="nombre" />
+    
+            <label for="tipo_modelo">Tipo modelo:</label>
+            <select name="tipo_modelo" id="modelo">
+                <option value="0" selected="selected">Seleccione modelo</option>
+                <option value="TE">Televisor</option>
+                <option value="FR">Frigorífico</option>
+                <option value="LA">Lavadora</option>
+                <option value="MI">Microondas</option>
+                <option value="LV">Lavavajillas</option>
+            </select>
+    
+            <label for="fecha">Fecha:</label>
+            <input name="fecha" type="text" id="fecha"/>
+    
+            <label for="consumo">Consumeo energético:</label>
+            <input name="consumo" type="text" id="consumo" />
+    
+            <label for="referencia">Referencia del modelo:</label>
+            <input name="referencia" type="text" id="referencia" />
+    
+            <label for="password">Password:</label>
+            <input name="password" type="password" id="password" />
+    
+            <input type="submit" name="Enviar" id="enviar" value="Enviar" />
+        </form>
+        <p id="newUser"></p>
+        <br>
+        <div id="errores"></div>
+    </fieldset>
+</body>
+</html>
