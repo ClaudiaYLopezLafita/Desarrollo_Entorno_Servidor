@@ -83,7 +83,7 @@ function handleSubmit(e){
                             }; 
                             console.log(regUsuario);
                             var newUser = JSON.stringify(regUsuario);
-                            document.getElementById('newUser').innerHTML=newUser;
+                            document.getElementById('newUser').innerHTML =newUser;
                             console.log(newUser)
 
                             //recuperar el JASON

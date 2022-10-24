@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2</title>
+    
+</head>
+<!--Leer una cadena de texto en un formulario y mostrar la siguiente información:
+●Número de palabras, primera palabra, última palabra.
+
+●Mostrar un mensaje indicando si la frase es palíndroma, es decir, se lee igual de
+izquierda a derecha que de derecha a izquierda. Ejemplo: “Amad a la dama”. (no se
+distingue entre mayúscula y minúscula, ni espacios).
+
+●Devolver las palabras ordenadas de mayor a menor longitud.
+
+-->
+<body>
+
+    <form action="" id="formulario">
+        <label for="texto"> Inserta una cadena de texto:</label>
+        <input type="text" name="inputText" id="texto">
+        <br>
+        <button type="submit" onclick="text()">Enviar</button>
+    </form>
+    
+    <p><b>Resultado:</b></p>
+    <p id="result"></p>
+
+    <script>
+        function text() {
+        
+        let cadena, array, ultima, primera, numPalabras;
+        
+        // obtencion array
+        cadena =document.getElementById("texto").value;
+        array = cadena.split(' ');
+    
+        // resultado primer punto
+        numPalabras = array.length;
+        primera= array[0];
+        ultima = array[numPalabras-1];
+
+        alert("Numero de palabras: " + numPalabras + "\n" +
+        "primera palabra: " + primera + "\n" +
+        "Ultima palabra: " + ultima + "\n")
+
+        // resultado segundo punto: palabra palindroma
+        if(cadenaPalindroma(cadena)==true){
+            alert('La cadena es Palindroma')
+        } else{ 
+            alert('La cadena no es Palindroma')
+        }
+    
+        // resultado tercer punto: orden de las palabras por longitud
+
+        let arrayOrdenado = new Array();
+        debugger
+        for (let x = 0; x < array.length; x++) {  
+            arrayOrdenado = (array[x].length);
+        }
+
+        arrayOrdenado.sort();
+    
+    }
+
+    function cadenaPalindroma(cadena){
+        let inversa='';
+        for (let x = cadena.length-1; x >= 0; x--) {  
+            inversa+=cadena[x];
+        }
+
+        cadena = cadena.toLowerCase().replaceAll(' ','');
+        inversa = inversa.toLowerCase().replaceAll(' ','');
+
+        if(cadena==inversa){
+            return true;
+        }
+
+        return false;
+    }
+    </script>
+</body>
+</html>

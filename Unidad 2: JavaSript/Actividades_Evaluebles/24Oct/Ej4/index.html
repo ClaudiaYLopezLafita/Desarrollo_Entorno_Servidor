@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4</title>
+
+    <script defer src="logic.js"></script>
+</head>
+<body>
+
+    <form action="" id="formulario">
+        <table>
+            <tr>
+                <td><label for="dni">DNI:</label></td>
+                <td><input type="text" name="" id="dni"></td>
+            </tr>
+            <tr>
+                <td><label for="">Nombre:</label></td>
+                <td><input type="text" name="" id="nombre"></td>
+            </tr>
+            <tr>
+                <td><label for="fecha">Fecha</label></td>
+                <td><input type="date" name="" id="fecha"></td>
+            </tr>
+            <tr>
+                <td><label for="">Hora</label></td>
+                <td><input type="time" name="" id="hora"></td>
+            </tr>
+            <tr>
+                <td><label for="contacto">Contactar</label></td>
+                <td>
+                    <select name="tipo_contacto" id="contacto">
+                        <option value="0" selected="selected">Medio de contacto</option>
+                        <option value="TE">Telefono (TE)</option>
+                        <option value="EM">Email (EM)</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="especifica">Especifica</label></td>
+                <td><input type="text" name="" id="especifica"></td>
+            </tr>
+            <tr>
+                <td><button type="submit">Enviar</button></td>
+                <td>
+                    <button type="reset" onclick="cargarDatos()">Recargar</button>
+                </td>
+            </tr>
+        </table>
+        <div id="newUser"></div>
+    </form>
+    
+</body>
+</html>

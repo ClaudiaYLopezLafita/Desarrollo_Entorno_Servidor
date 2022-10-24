@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+
+    <script defer src="logic.js"></script>
+</head>
+<!--
+    Desarrollar un programa para realizar la comanda de un restaurante de platos combinados:
+
+● Se debe elegir un plato (Nº1, Nº2, Nº3, Nº4 y Nº5).
+● Los complementos o extras opcionales (puede elegirse más de 1): entrante, bebida,
+postre.
+●Marcar si el cliente es VIP.
+
+El programa debe mostrar el detalle de la comanda con el precio total del menú (6€ por el
+plato y 1€ por cada complemento). Así como el detalle del descuento si procede (si el
+cliente es VIP se le aplica un 5%) y de los impuestos (el IVA es del 10% para todos los
+productos menos la bebida que es el 21%).
+-->
+<body>
+
+<form action="" method="get" id="formulario">
+   <table>
+    <tr>
+        <td> <label for="plato">Plato: </label>
+        <td> <input type="text" name="td_plato" id="plato"></td></td>
+    </tr>
+    <tr>
+        <td><label for="complemento">Complemento</label></td>
+        <td><input type="text" name="td_complemento" id="complemento"></td>
+    </tr>
+    <tr>
+        <td><label for="vip">Cliente VIP (si/no)</label></td>
+        <td><input type="text" name="td_complemento" id="vip"></td>
+    </tr>
+   </table>
+
+   <button type="submit">Enviar</button>
+</form>
+
+<p id="user"></p>
+<p id="vipmessage"></p>
+<h2 id="total"></h2>
+</body>
+</html>
