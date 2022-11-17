@@ -1,0 +1,56 @@
+//CREACION BD
+
+{'sku': '000001', 'genero': 'camisa', 'talla': 'L', 'precio': 1000, 'existencia':[{'tienda': 'SE','cantidad':8},{'tienda': 'CA','cantidad':12}] ,'tipo': 'hombre'}, 
+{'sku': '000011', 'genero': 'camisa', 'talla': 'M', 'precio': 50, 'existencia':[{'tienda': 'SE' ,'cantidad': 15},{'tienda': 'CA','cantidad':10}],'tipo': 'mujer'}
+{'sku': '000002', 'genero': 'traje', 'talla': 'M' , 'precio': 450 , 'existencia':[{'tienda': 'SE' ,'cantidad':5},{'tienda':  'CA','cantidad':15}],'tipo': 'mujer' }
+{'sku': '000009', 'genero': 'pantalon', 'talla': 'L' , 'precio': 50, 'existencia':[{'tienda': 'SE','cantidad':100},{'tienda': 'CA','cantidad':50}],'tipo': 'hombre'}
+
+// CRUD
+1. db.productos.updateMany({'tipo': 'hombre'},{$push:{'existencia':{ 'tienda': 'CO', 'cantidad':10 }}})
+
+2. db.productos.find({},{_id:0, 'sku':1 , 'genero': 1, 'precio':1}).sort({'precio':1}).limit(2)
+
+3. db.productos.find( {$or:[ {'existencia':{'CO':{$exists:false} }},{'precio':{$gt:50}}  ]}, {_id:0, 'sku':1 , 'precio':1} ).sort({'precio':-1})
+
+4. db.productos.find( {$and:[ {'existencia.cantidad':{$lt:10}}, {'precio':{$gt:100}}  ]}, {_id:0, 'sku':1 ,  'genero':1, 'talla':1 ,'tipo':1} ).sort({'talla':-1},{'sku':-1})
+
+//DISEÑO 
+5. db.ventas.insertOne({ 
+    'tienda': 'SE' , 
+    'productos':[
+        {'sku': '000001','canitdad':2}, 
+        {'sku': '000011','canitdad':8},
+        {'sku': '000002','canitdad':1},
+        {'sku': '000009','canitdad':20}
+    ],
+    'fecha': new Date()
+    })
+
+    db.ventas.insertOne({ 
+    'tienda': 'CA' , 
+    'productos':[
+        {'sku': '000001','canitdad':2}, 
+        {'sku': '000011','canitdad':3},
+        {'sku': '000002','canitdad':1},
+        {'sku': '000009','canitdad':10}
+    ],
+    'fecha': new Date()
+    })
+
+    db.ventas.insertOne({ 
+    'tienda': 'CO' , 
+    'productos':[
+        {'sku': '000001','canitdad':9}, 
+        {'sku': '000009','canitdad':5}
+    ],
+    'fecha': new Date()
+    })
+
+6.  db.ventas.createIndex({'tienda':1},{ unique:true})
+    db.productos.createIndex({'sku':1},{ unique:true})
+    db.productos.createIndex({'tipo':1,'talla':1})
+    db.productos.createIndex({'talla':1,'tipo':1})
+
+    db.runCommand( { dropIndexes: 'productos', index: 'tipo_1_talla_1' })
+
+// db.runCommand( { dropIndexes: "collection", index: "age_1" }) -- Para borrar un comando 

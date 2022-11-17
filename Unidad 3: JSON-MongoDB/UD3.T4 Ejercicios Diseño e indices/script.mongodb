@@ -1,0 +1,12 @@
+//actualización de los productos indicanto el stock en cada tienda.
+
+db.productos.update({"referencia":"P0001"},{$set:{"stock":[{"Jerez":32},{"Sevilla":12},{"Cordoba":"8"}]}})
+db.productos.update({"referencia":"P0002"},{$set:{"stock":[{"Jerez":9},{"Chucena":5},{"Cordoba":"12"}]}})
+db.productos.update({"referencia":"P0003"},{$set:{"stock":[{"Rota":9},{"Sevilla":15}]}})
+
+//creacion de indices para referencia, talla y stock
+
+db.productos.createIndex({'referencia':1})
+db.productos.createIndex({'talla':1})
+db.productos.createIndex({'stock':1})
+
