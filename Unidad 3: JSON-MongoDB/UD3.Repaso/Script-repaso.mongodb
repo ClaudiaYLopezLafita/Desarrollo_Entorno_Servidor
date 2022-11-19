@@ -54,3 +54,41 @@
     db.runCommand( { dropIndexes: 'productos', index: 'tipo_1_talla_1' })
 
 // db.runCommand( { dropIndexes: "collection", index: "age_1" }) -- Para borrar un comando 
+
+7. db.productos.aggregate([
+{$group: {
+  _id: '$tipo',
+  'cantidad': {$sum: 1},
+  'minimo': {$min:'$precio'},
+  'maximo': {$max:'$precio'}
+}}])
+
+8. db.productos.aggregate([
+    {$group: {
+    _id: '$genero',
+    'cantidad': {$sum: 1},
+    'media': {$avg:'$precio'}
+    }}
+])
+
+//9.  Muestra el stock total existente (entre todas las tiendas) de cada producto.
+
+db.productos.aggregate([
+    {$unwind: '$existencia' },
+    {$group: {
+        _id: {producto:"$_id"},
+        'total': {$sum: '$existencia.cantidad'},
+}}])
+
+//10. Visualización, de mayor a menor por tienda y producto, de la valoración de las existencias
+
+db.productos.aggregate([
+    {$unwind:'$existencia'},
+    { $group :
+        {
+        _id: { tienda:"$existencia.tienda" ,producto:'$sku' },
+        stock: { $sum : '$existencia.cantidad' }
+        }
+    },
+    {$sort:{'_id.tienda':-1 , '_id.producto':1}}
+])

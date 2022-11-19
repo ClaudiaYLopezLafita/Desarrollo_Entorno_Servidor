@@ -1,0 +1,288 @@
+/*          CRUD               */
+
+    // creacion de base de datos:
+        use nombreBD --> //se crea y directamente se usa
+
+    // creacion de colecciones:
+        db.createCollection('nombre')
+        db.nombreCollection.insert[One/Many]() --> //cuando se insertan datos se crea la coleccion
+
+    // insercion de un documento
+        db.collection.insertOne()
+
+            db.collection.insertOne({
+                nombre: "Diego",
+                email: "dcortes@example.com",
+                edad: 25
+            })
+
+    // insercion de varios documentos -- los objetos van dentor de [ ]
+        db.collection.insertMany()
+
+            db.collection.insertMany([
+                {
+                nombre: "Franco",
+                email: "franco@example.com",
+                edad: 20
+                },
+                {
+                nombre: "Juan",
+                email: "juan@example.com",
+                edad: 40
+                }
+            ]);
+
+    // busqueda de documentos:
+
+        //busqueda global
+            db.collection.find({})
+
+        //busqueda concreta
+            db.collection.find({'nameCampo':valor})
+
+    //*** Operadores de comparación ****
+        $eq: //Igual que -- {<nameCampo>:{$eq:<value>}}
+
+        $ne: //Distinto de | no es igual que -- {<nameCampo>:{$ne:<value>}}
+
+        $gt: //valores mayores que -- {<nameCampo>:{$gt:<value>}}
+
+        $gte: //Valores mayores o iguales que -- {<nameCampo>:{$gte:<value>}}
+
+        $lt: //Valores menores que -- {<nameCampo>:{$lt:<value>}}
+
+        $lte: //Valores menores o iguales que -- {<nameCampo>:{$lte:<value>}}
+
+        $in: //Valores que se encuentran en un array de elementos -- {<nameCampo>:{$in:[<value1>,..., <valueN>]}}
+        
+        $nin: //Obtiene valores que NO se encuentran en un array de elementos -- {<nameCampo>:{$nin:[<value1>,..., <valueN>]}}
+
+    //*** Operadores de elementos */
+        $exists: //Comprueba si el campo existe -- {<nameCampo>: {$exists: true | false}}
+
+        $type: //Comprueba el tipo de dato del campo -- { y: { $type: "value" } }
+
+    //*** Operadores logicos */
+
+        $or: //Filtra documento que cumpla alguna de las condiciones descrita en un array de elementos
+            db.usuarios.find({$or: [{ nombre: "Diego" }, {nombre: "Franco"}]}); //que se llame o D o F
+
+        $and: //Filtra documentos que cumplan todas las condiciones descritas en un array de elementos
+            db.usuarios.find({$and: [{ nombre: "Diego" }, {edad: 25}]}); //que se llame D con 25 años
+
+    // busqueda por texto:
+        //carácter comodín
+            db.collection.find({'campoBusqueda':/valor/},{})
+
+        //operador $regex
+            db.collection.find({'campoBusqueda': { $regex: value} },{} )
+
+    // actualizacion de un documento
+        db.collection.updateOne({filter}, {$set:{'newCampo':value}}) // $set te crea el campo en caso de no estar
+
+    // actualizacion de varios documentos
+        db.collection.updateMany({filter}, {$set:{'newcampo':value}})
+
+    // borrado de un documento 
+        db.collection.deleteOne({filter})
+
+    // borrado de varios documentos
+        db.collection.deleteMany({filter})
+
+    // operaciones con array/matriz
+        // igualdad de todo el array
+            db.collection.find( { 'nameCampo': [value_a0, value_a1, value_a2] } )
+
+        //encontrar matriz con los elementos que indiquemos sin tener encuenta el orden
+            db.collection.find( { 'nameCampo': { $all: ["value1", "value2"] } } )
+        
+        // que un valor de un elemton de una matrix cumpla una condicion
+            db.collection.find( { 'nameCampo': { $gt: 'condicion' } } )
+
+        // Consulta de un elemento de matriz que cumple varios criterios
+            db.inventory.find( { dim_cm: { $elemMatch: { $gt: 22, $lt: 30 } } } )
+
+        // Consulta de un elemento por la posición del índice de matriz
+            // todos los documentos en los que el segundo elemento [.1] de la matriz dim_cmes mayor que 25
+            db.inventory.find( { "dim_cm.1": { $gt: 25 } } ) 
+
+        // Consultar una matriz por longitud de matriz [$size: nº de elementos]
+            db.inventory.find( { "tags": { $size: 3 } } )
+
+        // consultar un elem que cumpla una conducion
+            db.collection.find( { 'nameCampo':{ $operador:value} } )
+        
+        // Encontrar un elemento dentro del array que cumpla más de una condición
+            db.collection.find( { 'nameCampo':{ $elemMatch:{value_a1,value_a2} } } )
+
+        // Añadir un elemento al array por la derecha
+            db.collection.update[One|Many]( {filtro} , { $push : { 'nameCampo' : new_value } } )
+
+        // Eliminar un elemento del array por la izquierda (primer elemento)
+            db.collection.updateOne( { filtro}, { $pop: { 'nameCampo': -1 } } )
+        
+        // Eliminar un elemento del array por la dereche (ultimo elemento)
+            db.collection.updateOne( { filtro }, { $pop: { 'nameCampo': 1 } } )
+
+        // Añadir varios los elementos especificados al Array
+            db.collection.update( { filtro }, { $pushAll: { 'nameCampo': [ value1, value2, value3 ] } } )
+
+        // Eliminar un elemento cualquiera del array especificando su valor.
+            db.profiles.updateOne( { filtro }, { $pull: { votes: { $gte: 6 } } } )
+
+        // Eliminar todos los elementos coincidentes del Array.
+            db.collection.update( { filtro }, { $pullAll: { 'nameCampo': [ value1, value2, value3 ] } } )
+
+        // Añadir un elemento al array únicamente si no existe ya.
+            //añade todo el array en si
+            db.collection.update( { filtro }, { $addToSet: { 'nameCampo': [ value1, value2, value3 ] } } )
+            // añade un valor al array 
+            db.inventory.updateOne( { _id: 1 }, { $addToSet: { 'nameCampo': value } } )
+
+/***        DISEÑO             */
+
+    /** EMBEBER
+        - Pequeños subdocumentos
+        - Los Datos no cambian regurlamente
+        - Se requiere consistencia -- los datos 
+        - Los Documentois crecen poco
+        - Se necesitan los datos embebidos para relizar segundas consultas
+        - Lecturas rápidas
+
+        Un campo del documento es un objeto en sí compuesto por varios campos. 
+    */
+
+    /** REFERENCIAR
+        - subdocumentos grandes -> mejor hacer un collection nuevo
+        - Los datos cambian frecuentemenre
+        - No es necesario mantener la consistencia
+        - LOs documentos crecen bastante
+        - Escrituras rápidas
+
+        ** OJO : cuando hagamos una coleccion relacionada con otra debemos de tener claro
+        que el valor del campo de una coleccion no puede ser el nombre del campo de otra coleccion
+     */
+
+    /** CASUISTICAS
+
+        1:1 --> embeber
+
+        1:n --> ver cuanto de n estamos hablando. Si es poco en mejor embeber (coches), 
+        si el n es alto debemos referenciar (comentarios). 
+
+        n:n --> debemos de referenciar, en algunos casos debemos de referencias en ambos 
+        lados para que la busqueda al final sea mas facil de locializar y no tener que buscar 
+        entre la lista de una de las referencias que puede ser muy alta. 
+    */
+
+/***        INDICES - MEJORA DEL RENDIMIENTO */
+
+    // Permiten optimizar la ejecución de las consultas que afecta a la velocidad con la que
+    // estas se ejecutan y devuelven el resultado. Ordenacion descendente: -1
+
+    // Análisis del rendimiento de las querys
+        // mirrar el numero de docuemntos y el tiempo
+        db.collection.find({<fiter>}).explain(“executionStats”)
+
+    //Llame a este método en una consulta para anular la selección de índice predeterminada de MongoDB 
+    //y el proceso de optimización de consultas .
+        db.collection.find().hint('nameIndex').explain(“executionStats”)
+
+    // consulta de indices existentes
+        db.collection.getIndexes()
+    
+    // crear indices simple
+        db.collection.createIndex({'nameCampo':1},{unique:true})
+    
+    //crear indices compuestos
+        db.collection.createIndex({'nameCampo':1 , 'nameCampo':1},{unique:true})
+    
+    //el indice filtra si los documente tienen o no el campo 
+        db.collection.createIndex( {'nameCampo':1 , 'nameCampo':1}, {sparse:true} )
+
+    // Solo se indexa la parte de la muestra que cumpla la condición especificada, podemos hacer que sea unico
+        db.collection.createIndex({'nameCampo':1 , 'nameCampo':1}, {[unique:true], partialFilterExpression: {'nameCampo': {$operador: value} } } )
+
+    // crear un índice sobre un subdocumento
+        db.coleccion.createIndex({"nameCampo.subnameCampo":1})
+    
+    //elimianr indices
+        db.collection.dropIndex('nombre')
+        db.collection.dropIndexes()
+
+    // indices de texto
+        db.collection.createIndex( { key: "text" } )
+        //consulta 
+            db.collection.find({$text:{$search:"palabra"}}) //busca la palabra dentro de un texto
+    
+/***        AGREACIONES        */
+
+    // Las operaciones de agregación le permiten agrupar, clasificar, realizar cálculos, analizar datos y mucho más.
+
+    /*  $group -- separa los documentos en grupos según una "clave de grupo". 
+        El resultado es un documento para cada clave de grupo única.
+        ** value puede ser el contenido de un campo: $nameCampo
+    */
+        db.collection.aggregate(
+            [ { $group : { _id : "$property_type" }, {'nameCampo': {$acumulador:value}} } ]
+        )
+
+    /* $sample -- Selecciona aleatoriamente el número especificado de documentos de su entrada.*/
+        db.collection.aggregate(
+            [ { $sample: { size: number } } ]
+        )
+
+    // $sort -- Reordena el flujo de documentos mediante una clave de clasificación especificada.
+        db.collection.aggregate(
+            [ { $sort : { 'campoPtoReferencia' : 1 } } ]
+        )
+
+    // $geoNear -- Devuelve un flujo ordenado de documentos según la proximidad a un punto geoespacial.
+        db.places.aggregate([
+            {
+                $geoNear: {
+                    // El punto para el que encontrar los documentos más cercanos.
+                    near: { 
+                        // tipo de pto de referencia
+                        type: "Point", 
+                        //mis coordenadas de interes
+                        coordinates: [ -73.99279 , 40.719296 ] 
+                    },
+                    //El campo de salida que contiene el obj distancia en el campo calculada.
+                    distanceField: "dist.calculated", //objeto con un subcampo calculated
+                    //la distanci máxima a mi pto de busqueda -- opcional
+                    maxDistance: 2,
+                    //limita los documentos de busqueda -- opcional 
+                    query: { category: "Parks" }, // busque solo una categoria definida
+                    //especifica el campo de salida que identifica la ubicación utilizada para calcular la distancia.
+                    includeLocs: "dist.location",
+                    //Determina cómo MongoDB calcula la distancia entre dos puntos
+                    spherical: true
+                }
+            }
+        ])
+
+
+    // $lookup -- Realiza una unión externa a otra colección en la misma base de datos para filtrar los
+                //documentos de la colección "referenciada" para su procesamiento.
+        db.collection.aggregate([
+            {$lookup:
+                {
+                from: <collection to join>, //[coleccion que queremos unir]
+                localField: <field from the input documents>, //campo de nuestra coleccion actual
+                foreignField: <field from the documents of the "from" collection>, //campo de la coleccion que queremos unir
+                as: <output array field> //nombre de la salida de datos. 
+                } 
+            }
+        ] )
+
+    // $out -- Escribe los documentos resultantes de la canalización de agregación en una colección
+        db.collection.aggregate( [
+            { $group : { _id : "$nameCampo", campoInteres: { $push: "$nameCampo" } } }, //query de interes
+            { $out : "nameNewCollection" } // crea una coleccion con los datos -- realziar find()
+        ] )
+
+    // $indexStats -- Devuelve estadísticas sobre el uso de cada índice para la colección.
+        db.collection.aggregate( [ { $indexStats: { } } ] )
+
+    /*** Acumuladores */
