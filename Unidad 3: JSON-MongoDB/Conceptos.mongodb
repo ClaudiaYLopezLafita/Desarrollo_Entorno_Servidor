@@ -219,25 +219,65 @@
 
     // Las operaciones de agregación le permiten agrupar, clasificar, realizar cálculos, analizar datos y mucho más.
 
-    /*  $group -- separa los documentos en grupos según una "clave de grupo". 
+     $project // donde indicamos que campos mostrar : 1 o noMOstrar:0
+        db.collection.aggregate( [ { $project : { 'campo' : 1 , 'campo2' : 0 } } ] )
+
+    $match //Filtra el flujo de documentos para permitir que solo los documentos coincidentes pasen sin
+    // modificar a la siguiente etapa de canalización.
+        db.collection.aggregate(
+            [ { $match : { 'campoACoincidir' : "davalueve" } } ]
+        )
+
+    $redact //Cambia la forma de cada documento en la secuencia restringiendo el contenido de cada
+    //documento en función de la información almacenada en los propios documentos.
+        var userAccess = [ "STLW", "G" ];
+        db.forecasts.aggregate(
+        [
+            { $match: { year: 2014 } },
+            //establecemos un cambio de documento con un condicional
+            { $redact: {
+                //condicion
+                $cond: {
+                if: { $gt: [ { $size: { $setIntersection: [ "$tags", userAccess ] } }, 0 ] },
+                then: "$$DESCEND",
+                else: "$$PRUNE"
+                }
+            }
+            }
+        ]
+        )
+
+    $limit //Pasa los primeros n documentos sin modificar a la canalización donde n es el límite
+    //especificado.
+        db.collection.aggregate( [ { $limit: numero } ] )
+
+    $skip //Omite los primeros n documentos donde n es el número de omisión especificado
+        db.collection.aggregate( [ { $skip : numero } ] );
+    
+    $unwind //Deconstruye un campo de matriz a partir de los documentos de entrada para generar un
+    //documento para cada elemento.
+        db.collection.aggregate( [ { $unwind : '$campoArray' } ] );
+
+    $group /*-- separa los documentos en grupos según una "clave de grupo". 
         El resultado es un documento para cada clave de grupo única.
         ** value puede ser el contenido de un campo: $nameCampo
     */
         db.collection.aggregate(
             [ { $group : { _id : "$property_type" }, {'nameCampo': {$acumulador:value}} } ]
         )
+        //** mirar apartado acumuladores
 
-    /* $sample -- Selecciona aleatoriamente el número especificado de documentos de su entrada.*/
+    $sample /*Selecciona aleatoriamente el número especificado de documentos de su entrada.*/
         db.collection.aggregate(
             [ { $sample: { size: number } } ]
         )
 
-    // $sort -- Reordena el flujo de documentos mediante una clave de clasificación especificada.
+    $sort //-- Reordena el flujo de documentos mediante una clave de clasificación especificada.
         db.collection.aggregate(
             [ { $sort : { 'campoPtoReferencia' : 1 } } ]
         )
 
-    // $geoNear -- Devuelve un flujo ordenado de documentos según la proximidad a un punto geoespacial.
+    $geoNear // -- Devuelve un flujo ordenado de documentos según la proximidad a un punto geoespacial.
         db.places.aggregate([
             {
                 $geoNear: {
@@ -263,7 +303,7 @@
         ])
 
 
-    // $lookup -- Realiza una unión externa a otra colección en la misma base de datos para filtrar los
+    $lookup // -- Realiza una unión externa a otra colección en la misma base de datos para filtrar los
                 //documentos de la colección "referenciada" para su procesamiento.
         db.collection.aggregate([
             {$lookup:
@@ -276,13 +316,82 @@
             }
         ] )
 
-    // $out -- Escribe los documentos resultantes de la canalización de agregación en una colección
+    $out // -- Escribe los documentos resultantes de la canalización de agregación en una colección
         db.collection.aggregate( [
             { $group : { _id : "$nameCampo", campoInteres: { $push: "$nameCampo" } } }, //query de interes
             { $out : "nameNewCollection" } // crea una coleccion con los datos -- realziar find()
         ] )
 
-    // $indexStats -- Devuelve estadísticas sobre el uso de cada índice para la colección.
+    $indexStats //-- Devuelve estadísticas sobre el uso de cada índice para la colección.
         db.collection.aggregate( [ { $indexStats: { } } ] )
 
-    /*** Acumuladores */
+    /*** Acumuladores -- Los acumuladores están disponibles en los escenarios $group y $project.*/
+        
+        $sum // devuelve una suma de valores numéricos
+        $avg // Devuelve un promedio de valores numéricos.
+        $first // Devuelve un valor del primer documento para cada grupo.
+        $last // Devuelve un valor del último documento para cada grupo
+        $max //Devuelve el valor de expresión más alto para cada grupo 
+        $push // Devuelve una matriz de valores de expresión para cada grupo. -- repeticiones 
+        $addToSet // Devuelve una matriz de valores de expresión únicos para cada grupo. -- no rept
+        $stdDevPop // Devuelve la desviación estándar de la población de los valores de entrada.
+        $stdDevSamp // Devuelve la desviación estándar de la muestra de los valores de entrada.
+
+        $cmp // Devuelve: 0 si los dos valores son equivalentes, 1 si el primer valor es mayor que el
+            //segundo y -1 si el primer valor es menor que el segundo
+        $eq // Devuelve true si los valores son equivalentes.
+        $gt // Devuelve true si el primer valor es mayor que el segundo.
+        $gte //Devuelve true si el primer valor es mayor o igual que el segundo.
+        $lt //Devuelve true si el primer valor es menor que el segundo.
+        $lte // Devuelve true si el primer valor es menor o igual que el segundo.
+        $ne // Devuelve true si los valores no son equivalentes.
+        $in // Devuelve true si un valor está contenido en un array.
+        $nin // Devuelve true si un valor no está contenido en un array.
+
+        $cond((condicion), result if true, result if false) // Realiza una cosa u otra dependiendo 
+        //de si se cumple o no la condición especificada
+
+        $and // devuelve true solo cuando todas sus expresiones se evalúan como true. 
+        $or // Devuelve true cuando cualquiera de sus expresiones se evalúa como true. 
+        $not // Devuelve el valor booleano opuesto a la expresión de su argumento.
+
+        // -- $project
+        $add //Realiza la suma de un array de números.
+        $divide // Divide dos números.
+        $mod // A partir de dos números calcula el resto producido al dividir el primero entre el segundo.
+        $multiply //Multiplica dos números.
+        $substract //A partir de dos números realiza la resta.
+
+        // --- string
+        $concat //Concatena cualquier número de cadenas.
+        $substr //Devuelve una subcadena de una cadena, comenzando en una posición de índice
+        //especificada hasta una longitud especificada.
+        $toLower // Convierte una cadena a minúsculas. 
+        $toUpper // Convierte una cadena en mayúsculas.
+        $strcasecmp // Realiza una comparación de cadenas no distingue entre mayúsculas y minúsculas 
+        //devuelve: 0 si dos cadenas son equivalentes, 1 si la primera cadena es mayor que la
+        //segunda y -1 si la primera cadena es menor que la segunda.
+
+        // --- array
+        $arrayElemAt //Devuelve el elemento en el índice de matriz especificado.
+        $concatArrays //Concatena matrices para devolver la matriz concatenada.
+        $filter //Selecciona un subconjunto de la matriz para devolver una matriz con solo los elementos
+        //que coinciden con la condición del filtro.
+        $isArray // Determina si el operando es una matriz. Devuelve un booleano.
+        $size //Devuelve el número de elementos de la matriz. Acepta una sola expresión como argumento.
+        $slice // Devuelve un subconjunto de una matriz.
+
+        // --- date
+        $dayOfYear //Devuelve el día del año para una fecha como un número entre 1 y 366 (año bisiesto).
+        $dayOfMonth //Devuelve el día del mes para una fecha como un número entre 1 y 31.
+        $dayOfWeek //Devuelve el día de la semana para una fecha como un número entre 1 (domingo) y 7
+        //(sábado).
+        $year // Devuelve el año de una fecha como un número (por ejemplo, 2014).
+        $month // Devuelve el mes de una fecha como un número entre 1 (enero) y 12 (diciembre).
+        $week // Devuelve el número de semana de una fecha como un número entre 0 (la semana parcial
+        //que precede al primer domingo del año) y 53 (año bisiesto).
+        $hour //Devuelve la hora de una fecha como un número entre 0 y 23.
+        $minute //Devuelve el minuto de una fecha como un número entre 0 y 59.
+        $second //Devuelve los segundos de una fecha como un número entre 0 y 60 (segundos intercalares).
+        $millisecond //Devuelve los milisegundos de una fecha como un número entre 0 y 999.
+        $dateToString //Devuelve la fecha como una cadena formateada
