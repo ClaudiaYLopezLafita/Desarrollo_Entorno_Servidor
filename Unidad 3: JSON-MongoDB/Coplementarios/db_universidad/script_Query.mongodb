@@ -1,0 +1,142 @@
+// insert documentos
+
+db.estudiantes.insertMany([
+    {nombre : 'Juan', 
+    apellido : 'Linarez', 
+    edad : 21, 
+    notas : [18,19,16], 
+    programa : { nombre : 'Ingeniería en Informática', nivel : 'pregrado'}, 
+    grupos: [ 
+        { nombre : 'Club de  Ajedrez', descripción : 'Grupo de jugadores de Ajedrez'}, 
+        { nombre : 'Club de Informática', descripcion : 'Grupo para fanáticos de Tecnología'}] 
+    },
+    {nombre : 'Maria', 
+    apellido : 'Cadenas', 
+    edad : 18, 
+    notas : [12,14], 
+    programa : { nombre : 'Medicina', nivel : 'pregrado'}, 
+    grupos: [ 
+        { nombre : 'Club de  Volleyball', descripción : 'Equipo d eVolleyball de la universidad.'}]
+    },
+    {nombre : 'Jorge', 
+    apellido : 'Rodriguez', 
+    edad : 31, 
+    notas : [14,19,13], 
+    programa : { nombre : 'Ingeniería Civil', nivel : 'postgrado'}
+    },
+    {nombre : 'Carla', 
+    apellido : 'Sandoval', 
+    edad : 24, 
+    notas : [15,17,16,15], 
+    programa : { nombre : 'Ingeniería en Informática', nivel : 'pregrado'}, 
+    grupos: [ { nombre : 'Club de Informática', descripcion : 'Grupo para fanáticos de Tecnología'}] 
+    },
+    {nombre : 'William', 
+    apellido : 'Smith', 
+    edad : 14, 
+    notas : ['A', 'B+', 'A-'], 
+    programa : { nombre : 'Bachiller'}, 
+    grupos: [ { nombre : 'Club de PS4', 
+    descripción : 'Grupo de jugadores de Playstation 4'}] 
+    }
+])
+
+//obtener solamente el nombre de aquellos estudiantes que sean mayores a 20 y menores a 30 años 
+
+db.estudiantes.find({edad:{$gt:20 , $lt:30}})
+
+//obtener toda la información a excepción del programa y los grupos de todos los estudiantes que sean menores a 20 o mayores a 30 año
+
+db.estudiantes.find(
+    {edad:{$gt:20 , $lt:30}},
+    {
+        programa:0,
+        grupos:0
+    }
+)
+
+// obtener los documentos donde el nombre sea o “María”, o “José”, “Juan” o 10. Lo haríamos de la siguiente forma:
+
+db.estudiantes.find({nombre:{$in:['Maria','José','Juan',10]}})
+
+//Si queremos obtener todos los estudiantes con las notas 18, 19 y 16. Podemos utilizar el siguiente comando:
+
+db.estudiantes.find({notas:{$all:[18,19,16]}})
+
+//  obtener todos los estudiantes cuyo nombre empiece por la letra “J”, usemos el siguiente comando:
+
+db.estudiantes.find({nombre:/J/},{nombre:1})
+
+//obtener todos los estudiantes cuyo apellido contenga una “n”, usemos este otro:
+
+db.estudiantes.find({apellido:/n/},{nombre:1,apellido:1})
+
+//obtener los estudiantes con programa de nivel “pregrado”, lo haríamos de la siguiente forma:
+
+db.estudiantes.find({'programa.nivel':'pregrado'},{_id:0,nombre:1,apellido:1,programa:1})
+
+//btener los estudiantes con un programa cuyo nombre empiece por la letra  “I”, y que además tenga nivel “pregrado”
+
+db.estudiantes.find({'programa.nombre':/^I/ ,'programa.nivel':'pregrado'},{_id:0,nombre:1,apellido:1,programa:1})
+
+// obtener los estudiantes mayores a 20 años con un programa de nivel pregrado
+
+db.estudiantes.find({edad:{$gt:20} ,'programa.nivel':'pregrado'},{_id:0,nombre:1,edad:1,programa:1})
+
+//Si quisiéramos encontrar los estudiantes que tienen en una de sus notas un 19
+
+db.estudiantes.find({notas:19},{_id:0,nombre:1,edad:1,notas:1})
+
+//obtener los estudiantes con al menos una nota mayor o igual a 17
+
+db.estudiantes.find({notas:{$lt:17}},{_id:0,nombre:1,edad:1,notas:1})
+
+//utilizar una disyunción y obtener los estudiantes con alguna de sus notas mayor o igual a 12 y menor a 16
+
+db.estudiantes.find({notas:{$lt:16,$gte:12}},{_id:0,nombre:1,edad:1,notas:1})
+db.estudiantes.find({notas: {$elemMatch : {$gte:12,$lt:16}}},{nombre:1,apellido:1,notas:1,_id:0})
+
+//saber los estudiantes cuya primera nota es 12 [uso de indice de array]
+
+db.estudiantes.find({'notas.0' : 12},{nombre:1,apellido:1,notas:1,_id:0})
+
+//quisiéramos saber los estudiantes con 3 notas exclusivamente, lo haríamos de la siguiente forma:
+
+db.estudiantes.find({notas:{$size:3}},{nombre:1,apellido:1,notas:1,_id:0})
+
+// no me retorna los estudiantes que pertenecen al grupo “Club de Ajedrez”
+
+db.estudiantes.find({ grupos : {'grupo.nombre':"Club de  Ajedrez"}},{nombre:1,apellido:1,_id:0, grupos:1}) // NO devuekve nada
+db.estudiantes.find({ grupos : {nombre:"Club de  Ajedrez", descripción: "Grupo de jugadores de Ajedrez"}},{nombre:1,apellido:1,_id:0, grupos:1})
+
+//obtener los estudiantes cuyo primer grupo fuera el de nombre “Club de Informática”,
+
+db.estudiantes.find({ 'grupos.0.nombre' : "Club de Informática"},{nombre:1,apellido:1,_id:0, grupos:1})
+
+//obtener los estudiantes que pertenecen al grupo de nombre “Club de Informática”
+
+db.estudiantes.find({ 'grupos.nombre' : "Club de Informática"},{nombre:1,apellido:1,_id:0, grupos:1})
+
+//ver los estudiantes que pertenecen o al club de informática o al club de volleyball -- para buscar en un array mejor con elemMatch
+
+db.estudiantes.find(
+    { grupos : {$elemMatch : { $or : [{nombre:"Club de Informática"},{nombre: "Club de  Volleyball"}] } } },
+    {nombre:1,apellido:1,_id:0, grupos:1}
+)
+
+// obtener los estudiantes menores a 30 años, que tengan 3 notas registradas de las cuales al menos una sea mayor
+// o igual a 18, estén en un programa de nivel “pregrado” y pertenezcan al curso de ajedrez o al de volleyball sin 
+//mostrar sus nombres pero si sus apellidos
+
+db.estudiantes.find(
+    { edad : { $lt : 30 }, 
+    notas : { $size : 3, $gte : 18 }, 
+    'programa.nivel' : 'pregrado', 
+    grupos : { $elemMatch : { nombre : { $in : ['Club de  Ajedrez', 'Club de  Volleyball' ]}} }
+    },
+    {nombre:0,_id:0}
+)
+
+// saber los estudiantes que no pertenecen a ningún grupo
+
+db.estudiantes.find({grupos: {$exists : false}})

@@ -1,0 +1,479 @@
+//obtener los estudiantes de nombre “Juan”
+
+db.estudiantes.aggregate({$match: { nombre:'Juan' }})
+
+// queremos solo ver el nombre de los estudiantes registrados
+
+db.estudiantes.aggregate({$project: { nombre:1,_id:0}})
+
+//mostrar el apellido como “segundoNombre” lo haríamos de la siguiente forma:
+
+db.estudiantes.aggregate({$project: { nombre:1,_id:0,segundoNombre:'$apellido'}})
+
+//obtener el nombre y apellido del estudiante utilice el operador de strings $concat
+db.estudiantes.aggregate([
+    {$project : {_id:0, nombreCompleto : {$concat : ["$nombre"," ","$apellido"]}}}]
+)
+
+//obtener los estudiantes ordenados según su edad de forma ascendente
+
+db.estudiantes.aggregate([
+    {$project : {nombre:1,edad:1,_id:0}},
+    {$sort : {edad : 1}}
+])
+
+//obtener solo 3 estudiantes más jóvenes
+
+db.estudiantes.aggregate([
+    {$project : {nombre:1,edad:1,_id:0}},
+    {$sort : {edad : 1}},{$limit : 3}
+])
+
+//obtener los 3 estudiantes más jóvenes luego de los primeros 2
+
+db.estudiantes.aggregate([
+    {$project : {nombre:1,edad:1,_id:0}},
+    {$sort : {edad : 1}},
+    {$skip:2},
+    {$limit : 3}
+])
+
+//obtener la cantidad de estudiantes menores a 20 años
+
+db.estudiantes.aggregate([
+    {$match : {edad : { $lt : 20}}}, 
+    {$count : "Estudiantes menores a 20 años"}
+])
+
+// grupar los estudiantes separando los mayores de edad de los menores de edad. 
+
+db.estudiantes.aggregate([
+    {$group : { _id : {$lt : ['$edad',18]}, 
+    edades : {$push : {edad : '$edad'}}}}
+])
+
+//grupar los estudiantes por el programa que cursan,
+
+db.estudiantes.aggregate([
+    {$group : { _id : '$programa', count : {$sum : 1}}}
+])
+
+//obtener una muestra aleatoria de 2 estudiantes
+
+db.estudiantes.aggregate([{$sample : {size : 2}}])
+
+//generar una colección con los grupos generados previamente por la etapa $group 
+//en donde se dividieron a los estudiantes según el programa que cursaban
+
+db.estudiantes.aggregate([
+    {$group : { _id : '$programa', count : {$sum : 1}}},
+    {$out : 'programas'}
+])
+
+//agregar 2 campos nuevos a la colección de estudiantes, uno que represente la sumatoria 
+//de sus notas, y otro que nos diga si es miembro de algún club,
+
+db.estudiantes.aggregate([
+        {$addFields : { 
+            totalNotas : { $sum : '$notas' }, 
+            esMiembroDeClub : { $gt : ['$grupos',null]}
+            }
+        }
+])
+
+//agrupar los estudiantes por programa, y ordenar los programas por número de estudiantes 
+//registrados en ellos
+
+db.estudiantes.aggregate([{$sortByCount : '$programa'}])
+
+//mostrar un campo que nos indique true o false si el estudiantes se apellida Smith
+
+db.estudiantes.aggregate(
+    {$project : {_id:0,nombre:1,apellido:1,apellidaSmith:{$eq : ['$apellido','Smith']}}}
+)
+
+// mostrar un campo que nos indicara true o false si el estudiante es mayor a 21 años
+
+db.estudiantes.aggregate(
+    {$project : {_id:0,nombre:1,apellido:1,mayorA21:{$gt : ['$edad',21]}}}
+)
+
+//mostrar en un campo nuevo si un estudiante es menor, mayor o tiene exactamente 21 años
+
+db.estudiantes.aggregate(
+    {$project : {_id:0,nombre:1,apellido:1,edad:1,relacionA21:{$cmp : ['$edad',21]}}}
+)
+
+// mostrar un campo que indique si un estudiante se llama “María” y tiene menos de 30 años
+
+db.estudiantes.aggregate(
+    {$project : 
+        {_id:0,
+        nombre:1,
+        apellido:1,
+        edad:1,
+        mariaMayorA30:{$and : [{$eq : ['$nombre','Maria']},{$lt : ['$edad', 30]}]}
+        }
+    }
+)
+
+//mostrar un campo que indique si un estudiante se apellida “Linarez” ó tiene más de 22 años
+
+db.estudiantes.aggregate(
+    {$project : 
+        {_id:0,
+        nombre:1,
+        apellido:1,
+        edad:1,
+        linarezOMayorA22:{$or : [{$eq : ['$apellido','Linarez']},{$gt : ['$edad', 22]}]}
+        }
+    }
+)
+
+//mostrar un campo que indique si un estudiante no se llama “William Smith”
+
+db.estudiantes.aggregate(
+    {$project : 
+        {_id:0,
+        nombre:1,
+        apellido:1,
+        edad:1,
+        noWilliamSmith:{$not : { $and : [{$eq:['$nombre','William']},{$eq : ['$apellido','Smith']}]}}
+        }
+    }
+)
+
+/**mostraremos en un campo adicional el valor absoluto de la resta de la edad del estudiante menos 
+12 multiplicado por dos, y en otro le sumaremos 2 a la edad dividido entre 5. */
+
+db.estudiantes.aggregate([
+    {$project : 
+        { _id: 0, 
+        edad: 1, 
+        valorAbsolutoRestaMultiplicacion: {$abs: { $subtract: ['$edad', {$multiply: [12,2]}]}}, 
+        sumaDivision: {$add: ['$edad',{$divide:['$edad',5]}]}
+        }
+    }
+])
+
+db.estudiantes.aggregate(
+    {$project : 
+        { _id: 0, 
+        edad: 1, 
+        valorAbsolutoRestaMultiplicacion: {$abs: { $subtract: ['$edad', {$multiply: [12,2]}]}}, 
+        sumaDivision: {$add: ['$edad',{$divide:['$edad',5]}]}
+        }
+    }
+)
+
+/**consulta en la que utilizaremos la edad y el número 3, cuando sea necesario, en cada una de ellas
+ y las mostraremos todas como un campo nuevo proyectado */
+
+db.estudiantes.aggregate([
+    {$project : 
+        { _id: 0,
+        edad: 1,
+        edadElevadoALa3: {$pow : ['$edad',3]}, 
+        raizCuadradaDeEdad : {$sqrt: '$edad'}, 
+        eElevadoALaEdad : {$exp : '$edad'}, 
+        logaritmoNaturalDeEdad: {$ln : '$edad'}, 
+        logaritmoEnBase3DeEdad : {$log : ['$edad',3]}
+        }
+    }
+])
+
+//con el mismo parámetro el cual será el valor de 5 menos la edad dividido entre 
+
+db.estudiantes.aggregate([
+    {$project: 
+        {_id :0, 
+        edad:1, 
+        menosEdadEntre4 : {$subtract: [5,{$divide:['$edad',4]}]},
+        ceil : {$ceil: {$subtract: [5,{$divide:['$edad',4]}]}},
+        floor : {$floor: {$subtract: [5,{$divide:['$edad',4]}]}},
+        trunc : {$trunc: {$subtract: [5,{$divide:['$edad',4]}]}}
+        }
+    }
+])
+
+// una consulta la cual nos muestre el nombre completo del estudiante (nombre y apellido) y 
+//luego dividiremos estos strings utilizando como delimitador la letra a.
+
+db.estudiantes.aggregate([
+    {$project :
+        { _id:0, 
+        nombreCompleto : {$concat: ['$nombre',' ','$apellido']}, 
+        nombreCompletoSeparadoPorA : { $split : [ {$concat: ['$nombre',' ','$apellido']},'a']}
+        }
+    }
+])
+
+// buscar  las ocurrencias de la letra a en el nombre completo del estudiante, desde la 3ra hasta la décima letra
+
+db.estudiantes.aggregate([
+    {$project : 
+        { _id:0, 
+        nombreCompleto : {$concat :['$nombre',' ','$apellido']}, 
+        indiceDeAenNombreCompleto : { $indexOfBytes : [{$concat: ['$nombre',' ','$apellido']},'a',2,9]}
+        }
+    }
+])
+
+//vamos a comparar el string “maRiA” con los nombres  que tenemos registrados
+
+db.estudiantes.aggregate([{$project: { _id:0, nombre:1, esMaria: {$strcasecmp : ['$nombre','maRiA']}}}])
+
+//ostrar los nombres en minúsculas y los apellidos en mayúsculas de los estudiantes 
+
+db.estudiantes.aggregate([
+    {$project: 
+        {_id:0, 
+        nombreEnMinusculas:{ $toLower : '$nombre'}, 
+        apellidoEnMayusculas: {$toUpper: '$apellido'}
+        }
+    }
+])
+
+// mostrar los nombres en minúsculas y los apellidos en mayúsculas de los estudiantes
+
+db.estudiantes.aggregate([
+    {$project: 
+        {_id:0, 
+        nombreEnMinusculas:{ $toLower : '$nombre'},
+        apellidoEnMayusculas: {$toUpper: '$apellido'}
+        }
+    }
+])
+
+//saber los estudiantes que tengan notas de 16, 18 y 19 exactamente
+
+db.estudiantes.aggregate([{$project : {_id:0, notas:1, tiene1618y19: {$setEquals : ['$notas',[16,18,19]]}}}])
+
+// intersección entre las notas de los estudiantes y el arreglo [18,19,20] 
+
+db.estudiantes.aggregate([{$project : {_id:0, notas:1, intercepcion181920: {$setIntersection : ['$notas',[18,19,20]]}}}])
+
+//unir el arreglo con las notas de los estudiantes con un arreglo con las notas 16 y 14 de modo que los que
+// ya tengan esas notas no se repitan
+
+db.estudiantes.aggregate([{$project : {_id:0, notas:1, union1416: {$setUnion : ['$notas',[14,16]]}}}])
+
+// obtener las notas de los estudiantes exceptuando las notas 12 y 19 
+
+db.estudiantes.aggregate([{$project : {_id:0, notas:1, diferencia12y19: {$setDifference : ['$notas',[12,19]]}}}])
+
+// determinar los estudiantes que tienen al menos un 15 y un 16
+
+db.estudiantes.aggregate([{$project : {_id:0, notas:1, tiene15y16: {$setIsSubset : [[15,16], '$notas']}}}])
+
+//retornar la segunda nota de cada estudiante 
+
+db.estudiantes.aggregate([{$project: { _id:0, notas:1, segundaNota:{$arrayElemAt : ['$notas',1]}}}])
+
+/** mostrar un arreglo con los valores “Este ”, “es ”, “ un”, luego los elementos del arreglo de notas del estudiante 
+y luego los valores “arreglo”, “concatenado”, “con las notas de:” y el nombre completo del estudiante. */
+
+db.estudiantes.aggregate([
+    {$project:
+        {_id:0, 
+        arregloConcatenado: {
+            $concatArrays : [['Este','es','un'],'$notas',['arreglo','concatenado con las notas de:',
+            {$concat:['$nombre',' ','$apellido']}]]}
+        }
+    }
+])
+
+//etornar solo las notas de los estudiantes que sean mayor a 16
+
+db.estudiantes.aggregate([
+    {$project: 
+        {_id:0, 
+        nombreCompleto: {$concat: ['$nombre',' ','$apellido']}, 
+        notasMayoresA16 : {$filter: {input : '$notas', as: 'nota', cond: { $gt : ['$$nota', 16]}}}
+        }
+    }
+])
+
+// queremos saber si algún estudiante tiene un 18 en alguna de sus notas
+
+db.estudiantes.aggregate([{$project: { _id: 0, nombre:1, notas:1, tieneAlMenosUnaCon18oMas: {$in : [18,'$notas']}}}])
+
+//retornar los índices de la ocurrencia de un 16 en las notas de los estudiantes
+
+db.estudiantes.aggregate([{$project: { _id: 0, nombre:1, notas:1, indiceDelPrimer16:{$indexOfArray: ['$notas',16]} }}])
+
+//si los valores de notas, programa y grupos son arreglos o no.
+
+db.estudiantes.aggregate([
+    {$project: 
+        { _id: 0, 
+        nombre:1, 
+        notas:1, 
+        notasEsArreglo: {$isArray: '$notas'}, 
+        programaEsArreglo: {$isArray : '$programa'}, 
+        gruposEsArreglo : {$isArray: '$grupos'}
+        }
+    }
+])
+
+//obtener el tipo de dato de cada nota asociada al estudiante
+
+db.estudiantes.aggregate([
+    {$project: 
+        { _id:0, 
+        notas:1, 
+        mitadDeNotas: { $map: {input:'$notas', as:'nota', in: {$type: '$$nota'}} } 
+        }
+    }
+])
+
+//obtener los números entre la edad del estudiante y 30 con un salto de 2
+
+db.estudiantes.aggregate([{$project: { _id:0, notas:1, rangoEntreEdadY30: { $range : ['$edad',30,2] } }}])
+
+//obtener el valor acumulado de la suma de la mitad y la décima parte de la edad de un estudiante 
+
+db.estudiantes.aggregate([
+    {$project: 
+        { _id:0, 
+        notas:1, 
+        acumuladorDeNotas: { $reduce:{ input : [{$divide:['$edad',2]},{$divide : ['$edad',10]}], 
+        initialValue: 0, in : { $add : ['$$value','$$this']}}} 
+        }
+    }
+])
+
+//obtener el valor acumulado de la suma de la mitad y la décima parte de la edad de un estudiante
+
+db.estudiantes.aggregate([
+    {$project: 
+        { _id:0, 
+        notas:1, 
+        acumuladorDeNotas: { $reduce:{ input : [{$divide:['$edad',2]},{$divide : ['$edad',10]}], 
+        initialValue: 0, in : { $add : ['$$value','$$this']}}} 
+        }
+    }
+])
+
+//aber cuántas notas tiene un estudiante
+
+db.estudiantes.aggregate([{$project: { _id:0, notas:1, cantidadDeNotas: {$size: '$notas'} }}])
+
+//obtener las primeras 2 notas del estudiante
+
+db.estudiantes.aggregate([{$project: { _id:0, notas:1, primeras2Notas: {$slice: ['$notas',2]} }}])
+
+//mezclar los elementos de las notas de los estudiantes y otros 2 arreglos ([1,2,3] y [‘A’,’B’,’C’]).
+
+db.estudiantes.aggregate([
+    {$project: 
+        { _id:0, 
+        notas:1, 
+        zipNotas: {$zip:{inputs:['$notas',[1,2,3],['A','B','C']]}} 
+        }
+    }
+])
+
+/**definir una variable que almacenará la longitud del nombre completo del estudiante, 
+y luego lo retornaremos de forma que diga “El nombre del estudiante x tiene n letras.” */
+
+db.estudiantes.aggregate([
+    {$project : 
+        {_id:0, 
+        nombre:1, 
+        apellido:1, 
+        cantidadDeLetrasEnNombreCompleto: { $let : { vars : { nombreCompleto : {$concat: ['$nombre', '$apellido'] }}, 
+        in: 
+            { $concat : ["El nombre del estudiante ",'$$nombreCompleto'," tiene ", 
+            { $substr : [{$strLenCP:'$$nombreCompleto'},0,-1 ] }, " letras" ]
+            } } } 
+        }
+    }
+])
+
+//ver el funcionamiento de este operador $literal
+
+db.estudiantes.aggregate([
+    {$project : 
+        {_id:0, 
+        nombre: 1, 
+        literalEdad: {$literal : '$edad'}, 
+        literalFuncion:{$literal: { $add : ['$edad',2]}}
+        }
+    }
+])
+
+//observamos el tipo de dato de algunos de los campos que pertenecen al estudiante
+
+db.estudiantes.aggregate([
+    { $project: 
+        { _id:0, 
+        nombre: 1, 
+        tipoApellido : {$type : '$apellido'}, 
+        tipoEdad : { $type:'$edad'}, 
+        tipoNotas: {$type: '$notas'}, 
+        tipoPrograma: {$type:'$programa'}, 
+        tipoGrupo: {$type: '$grupos'} 
+        } 
+    }
+])
+
+//er que estudiantes son mayores de edad, de forma de que si el estudiante es mayor 
+//de edad muestre “Si” y de lo contrario “No”
+
+db.estudiantes.aggregate([{$project: {_id:0, nombre:1, edad:1,esMayorDeEdad: {$cond:[{$gte: ['$edad',18]},'Si','No']}}}])
+
+//Para que en el caso de que cuando un estudiante no tenga ningún grupo nos muestre un string que diga 
+//“No pertenece a ningún grupo” 
+
+db.estudiantes.aggregate([{$project: { _id:0, nombre:1, grupos: { $ifNull:['$grupos',"No pertenece a ningún grupo"]}}}])
+
+//Vamos a mostrar por cada estudiante si su edad esta entre los grupos de 10 a 20, de 20 a 30 u otro grupo
+
+// db.estudiantes.aggregate([
+//     {$project : 
+//         { _id:0, 
+//         nombre:1, 
+//         edad:1, 
+//         grupoDeEdad: 
+//             { $switch:  
+//                 {branches: [{case:{$lt:['$edad',20]} ,then:"Grupo de menores de 20"},
+//                 { case : {$lt:['$edad',30]} ,then: "Grupo menores de 30"}], 
+//                 default: "Pertenece a otro grupo" } } }}]), default: "Pertenece a otro grupo" } } }}])])
+// ])
+
+//ara demostrar el funcionamiento de estos operadores, los usaremos todos en un solo comando 
+//utilizando la fecha actual (new Date())
+
+db.estudiantes.aggregate([
+    {$project : 
+        { _id:0, 
+        diaDelAnio: {$dayOfYear: new Date()}, 
+        diaDelMes:{ $dayOfMonth : new Date() }, 
+        diaDeLaSemana: {$dayOfWeek : new Date()}, 
+        anio:{$year : new Date()} , 
+        mes: {$month: new Date()}, 
+        semana : {$week : new Date()}, 
+        hora:{$hour : new Date()}, 
+        minuto:{$minute: new Date()}, 
+        segundo : {$second: new Date()}, 
+        milisegundo:{$millisecond: new Date()} 
+        }
+    }
+])
+
+//Para mostrar la fecha actual en formato dia/mes/anio, lo hacemos de la siguiente forma:
+
+db.estudiantes.aggregate([{$project : { _id:0, diaMesaAnio: {$dateToString:{format: "%d/%m/%Y" ,date: new Date()}}}}])
+
+//obtener la sumatoria y el promedio de todas las edades, lo hacemos de la siguiente forma.
+
+db.estudiantes.aggregate([{$group : {_id: 'idAux', suma: {$sum: '$edad'}, promedio: {$avg:'$edad'}}}]);
+
+//Obtengamos la edad máxima y la mínimo de la colección
+
+db.estudiantes.aggregate([{$group : {_id: 'idAux', maximo: {$max: '$edad'}, minimo: {$min:'$edad'}}}]);
+
+//podemos obtener el estudiante más joven y al más viejo.
+
+db.estudiantes.aggregate([{$sort: {edad:1}},{$group : {_id: 'idAux', primero: {$first: '$edad'}, ultimo: {$last:'$edad'}}}]);
