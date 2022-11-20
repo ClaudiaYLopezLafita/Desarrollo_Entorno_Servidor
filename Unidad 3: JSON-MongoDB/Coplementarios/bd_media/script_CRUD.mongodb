@@ -1,0 +1,164 @@
+// 1) Insertar los documentos dados en una base de datos llamada «media» en una única operación.
+
+db.productos.insertMany( [
+    {
+        tipo: 'libro',
+        titulo: 'Java para todos',
+        isbn: '987-1-2344-5334-8',
+        editorial: 'Anaya',
+        autor: [ 'Pepe Caballero', 'Isabel Sanz', 'Timoteo Marino' ],
+        capitulos: [
+            { capitulo: 1, titulo: 'Primeros pasos en Java', longitud: 20 },
+            { capitulo: 2, titulo: 'Primeros pasos en Java', longitud: 25 }
+        ]
+    },
+    {
+        tipo: 'CD',
+        artista: 'Los pìratas',
+        titulo: 'Recuerdos',
+        canciones: [
+            { cancion: 1, titulo: 'Adiós a mi barco', longitud: '3:20' },
+            { cancion: 2, titulo: 'Pajaritos', longitud: '4:15' }
+        ]
+    },
+    {
+        tipo: 'DVD',
+        titulo: 'Matrix',
+        estreno: 1999,
+        actores:[ 'Keanu Reeves', 'Carry-Anne Moss', 'Laurence Fishburne', 'Hugo Weaving', 'Gloria Foster','Joe Pantoliano']
+    }
+] )
+
+// 2) Actualizar el documento que hace referencia a la película «Matrix», de manera que se cambia su estructura a:
+
+db.productos.updateOne( 
+    {_id: ObjectId("6379e765d57219de91cb0168") },
+    {
+        $set:{
+            tipo: 'DVD',
+            titulo: 'Matrix',
+            estreno: 1999,
+            genero:'accion'
+        }
+    }
+)
+
+// 3) Considerar un nuevo documento para la colección media:
+
+db.productos.insertOne(
+    {
+        tipo: 'libro',
+        titulo: 'Constantinopla',
+        capitulos: 12,
+        leidos:3
+    }
+)
+
+//incrementar en 5 unidades el valor de la clave «leídos». 
+
+db.productos.update(
+    {titulo:'Constantinopla'},
+    {$inc:{leidos:5 }}
+)
+
+//4) Actualizar el documento referido a la película «Matrix» cambiando el valor de la clave «género» a «ciencia ficción».
+
+db.productos.update(
+    {titulo:'Matrix'},
+    {$set:{genero:'ciencia ficcion'} }
+)
+
+// 5) Actualizar el documento referido al libro «Java para todos» de manera que se elimine la clave «editorial».
+
+db.productos.update(
+    {titulo:'Java para todos'},
+    {$unset:{editorial:''} }
+)
+
+// 6) Actualizar el documento referido al libro «Java para todos» añadiendo el autor «María Sancho» al array de autores.
+
+db.productos.updateOne(
+    {titulo: 'Java para todos'},
+    { $push: { autor:'María Sancho' }}
+)
+
+// 7) Actualizar el documento referido a la película «Matrix» añadiendo al array «actores» los valores de «Antonio Banderas» y
+// «Brad Pitt» en una única operación.
+
+db.productos.updateOne(
+    {titulo: 'Matrix'},
+    { $push: { actores: { $each:['Antonio Banderas','Brad Pitt'] }}}
+) // $each para poder especificar una lista de elementos
+
+// 8) Actualizar el documento referido a la película «Matrix» añadiendo al array «actores» los valores «Joe Pantoliano», «Brad
+// Pitt» y «Natalie Portman» en caso de que no se encuentren, y si se encuentran no se hace nada.
+
+db.productos.updateOne( 
+    { titulo:'Matrix' }, 
+    { $addToSet: { actores: { $each: ['Joe Pantoliano', 'Brad Pitt' , 'Natalie Portman']}} } 
+)
+
+//9) Actualizar el documento referido a la película «Matrix» eliminando del array el primer y último actor.
+
+db.productos.updateOne(
+    {titulo:'Matrix'},
+    {$pop: { actores: -1 }}
+)
+
+db.productos.updateOne(
+    {titulo:'Matrix'},
+    {$pop: { actores: 1 }}
+)
+
+//10) Actualizar el documento referido a la película «Matrix» añadiendo al array actores los valores «Joe Pantoliano» y «Antonio Banderas».
+
+db.productos.updateOne(
+    {titulo:'Matrix'},
+    {$pushAll: {actores: ['Antonio Bandera', 'Joe Pantoliano'] } }
+)
+
+db.productos.updateOne(
+    {titulo: 'Matrix'},
+    { $push: { actores: { $each:['Antonio Banderas','Joe Pantoliano'] }}}
+)
+
+//11) Actualizar el documento referido a la película «Matrix» eliminado todas las apariciones en el array «actores» de los valores «Joe Pantoliano» y «Antonio Banderas».
+
+db.productos.updateOne( 
+    { titulo:'Matrix' }, 
+    { $pullAll: { actores: [ 'Antonio Banderas','Joe Pantoliano' ] } }
+)
+
+//12) Actualizar el documento referido al disco «Recuerdos» y añadir una nueva canción al array «canciones»:
+
+db.productos.updateOne(
+    {titulo: 'Recuerdos'},
+    {$push:{
+        canciones: {
+            cancion: 5,
+            titulo: 'El atardecer',
+            longitud: '6:50'
+        }
+    } }
+)
+
+// 13) Actualizar el documento referido al disco «Recuerdos» de manera que la canción «El atardecer» tenga asignado el número
+//3 en vez de 5.
+
+db.productos.updateOne(
+    {titulo:'Recuerdos'},
+    {$set:{'canciones.2.cancion':3 }}
+)
+//buscamos en el array cancines le tercer objetos y el campo cancion
+
+// 14) Renombrar el nombre de la colección «media» a «multimedia».
+
+db.productos.renameCollection('multimedia')
+
+// 15) Actualizar el documento referido al disco «Recuerdos» de manera que en una sola operación se cambia el nombre del
+//artista a «Los piratillas» y se muestre el documento resultante.
+
+db.multimedia.findOneAndUpdate( {titulo:'Recuerdos'} ,{$set:{artista:'Los piratillos'}} )
+
+
+

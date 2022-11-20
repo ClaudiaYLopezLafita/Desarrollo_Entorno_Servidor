@@ -79,7 +79,9 @@
 
     // actualizacion de un documento
         db.collection.updateOne({filter}, {$set:{'newCampo':value}}) // $set te crea el campo en caso de no estar
-
+        // con $unset eliminas el campo indicado
+        // $rename renombras el campo
+        
     // actualizacion de varios documentos
         db.collection.updateMany({filter}, {$set:{'newcampo':value}})
 
@@ -90,6 +92,8 @@
         db.collection.deleteMany({filter})
 
     // operaciones con array/matriz
+        // mostrar n valores de un array (-n para contar desde el final) y [n,m] para un intervao
+            db.collection.find( { 'nameCampo': {$slice: n} } )
         // igualdad de todo el array
             db.collection.find( { 'nameCampo': [value_a0, value_a1, value_a2] } )
 
@@ -359,6 +363,7 @@
         $add //Realiza la suma de un array de números.
         $divide // Divide dos números.
         $mod // A partir de dos números calcula el resto producido al dividir el primero entre el segundo.
+            //$mod:[2,0] -- indica si es par o no
         $multiply //Multiplica dos números.
         $substract //A partir de dos números realiza la resta.
 
