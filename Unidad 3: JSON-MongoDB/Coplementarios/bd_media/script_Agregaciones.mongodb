@@ -1,0 +1,138 @@
+/**  AGREGACIONES */
+
+//insert de nuevos docuemntos_
+
+db.multimedia.insertMany(
+    [
+        {
+            tipo:'DVD',
+            titulo:'Batman',
+            estreno:1989
+        },
+        {
+            tipo:'DVD',
+            titulo: 'Blade Runner',
+            estreno: 1999
+        },
+        {
+            tipo:'DVD',
+            titulo: 'Superman',
+            estreno: 1996
+        }
+    ]
+)
+
+/** 1) Seleccionar los documentos de tipo «CD», de manera que
+solo se muestre en dichos documentos los campos «Artista»,
+«TituloCanción», y un nuevo campo «TitulosCanciones», que
+contenga un array con las canciones del disco. */
+
+db.multimedia.aggregate(
+    { $match: { tipo:'CD'} },
+    { 
+    $project: {
+        _id:0,
+        artista:1,
+        tituloCanciones:'$canciones.titulo'
+    }
+    }
+)
+
+/** 2)Seleccionar todos los documentos de tipo «DVD» y calcular
+cuántas películas hay de cada año de estreno, mostrando el año
+de estreno y el número de películas de cada año. */
+
+db.multimedia.aggregate(
+    { $match: {tipo:'DVD' }},
+    {
+    $group: {
+        _id: '$estreno',
+        numPeliculas: {
+            $sum: 1
+        }
+    }
+    }
+)
+
+/** 3) Seleccionar el documento sobre la película «Matrix» y crear
+un documento por cada uno de los actores que intervienen. En
+los documentos resultantes solo se mostrará el título y el actor. */
+
+db.multimedia.aggregate(
+    {$match:{titulo:'Matrix'}},
+    {$project: {
+        _id:0,
+        titulo:1,
+        actores:1
+    }},
+    {
+        $unwind:'$actores'
+    }
+)
+
+/**4) Igual que la consulta anterior, pero se mostrará solo los tres
+últimos resultados ordenados por el nombre del actor */
+
+db.multimedia.aggregate(
+        {$match:{titulo:'Matrix'}},
+    {$project: {
+        _id:0,
+        titulo:1,
+        actores:1
+    }},
+    { $unwind:'$actores' },
+    {$sort:{actores:1}},
+    { $skip: 3 }
+)
+
+/** 5) Obtener las películas distintas que hay con respecto al
+título, los diferentes años de estrenos, y los diferentes tipos de
+documentos. Se realizará en tres consultas diferentes. */
+
+
+/**6) Agrupar los documentos por «Título», mostrando el título
+y el total que hay de cada grupo.*/
+
+db.multimedia.aggregate(
+    {$group: {
+        _id: '$titulo',
+        cantidad: {
+            $sum: 1
+        }
+    }
+    }
+)
+
+/**7) Agrupar los documentos por «Título», mostrando el título
+y el total que hay de cada grupo. Pero que solo sean peliculas*/
+
+db.multimedia.aggregate(
+    {$match:{tipo:'DVD'}},
+    {$group: {
+        _id: '$titulo',
+        cantidad: {
+            $sum: 1
+        }
+    }}
+)
+
+/**8) Obtener usando MapReduce la suma de los años de los
+estrenos de cada película. Es decir, debe obtenerse documentos
+de la forma: {“_id”: “Batman”, “value”:{“TotalPeliculas”:3988
+}}. */
+
+var map = function(){ 
+    var key = this.titulo;
+    var value ={total:this.estreno}; 
+    emit(key,value);
+}
+var reduce = function(key,values) {
+    var reduced ={ totalPelis:0};
+    for(var i =0; i<values.lenght;i++){
+        reduced.totalPelis+=values[i].total;
+    }
+    return reduced;
+}
+
+db.multimedia.mapReduce(map,reduce,{$out:'resultado',query:{tipo:'DVD'}})
+db.resultado.find()
