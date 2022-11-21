@@ -1,3 +1,5 @@
+
+/// insert documentos  -- db: pruebaAgregaciones
 db.employees.insertOne({"name":"Adma","dept":"Admin","languages":["german","french","english","hindi"],"age":30,"totalExp":10})
 db.employees.insertOne({"name":"Anna","dept":"Admin","languages":["english","hindi"],"age":35,"totalExp":11})
 db.employees.insertOne({"name":"Bob","dept":"Facilities","languages":["english","hindi"],"age":36, "totalExp":14})
@@ -6,26 +8,26 @@ db.employees.insertOne({"name":"Mike","dept":"HR","languages":["english", "hindi
 db.employees.insertOne({"name":"Jenny","dept":"HR","languages":["english", "hindi","spanish"],"age":25, "totalExp":3})
 
 
-###Obtener los datos de los empleados del departamento Admin.
+// Obtener los datos de los empleados del departamento Admin.
 
 	db.employees.aggregate([{$match:{dept:"Admin"}}])  // con $match buscamos una coincidencia que cumpla los requisitos que buscamos
 
-## Mostrar sólo los datos de id, nombre y departamento de los empleados del departamento Admin
+// Mostrar sólo los datos de id, nombre y departamento de los empleados del departamento Admin
 
 	db.employees.aggregate([{$match:{dept:"Admin"}}, {$project:{"name":1, "dept":1}}]) 
 
 	//$match: que sean del departamento Admin 
 	//project mostrar solo el nombre y el departamento
 
-##Mostrar sólo el nombre de los empleados.
+// Mostrar sólo el nombre de los empleados.
 
 		db.employees.aggregate({$project: {'_id':0, 'name': 1}})  //$project salida de datos
 
-##Mostrar los departamentos existentes. 
+// Mostrar los departamentos existentes. 
 
 	db.employees.aggregate([{$group:{"_id":"$dept"}}])  //Aquí los documentos se agrupan por el valor del campo "dept". --> GROUP BY
 
-##Listado de id, nombre y departamento de los empleados del departamento de Admin ordenados alfabéticamente por nombre.
+// ##Listado de id, nombre y departamento de los empleados del departamento de Admin ordenados alfabéticamente por nombre.
 
 	db.employees.aggregate([{$match:{dept:"Admin"}}, {$project:{"name":1, "dept":1}}, {$sort:{name: 1}}])
 
@@ -39,7 +41,7 @@ db.employees.insertOne({"name":"Jenny","dept":"HR","languages":["english", "hind
 	//$project: que se muestren solo nombre y departamento
 	//$sort: que se ordenen por el nombre alfabeticamente inversa
 	
-## Listado de id, nombre y departamento de los empleados del departamento de Admin, a partir del segundo, ordenados descendentemente por nombre.
+// ## Listado de id, nombre y departamento de los empleados del departamento de Admin, a partir del segundo, ordenados descendentemente por nombre.
 
 	db.employees.aggregate([{$match:{dept:"Admin"}}, {$project:{"name":1, "dept":1}}, {$sort:{name: -1}}, {$skip:1}]);
 	
@@ -48,7 +50,7 @@ db.employees.insertOne({"name":"Jenny","dept":"HR","languages":["english", "hind
 	//$sort: que se ordenen por el nombre alfabeticamente inversa
 	//$skip: Omite los primeros n documentos donde n es el número de omisión especificado y pasa los documentos restantes sin modificar a la canalización.
 	
-##Visualiza el id, nombre y departamento del primer empleado del departamento de Admin ordenados descendentemente por nombre.
+// ##Visualiza el id, nombre y departamento del primer empleado del departamento de Admin ordenados descendentemente por nombre.
 
 	db.employees.aggregate([{$match:{dept:"Admin"}}, {$project:{"name":1, "dept":1}}, {$sort:{name: -1}}, {$limit:1}]);
 
@@ -57,37 +59,116 @@ db.employees.insertOne({"name":"Jenny","dept":"HR","languages":["english", "hind
 	//$sort: que se ordenen por el nombre alfabeticamente inversa
 	//$limit: mostrando solo uno 
 	
-## Obtener datos de muestra aleatoria de 2 elementos
+// ## Obtener datos de muestra aleatoria de 2 elementos
 
 	db.emplyees.aggregate({ $sample: { size:2 } })
 	
 	//$sample: salida aleatorio de un elemento con tamaño n
 	
------------------------------------------------------------------------------------ ACUMULADORES -------------------------------------------------------------------------------------------------
+// -------------------------- ACUMULADORES -----------------------------------------------
 	
-##1. Calcula la suma de las edades de todos los empleados.
+// ##1. Calcula la suma de las edades de todos los empleados.
 	
 	db.employees.aggregate([{$group:{"_id":null, "totalAge":{$sum:"$age"}}}]);
 	//$group: agrupamos para sumar, al indicar un id lo que hacemos es una suma de cada uno de los dcumentos.
 	//$sum: suma de las edad 
 	
-##2. Cuenta el número de empleados de cada departamento.
+// ##2. Cuenta el número de empleados de cada departamento.
 	
 	db.employees.aggregate([{$group:{"_id":"$dept", "noOfDept":{$sum:1}}}]);
 	
-	/$group: agrupamos para sumar por el campo departamento
+	//$group: agrupamos para sumar por el campo departamento
 	//$sum: suma de los empleados  de cada departamento
 	
-##3. Calcula el promedio del total de experiencia por departamento.
+// ##3. Calcula el promedio del total de experiencia por departamento.
 
 	db.employees.aggregate([{$group:{"_id":"$dept", "avgExp":{$avg:"$totalExp"}}}]);
 	
 	//$group: agrupamos por departamento
 	//$avg: hacemos la media del campo experiencia
 	
-##4. Encuentra la experiencia mínima en cada departamento.
+// ##4. Encuentra la experiencia mínima en cada departamento.
 	
 	db.employees.aggregate([{$group:{"_id":"$dept", "minExp":{$min:"$totalExp"}}}])
 	
 	//$group: agrupamos por departamento
 	//$min: obtenennmos el minimo del campo experiencia
+
+//5. Encuentra la experiencia máxima en cada departamento.
+
+	db.employees.aggregate([{$group:{"_id":"$dept", "maxExp":{$max:"$totalExp"}}}]);
+		
+	//$group: agrupamos por departamento
+	//$max: obtenennmos el maxima del campo experiencia
+
+//6. Obtención del valor del campo nombre del primer y último empleado de cada grupo según edad.
+	db.employees.aggregate([
+		{$group:
+			{"_id":"$age", "lasts":{$last:"$name"},"firsts":{$first:"$name"}}
+		}
+		]);
+
+//7. Obtener la experiencia máxima y mínima por departamento
+
+	db.employees.aggregate([
+		{$group:
+			{"_id":"$dept", "maxExp":{$max:"$totalExp"}, "minExp":{$min: "$totalExp"}}
+		}
+	]);
+
+//8. ● Mostrar las distintas edades de los empleados (con y sin repeticiones).
+
+db.employees.aggregate([
+	{$group:
+		{"_id":"dept", 
+			"arrPush":{$push:"$age"}, // le da igual si ya exiten
+			"arrSet":  {$addToSet:"$age"} // mira si hay ya existen
+		}
+	}
+]);
+
+
+//9. Mostrar todos los datos de Adma por cada lenguaje, luego podríamos hacer una agregación
+//adicional basada en esos valores
+
+db.employees.aggregate([{$match:{"name":"Adma"}}, {$unwind:"$languages"}]);
+
+
+// ----------------- OPERADORES -----------------
+
+
+//1. Listado de los empleados del departamento Admin, indicando id, nombre, departamento y si
+//es mayor o no de 30.
+
+db.employees.aggregate([
+	{$match:{dept:"Admin"}}, 
+	{$project:{"name":1, "dept":1, age: {$gt:["$age", 30]}}}
+]);
+
+//2. Listado de los campos id, nombre, departamento de los empleados del departamento Admin
+//que sean mayores de 30.
+
+db.employees.aggregate([
+	{$match:{dept:"Admin", age: {$gt:30}}}, 
+	{$project:{"name":1,"dept":1}}
+]);
+
+//3. Listado de los empleados del departamento Admin, indicando id, nombre, departamento y si
+//su edad está comprendida entre los 31 y 35.
+
+db.employees.aggregate([
+	{$match:{dept:"Admin"}}, 
+	{$project:
+		{"name":1, 
+		"dept":1, age: {$and: [{ $gt: [ "$age", 30 ] }, { $lt: [ "$age", 36 ] } ] }
+		}
+	}
+]);
+
+//4. 
+
+
+
+
+
+
