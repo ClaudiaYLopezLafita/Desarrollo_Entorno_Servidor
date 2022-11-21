@@ -56,14 +56,12 @@ _id:'Frank_USE',
 {'titulo':'Hola mundo', 'cuerpo':'La primera frasa que imprime un bebe informatico.','fecha':new Date(), 'tags':[]} -------
 {'titulo':'Un gato bajo la lluvia II', 'cuerpo':'Lorem ipsum y los michis del mundo.','fecha':new Date(), 'tags':[]} ----------
 
-## insert de COMENTARIOS
+// ## insert de COMENTARIOS
 
 db.comentarios.insertMany([{'fecha':new Date(), 'cuerpo':'Me ha encantado'} , {'fecha':new Date(), 'cuerpo':'Deberias de informarte mejor de las actualizaciones'}, {'fecha':new Date(), 'cuerpo':'Deberias dejar de escribir'}, {'fecha':new Date(), 'cuerpo':'Se parece mucho a otra noticia'},{'fecha':new Date(), 'cuerpo':'Like x1000'} ,{'fecha':new Date(), 'cuerpo':'Como te has enterado de estos datos si son secretos'}  ])
 
 
-
-	
- --- poner los ids de los autores en los comentarios
+//  --- poner los ids de los autores en los comentarios
  db.comentarios.update({ _id:  ObjectId("637116a7ea0f09d5ff5a552c")},{$set:{'autor':'Peter'}})
  db.comentarios.update({ _id: ObjectId("637116a7ea0f09d5ff5a552d")},{$set:{'autor':'Frank_USA'}})
  db.comentarios.update({ _id:ObjectId("637116a7ea0f09d5ff5a552e")},{$set:{'autor':'Peter'}}) 
@@ -72,18 +70,18 @@ db.comentarios.insertMany([{'fecha':new Date(), 'cuerpo':'Me ha encantado'} , {'
 db.comentarios.update({  _id:ObjectId("637116a7ea0f09d5ff5a5531")},{$set:{'autor':'Frank_USA'}})
 
 
-# ids usuarios
+// # ids usuarios
 _id:'Frank_USA'
 _id:'Frank_USE'
 _id:'Peter'
 
--- poner los ids de noticias en sus autores-
+// -- poner los ids de noticias en sus autores-
 db.usuario.update({_id:'Frank_USA'},{$set:{'noticias':[ObjectId("636d0f7a6a9cdb90777698bb"), ObjectId("636d11286a9cdb90777698bf") , ObjectId("636d120f6a9cdb90777698c3") ]}})
 db.usuario.update({_id:'Frank_USE'},{$set:{'noticias':[ObjectId("636d0fef6a9cdb90777698bc"), ObjectId("636d10396a9cdb90777698bd"), ObjectId("636d10796a9cdb90777698be")]}})
 db.usuario.update({_id:'Peter'},{$set:{'noticias':[ObjectId("636d11be6a9cdb90777698c1") ]}})
 
 ---
-# ids noticias																AUTOR				|| COMENTARIOS
+// # ids noticias																AUTOR				|| COMENTARIOS
 1  { _id: ObjectId("636d0f4e6a9cdb90777698ba") }, -- anonimo					11-14-15
 2  { _id: ObjectId("636d0f7a6a9cdb90777698bb") }, --'Frank_USA'      		11-15
 3  { _id: ObjectId("636d0fef6a9cdb90777698bc") }  --'Frank_USE' 				sin ----------------
@@ -95,7 +93,7 @@ db.usuario.update({_id:'Peter'},{$set:{'noticias':[ObjectId("636d11be6a9cdb90777
 9  { _id: ObjectId("636d120f6a9cdb90777698c3") } --'Frank_USA'				sin -------
 10  { _id: ObjectId("636d12226a9cdb90777698c4") } -- anonimo					11-12-14-16
   
- # referencias de los comentarios que aparecen en cada noticia
+//  # referencias de los comentarios que aparecen en cada noticia
  
  db.noticias.update({ _id: ObjectId("636d0f4e6a9cdb90777698ba") },{$set:{'comentarios':[ ObjectId("637116a7ea0f09d5ff5a552c"), ObjectId("637116a7ea0f09d5ff5a552f"), ObjectId("637116a7ea0f09d5ff5a5530")]}})
   db.noticias.update( { _id: ObjectId("636d0f7a6a9cdb90777698bb") },{$set:{'comentarios':[ObjectId("637116a7ea0f09d5ff5a552c"),ObjectId("637116a7ea0f09d5ff5a5530")]}})
@@ -106,7 +104,7 @@ db.usuario.update({_id:'Peter'},{$set:{'noticias':[ObjectId("636d11be6a9cdb90777
   db.noticias.update({ _id: ObjectId("636d12226a9cdb90777698c4") } ,{$set:{'comentarios':[ ObjectId("637116a7ea0f09d5ff5a552c") , ObjectId("637116a7ea0f09d5ff5a552d"),ObjectId("637116a7ea0f09d5ff5a552f") , ObjectId("637116a7ea0f09d5ff5a5531") ]}})
 
  
-## IDS DE LOS COMENTARIOS:
+// ## IDS DE LOS COMENTARIOS:
 
 '011: ObjectId("637116a7ea0f09d5ff5a552c") Pete
     '12': ObjectId("637116a7ea0f09d5ff5a552d"), Frank_USA
@@ -115,7 +113,7 @@ db.usuario.update({_id:'Peter'},{$set:{'noticias':[ObjectId("636d11be6a9cdb90777
     '15: ObjectId("637116a7ea0f09d5ff5a5530"),Peter
     '16: ObjectId("637116a7ea0f09d5ff5a5531") Frank_USA
 
---- poner lo ids de las noticias en los comentarios
+// --- poner lo ids de las noticias en los comentarios
 db.comentarios.update({_id: ObjectId("637116a7ea0f09d5ff5a552c")},{$set:{'noticias':ObjectId("636d0f4e6a9cdb90777698ba")}})
 db.comentarios.update({ _id: ObjectId("637116a7ea0f09d5ff5a552d")},{$set:{'noticias':ObjectId("636d12226a9cdb90777698c4")}})
 db.comentarios.update({_id:ObjectId("637116a7ea0f09d5ff5a552e")},{$set:{'noticias':ObjectId("636d10396a9cdb90777698bd")}})
@@ -123,12 +121,12 @@ db.comentarios.update({_id:ObjectId("637116a7ea0f09d5ff5a552f")},{$set:{'noticia
 db.comentarios.update({_id:ObjectId("637116a7ea0f09d5ff5a5530")},{$set:{'noticias':ObjectId("636d0f4e6a9cdb90777698ba")}})
 db.comentarios.update({_id:ObjectId("637116a7ea0f09d5ff5a5531")},{$set:{'noticias':ObjectId("636d12226a9cdb90777698c4")}})
 
--- referencias los comentarios a cada usuario
+// -- referencias los comentarios a cada usuario
 db.usuario.update({_id:'Frank_USA'},{$set:{'comentarios':[ ObjectId("637116a7ea0f09d5ff5a552d"), ObjectId("637116a7ea0f09d5ff5a5531")  ]}})
 db.usuario.update({_id:'Frank_USE'},{$set:{'comentarios':[  ObjectId("637116a7ea0f09d5ff5a552f")]}})
 db.usuario.update({_id:'Peter'},{$set:{'comentarios':[ObjectId("636d14c46a9cdb90777698c5"), ObjectId("637116a7ea0f09d5ff5a552e"), ObjectId("636d15106a9cdb90777698c9") ]}})
 
-# referencias de los autores en cada noticia
+// # referencias de los autores en cada noticia
 db.noticias.update({ _id: ObjectId("636d0f7a6a9cdb90777698bb") },{$set:{'autor':'Frank_USA'}})
 db.noticias.update({_id: ObjectId("636d0fef6a9cdb90777698bc")},{$set:{'autor':'Frank_USE'}})
 db.noticias.update({ _id: ObjectId("636d10396a9cdb90777698bd")},{$set:{'autor':'Frank_USE'}})
