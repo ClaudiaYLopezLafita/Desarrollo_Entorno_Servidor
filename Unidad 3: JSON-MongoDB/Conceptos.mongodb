@@ -1,5 +1,5 @@
 /*          CRUD               */
-
+//xplain(executionState)
     // creacion de base de datos:
         use nombreBD --> //se crea y directamente se usa
 

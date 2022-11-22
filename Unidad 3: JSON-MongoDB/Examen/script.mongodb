@@ -1,0 +1,254 @@
+//   EXAMEN 21-11-2022          
+
+/** CRUD */
+
+// 1. Insertar el siguiente registro definiendo el tipo de datos como consideres.
+
+db.libros.insertOne(
+    {
+    titulo: "Secuestrado",
+    descripcion: "Las aventuras de David Balfour",
+    autor: "Robert Louis Stevenson",
+    anioPublicacion: 2002,
+    genero: ["acción"],
+    paginas: 255,
+    editorial: "Addison‐Wesley",
+    disponible: false,
+    precio: 15.95
+    }
+)
+
+// 2. Insertar varios registros a la vez, con los siguientes datos de libros.
+
+db.libros.insertMany([
+    {
+    titulo: "Secuestrada por el peligro",
+    descripcion: "Traición, venganza y amor",
+    autor: "Melissa Hall",
+    anioPublicacion: 2017,
+    genero: ["romántica", "acción"],
+    paginas: 318,
+    editorial: "Mozaika Publications",
+    disponible: true,
+    precio: 19.95
+    },
+    {
+    titulo: "La trama",
+    descripcion: "Enredo político",
+    autor: "Carlos Alberto Montaner",
+    anioPublicacion: 2000,
+    genero: ["histórica"],
+    paginas: 187,
+    editorial: "Planeta",
+    disponible: false,
+    precio: 18.95
+    },
+    {
+    titulo: "Historias de mujeres casadas",
+    descripcion: "Amor, matrimonio, amantes y amistad",
+    autor: "Cristina Campos",
+    anioPublicacion: 2021,
+    genero: ["romántica"],
+    paginas: 464,
+    editorial: "Planeta",
+    disponible: true,
+    precio: 25.95
+    }
+])
+
+// 1. Busca todos los documentos que contengan en la descripción el valor 'amor',
+// muestra solo el título, descripción y autor.
+
+db.libros.find({descripcion:/amor/},{_id:0,descripcion:1,autor:1})
+
+// 2. Busca todos los documentos que tengan más de 200 páginas y cueste menos de 20,
+// muestra el título, editorial, año de publicación y precio.
+
+
+// 3. Busca todos los documentos que tengan entre 200 y 400 páginas (ambos valores
+// incluidos) y estén disponibles.
+// 4. Busca todos los documentos que sean del género 'romántica' y 'acción', muestra
+// sólo el título, autor, precio y si está disponible.
+
+db.libros.find(
+    {$and:[{genero:'romántica'},{genero:'acción'}]},
+    {_id:0, titulo:1, precio:1, disponible:1}
+)
+
+// 5. Busca todos los documentos que sean del género 'romántica' o 'acción' y esté
+// disponible, muestra sólo el título, autor y precio, ordenados por precio ascendente.
+
+
+
+// 6. Obtén los libros editados en 1998 o en 2005, muestra sólo el título, autor y año de
+// publicación del libro más antiguo.
+
+db.libros.find(
+    {},
+    {}
+).
+// 7. Obtén los libros editados desde 2001 y precio mayor que 25, muestra sólo el título,
+// año de publicación, precio y si está disponible, ordenados por año de publicación.
+
+
+db.libros.find(
+    {anioPublicacion:2001,precio:{$gt:25}},
+    {_id:0, titulo:1, precio:1, disponible:1}
+)
+// 8. Obtén los libros publicados por la editorial Planeta desde el año 2000, que no estén
+// disponibles y ponlos disponibles.
+
+db.libros.update(
+    {$and:[{editorial:'Planeta'}, {anioPublicacion:{$gt:2000}}, {disponible:false}]},
+    {$set:{disponible:true}}
+)
+
+// 9. Obtén los libros publicados con posterioridad al 2002, incrementa su precio un 20%
+// y muestra el listado resultante con los datos título, autor y precio, ordenado de mayor
+// a menor precio.
+
+db.libros.update(
+    { anioPublicacion:{$gt:2002}},
+    {$inc:{precio:1.2}}
+)
+
+// 10. Recalifica los libros con género ‘acción’ por ‘aventuras’ y luego muestra el listado
+// resultante con los datos título, autor y género.{“key2.pos”: value_a1}
+
+
+db.libros.updayeOne(
+    {genero:'accion'},
+    {$set:{'genero.0':'aventura', $'genero.1''aventura':}}
+    {}
+)
+
+db.libros.find({genero:'acción'})
+
+/** DISEÑO -- INDICE -- AGREGACIONES*/
+
+/// COLLECCION ALUMNOS
+
+db.alumnos.insertMany([
+{_id: 20200001, nombre:'José Ruiz Mateo', edad: 18, Telefono: [954444444, 600123456],Curso:[11]},
+{_id:20200002,  nombre: 'Cristina Bolancé Jiménez', edad:19, Telefono: [600234567],Curso:[11,22] },
+{_id:20200003,  nombre:' Felipe Díaz Perez', edad:18, Telefono: [954354444, 601123456],Curso:[11]},
+{_id:20200004,  nombre: 'Lucía García Jiménez', edad:19, Telefono: [601234567],Curso:[22]},
+{_id:20200005,  nombre:'Juan Rivera Lopez', edad:28, Telefono: [954554444, 602123456],Curso:[12]},
+{_id:20200006,  nombre:'Carlota García Mendez', edad:21, Telefono: [602234567],Curso:[11,22]},
+{_id:20200007,  nombre:'Francisco López Perez', edad:18, Telefono: [954354554, 602123456],Curso:[11]},
+{_id:20200008,  nombre:'Lidia Carrillo González', edad:19, Telefono: [602234267],Curso:[12]}]
+)
+
+db.cursos.insertMany([
+    {_id:11, nombre: 'DAW1 Mañana', alumnos:[20200001,20200002,20200003,20200006,20200007],profesores:['44444444D']},
+    {_id:12, nombre: 'DAW1 Tarde', alumnos: [20200005,20200008],profesores:['44444444D']},
+    {_id:21, nombre: 'DAW2 Mañana',profesores:['11111111A','22222222B','33333333C','44444444D']},
+    {_id:22, nombre: 'DAW2 Tarde', alumnos: [20200002,20200006],profesores:['11111111A','22222222B','33333333C','44444444D']}
+])
+
+db.profesores.insertMany([
+    {_id:'11111111A', nombre:' Angelica Mora Nuñez', cargo:'tutor', Curso: [21, 22]},
+    {_id:'22222222B', nombre: 'Antonio González Casado', cargo: 'tutor', Curso:[ 21, 22]},
+    {_id:'33333333C', nombre: 'José María García Durán', cargo: 'profesor', Curso: [21, 22]},
+    {_id:'44444444D', nombre: 'Carmen García Rufino', cargo:'profesor', Curso: [11, 12, 21, 22]}
+])
+
+// Realiza las siguientes operaciones con Agregaciones sobre la Base de datos:
+// 1. Contabilizar la cantidad de profesores por cargo.
+
+db.profesores.aggregate([
+    {$group:
+        {
+        _id:'$cargo',
+        totalProfesores: { $sum :1}
+        }
+    }
+])
+
+
+// 2. Mostrar la media, mayor y menor edad de los alumnos por curso, ordenado por
+// curso.
+
+db.alumnos.aggregate([
+    {$unwind:'$Curso'},
+    {
+    $group: 
+        {
+        _id:{curso: '$Curso'}, 
+        media: { $avg:'$edad'},
+        menor: { $min:'$edad'},
+        mayor: { $max:'$edad' }
+        }
+    },
+    {$sort: {curso: 1 }}
+])
+
+// 3. Mostrar los datos del alumno de mayor edad.
+
+db.alumnos.aggregate([
+    {$sort:{edad:1}},
+    {$limit:1}
+])
+
+// 4. Cursos que tengan al menos 2 alumnos entre 18 y 20 años (ambos inclusives). "tags": { $size: 3 }
+
+db.cursos.aggregate([ 
+    {$group:{
+        _id:{cursos:'$nombre'},
+        cantidadDeNotas: {$size: '$alumnos'}
+        }
+    }
+])
+
+db.alumnos.aggregate([
+    {$match : {edad : { $lte : 20,$gte:18}}}, 
+])
+
+
+
+// 5. Listar los nombres de los cursos y de los alumnos, ordenados por curso y nombre
+// del alumno.
+
+db.alumnos.aggregate(
+    [
+		//agrupamos por el nombre de los runners y sumamos la distancia que han realizado
+        {$group:
+            { _id:{nombre:"$nombre"},
+                totalcursos:{$size:'Cursos'}
+            }
+        },
+		//ordenamos por la suma de las distancia de manera descendent
+        {$sort:{totalDist:-1}},
+		//indicamos que solo vamos a sacar un registro
+        {$limit:1},
+		//buscamos-obtenemos:
+        {$lookup:{
+            from:'gustos', // de la coleccion gustos
+            localField:'_id.nombre',// relacionando el cambo _id.nombre de coleccion pruebas [NUESTRA COLECCION]
+            foreignField: 'nombre',// con el campo nombre de la coleccion gusto [COLECCION A RELACIONAR]
+            as: 'susGustos' } //lo sacamos con un nombre
+        },
+		//disgregamos el array obtenido
+        {$unwind:'$susGustos'},
+		//mostramos
+        {$project: {
+            _id:0, //NO mostramos el _id 
+            nombre:'$_id.nombre',//mostramos el nombre del runner [COLECCION PRUEBAS]
+            totalDist:1,//mostramos la fistancia [COLECCION PRUEBAS]
+            aficiones: '$susGustos.aficiones'  } //mostramnos las aficiones de registro gustos el array de aficiones. 
+        }
+    ]
+)
+
+
+// 6. Por curso listar nombres de los profesores y cargo, ordenados por curso y nombre
+// del profesor.
+
+
+///INDICES
+
+db.alumnos.createIndex({_id:1},{ unique:true});
+
+db.alumnos.createIndex({nombre:1},{ unique:true});
+
+db.cursos.createIndex({nombre:1},{ unique:true});
