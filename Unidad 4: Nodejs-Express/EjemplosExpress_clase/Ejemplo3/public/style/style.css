@@ -1,0 +1,12 @@
+body{
+    background-color: blanchedalmond;
+}
+
+.container{
+    background-color: antiquewhite;
+    border-color: 1px solid black;
+}
+
+h1{
+    font-style: italic;
+}
