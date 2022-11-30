@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 1</title>
+
+    <link rel="stylesheet" href="./css/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <div class="container-fluid p-5 bg-success text-white text-center">
+        <h1>NodeJS</h1>
+        <p>Tus primeros pasos!</p>
+    </div>
+    <div class="container">
+        <div id="accordion">
+            <div class="card">
+                <div class="card-header bg-secondary text-white">
+                    <a class="btn" data-bs-toggle="collapse" href="#collapseOne">
+                        1. ¿Qué es Node?
+                    </a>
+                </div>
+                <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
+                <div class="card-body bg-white text-dark">
+                    Node es un “reproductor” que abre documentos escritos en el lenguaje JavaScript y
+                    “reproduce” (ejecuta) su contenido paso a paso.
+                    <br>
+                    <br>
+                    Gracias a Node, JavaScript pasa de ser un lenguaje que hasta ahora solo se había usado
+                    en los navegadores para renderizar páginas web, a un lenguaje multiplataforma con el que
+                    se puede hacer de todo (de hecho también hay herramientas para crear apps móviles
+                    multiplataforma).
+                </div>
+                </div>
+            </div>
+    
+            <div class="card">
+                <div class="card-header bg-secondary text-white">
+                <a class="collapsed btn" data-bs-toggle="collapse" href="#collapseTwo">
+                    2. Principales ventajas
+                </a>
+                </div>
+                <div id="collapseTwo" class="collapse" data-bs-parent="#accordion">
+                <div class="card-body">
+                    <ul>
+                        <li>Velocidad (se ejecuta en el motor JS de Google)</li>
+                        <li>Paradigma de E / S sin bloqueo.Transmisión de datos (solicitudes y respuestas HTTP como un solo evento)</li>
+                        <li>Mismo lenguaje (javascript), tanto en el cliente como en el servidor.</li>
+                        <li>Consultas de bases de datos unificadas (formato JSON).</li>
+                        <li>Codificación fácil y rápida.</li>
+                        <li>Buena gestión de paquetes gracias a NPM (y Yarn).</li>
+                        <li>Capacidad del servidor proxy.</li>
+                        <li>Ciclos de desarrollo rápidos.</li>
+                        <li>Lógica de negocio en el servidor.</li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+    
+            <div class="card">
+                <div class="card-header bg-secondary text-white">
+                <a class="collapsed btn" data-bs-toggle="collapse" href="#collapseThree">
+                    3. Conceptos básicos
+                </a>
+                </div>
+                <div id="collapseThree" class="collapse" data-bs-parent="#accordion">
+                <div class="card-body">
+                    <p>
+                        <b>GESTOR NPM</b>
+                        <br>
+                        npm es un gestor de paquetes de Node.js con él los desarrolladores pueden crear, compartir
+                        y reutilizar desde módulos o pequeñas librerías, hasta aplicaciones completas de un
+                        extenso catálogo gestionado por la comunidad.
+                        <br>
+                        <br>
+                        Cuando se instalan nuevos paquetes desde el comando npm, se hace de forma local en
+                        nuestro proyecto dentro de la carpeta /node_modules, pero también se puede instalar de
+                        forma global si fuese necesario.
+                        <br>
+                        <br>
+                        Por defecto ya vienen instalados varios módulos (módulos nativos).
+                        Con este comando instalaremos los módulos que se incluirán como dependencias en el
+                        fichero 'package.json'.
+                        <br>
+                        <br>
+                        <b>npm install [nombre_modulo] --save</b>
+                        <br>
+                        <br>
+                        <small>Con la opción de --save indicamos a npm que guarde el nombre del módulo en la sección de
+                            dependencias del 'package.json' además de instalarlo.</small>
+                    </p>
+                    <hr>
+                    <p>
+                        <b>Package.json</b>
+                        Cuando inicializamos el gestor npm npm init tendremos automáticamente también el fichero
+                        package.json donde se definen las características principales y las dependencias de
+                        nuestro proyecto con respecto a otras aplicaciones y librerías. Dentro de él se definen
+                        características cómo:
+                        <ul>
+                            <li>Nombre del proyecto</li>
+                            <li>Versión </li>
+                            <li>Dependencias</li>
+                            <li>Autores</li>
+                            <li>Licencias</li>
+                            <li>Script</li>
+                            <li>...</li>
+                        </ul>
+                    </p>
+                </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header bg-secondary text-white">
+                <a class="collapsed btn" data-bs-toggle="collapse" href="#collapseFour">
+                    4. Primer proyecto
+                </a>
+                </div>
+                <div id="collapseFour" class="collapse" data-bs-parent="#accordion">
+                <div class="card-body">
+                    <p>
+                        En este primer proyecto crearemos un servidor que al inicialiarlo en el puerto 8000 nos enviará 
+                        a un página web donde se léa Hola Mundo!! 
+                    </p>
+                    <p>
+                        Teniendo en cuenta: <br>
+                        <b>response.writeHead</b> --> propiedad incorporada del módulo 'http' que envía un encabezado de respuesta a la solicitud.
+                        El código de estado es un código de estado HTTP de 3 dígitos , como 404. El último argumento, 
+                        los encabezados, son los encabezados de respuesta.
+                        <br><br>
+                        <b>response.end()</b> -->  es una interfaz de programación que se usa para enviar la señal al servidor de que se ha ennviado 
+                        todo el encabezado.
+                    </p>
+                    <img src="./images/Screenshot from 2022-11-30 18-21-50.png" alt="codigo_proyecto">
+                    <p>Una vez nos metemos en localhost:8000 obtenemos</p>
+                    <img src="./images/resultHolaMundo.png" alt="resultado primer servidor">
+                </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header bg-secondary text-white">
+                <a class="collapsed btn" data-bs-toggle="collapse" href="#collapseFive">
+                    5. ¿Quién usa Node.js?
+                </a>
+                </div>
+                <div id="collapseFive" class="collapse" data-bs-parent="#accordion">
+                <div class="card-body">
+                    Aparte del hecho de que las siguientes empresas ofrecen un servicio o producto muy popular, todas son empresas que operan a escala global, 
+                    que sirven a millones de personas y que crean aplicaciones de red escalables.
+                    <ol>
+                        <li>Netflix</li>
+                        <li>Paypal</li>
+                        <li>Uber</li>
+                        <li>LinkedIn</li>
+                        <li>Ebay</li>
+                    </ol>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <a href="index.html" class="btn btn-success" id="back">Volver atrás</a>
+        </div>
+    </div>
+    <footer class="section footer-classic context-dark bg-image" style="background: #2d3246" >
+        <div class="container">
+        <div class="row row-30">
+            <div class="col-md-4 col-xl-5">
+            <p>
+                Esta es una página básica para aprender lo mas importante de
+                NodeJs y Express.
+            </p>
+            </div>
+        </div>
+        </div>
+        <div class="row no-gutters social-container">
+        <div class="col">
+            <a class="social-inner" href="#"><span class="icon mdi mdi-facebook"></span><span>Facebook</span></a>
+        </div>
+        <div class="col">
+            <a class="social-inner" href="#"><span class="icon mdi mdi-instagram"></span><span>instagram</span></a>
+        </div>
+        <div class="col">
+            <a class="social-inner" href="#"><span class="icon mdi mdi-twitter"></span><span>twitter</span></a>
+        </div>
+        <div class="col">
+            <a class="social-inner" href="#"
+            ><span class="icon mdi mdi-youtube-play"></span
+            ><span>google</span></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

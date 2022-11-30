@@ -1,0 +1,21 @@
+EJERCICIO PRÁCTICO WEB ESTÁTICA
+
+La web va a tener 3 páginas estáticas, de momento la principal (index) tendrá mínimo el
+título “Aprende Node y Express” y los accesos a las otras 2 páginas: node.html y
+express.html.
+
+Los estilos de todas ellas serán opcionales, además se pueden incorporar imágenes, textos,
+referencias ...
+
+Vamos a aprovechar para resumir los conceptos más importantes tratados en la unidad en
+la realización de estas 2 páginas una con el detalle sobre Node y otra con el detalle sobre
+Express, ambas que incluya un ejemplo ilustrativo de código hecho por vosotros (puede ser
+simplemente una imagen sobre el ejemplo del server con el “Hola mundo”).
+Puesto que el contenido es importante se recomienda investigar en internet.
+
+Recordatorio:
+La aplicación estará implementada en Express (app.js), usaremos los recursos estáticos
+que guardaremos en nuestro proyecto dentro de la carpeta “public”, el servidor estará
+escuchando en el puerto 8080.
+
+Se valorará tanto la funcionalidad como el contenido.
