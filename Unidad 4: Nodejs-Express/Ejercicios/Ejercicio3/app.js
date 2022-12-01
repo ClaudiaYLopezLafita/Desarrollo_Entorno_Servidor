@@ -12,8 +12,8 @@ app.get('/:user/:age', (req, res) => {
     let userName = req.params.user;
     let cantidad = userName.length;
     let ageUser = req.params.age;
-    let condicion = (ageUser >= 18) ? true : false;
-    res.render('index.ejs', {userName: userName, cantidad: cantidad, ageUser: condicion});
+    let condicion = (ageUser >= 18) ? 'Eres mayor de edad' : 'Eres menor de edad';
+    res.render('index.ejs', {userName: userName, cantidad: cantidad, ageUser:ageUser ,condicion: condicion});
 });
 
 app.listen(portServidor, () => {
