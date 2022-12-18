@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio</title>
+    <style>
+        .container {
+            margin-top: 100px;
+            margin-left: 400px;
+        }
+        form{
+            display: inline-block;
+            padding: 37.5px;
+            margin: 50px 0;
+            margin-left: 400px;
+            background-color: lavender;
+            border: 1px solid #000;
+            border-radius: 5px;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, 
+            rgba(0, 0, 0, 0.12) 0px -12px 30px, 
+            rgba(0, 0, 0, 0.12) 0px 4px 6px, 
+            rgba(0, 0, 0, 0.17) 0px 12px 13px, 
+            rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            text-align: left;
+        }
+        input{
+            margin-bottom: 5px;
+        }
+        #username{
+            margin-left: 20px;
+        }
+        #email{
+            margin-left: 33px;
+        }
+        button{
+            margin-top: 10px;
+            margin-left: 120px;
+        }
+    </style>
+</head>
+<body>
+    <form action="usuario" method="post">
+        <div>
+            <label for="username">Nombre:</label>
+            <input type="text" name="formUsuarioNombre" placeholder="Username" id="username">
+        </div>
+        <div>
+            <label for="username">Contraseña:</label>
+            <input type="password" name="formUsuarioPassword" placeholder="Password" id="password">
+        </div>
+        <div>
+            <label for="username">Email:</label>
+            <input type="text" name="formUsuarioEmail" placeholder="Email" id="email">
+        </div>
+        <div>
+            <button>Enviar</button>
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        .container {
+            margin-top: 100px;
+            margin-left: 450px;
+            margin-right: 450px;
+        }
+        table{
+            border-collapse: collapse;
+            padding-bottom: 10px;
+        }
+        td{
+            padding: 10px;
+        }
+        div{
+            border: 1px solid green;
+            background-color: lightgreen;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>Usuario creado</h3>
+        <table>
+            <tbody>
+                <tr>
+                    <td>DNI:</td>
+                    <td><%= dniUsuarioReg %></td>
+                </tr>
+                <tr>
+                    <td>Nombre:</td>
+                    <td><%= nombreUsuarioReg %></td>
+                </tr>
+                <tr>
+                    <td>Apellido:</td>
+                    <td><%= apellUsuarioReg %></td>
+                </tr>
+                <tr>
+                    <td>Telefono:</td>
+                    <td><%= tlflUsuarioReg %></td>
+                </tr>
+                <tr>
+                    <td>Comentario:</td>
+                    <td><%= commentUsuarioReg %></td>
+                </tr>
+                <tr>
+                    <td>Hora:</td>
+                    <td><%= horaUsuarioReg %></td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Volver al <a href="/">formulario</a></p>
+    </div>
+
+</body>
+</html>
