@@ -1,0 +1,17 @@
+.form-horizontal{
+    margin-left: 300px;
+    margin-top: 50px;
+}
+
+fieldset{
+    border-radius: 10%;
+}
+
+.form-group{
+    margin-bottom: 20px;
+    margin-left: 50px;
+}
+
+button{
+    margin-top: 20px;
+}
