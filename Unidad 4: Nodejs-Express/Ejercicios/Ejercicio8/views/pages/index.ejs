@@ -10,7 +10,10 @@
             <%- include('../partials/header'); %>
         </header>
         <main>
-            <div class="jumbotron p-1 text-center" style="background:#EAF2F8  !important">
+            <div class="jumbotron p-1 text-center">
+                <div class="bg_color"></div>
+                <div class="wave w1"></div>
+                <div class="wave w2"></div>
                 <h2>Our products</h2>
                 <p>Everything you need to enjoy</p>
             </div>
@@ -18,7 +21,7 @@
         <div class="product-container">
             <div class="row">
                 <!-- Elementos generados a partir del JSON -->
-                <main id="items" class="col-sm-8 row" style="margin-top: 20px; margin-left: 10px;">
+                <main id="items" class="col-sm-8 row">
                     
                 </main>
                 <!-- Carrito -->
@@ -30,15 +33,15 @@
                     <hr>
                     <!-- Precio total -->
                     <p class="text-right">Total: <span id="total"></span>&euro;</p>
-                    <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
-                    <button id="boton-pagar" class="btn btn-success">Pagar</button>
+                    <button type="reset" id="boton-vaciar" class="btn btn-danger">Vaciar</button>
+                    <button type="submit" id="boton-pagar" class="btn btn-success">Pagar</button>
                     </form>
                 </aside>
             </div>
         </div>
         <footer>
             <%- include('../partials/footer'); %>
-        </footer>
+        </footer class="p-lg-1">
     </div>
     <script src="../../static/js/utils.js"></script>
 </body>

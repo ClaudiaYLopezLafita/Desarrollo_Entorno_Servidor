@@ -91,7 +91,6 @@ function renderizarProductos() {
         // Estructura
         const miNodo = document.createElement('div');
         miNodo.classList.add('card', 'col-sm-4');
-        miNodo.style.cssText = 'width:30%; margin-left:15px; margin-bottom:15px;';
         // Body
         const miNodoCardBody = document.createElement('div');
         miNodoCardBody.classList.add('card-body');

@@ -1,3 +1,27 @@
 body{
     width: 100% !important;
 }
+
+.jumbotron{
+    background:#EAF2F8  !important;
+    position:relative;
+    text-align:center;
+}
+
+#items{
+    margin-top: 20px; 
+    margin-left: 10px;
+}
+
+.card{
+    width:30%; 
+    margin-left:15px; 
+    margin-bottom:15px;
+}
+
+aside{
+    margin-top: 20px; 
+}
+
+
+/*https://www.youtube.com/watch?v=ZvgaSmLuIAQ*/
