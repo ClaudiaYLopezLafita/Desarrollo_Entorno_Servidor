@@ -12,62 +12,62 @@ const baseDeDatos = [
         nombre: 'Chaleco Salvavida',
         precio: 12.2,
         stock: 30,
-        imagen: 'cebolla.jpg'
+        imagen: '../../static/images/chaleco.jpeg'
     },
     {
         id: 3,
         nombre: 'Prismatico Marino',
         precio: 40.65,
         stock: 15,
-        imagen: 'calabacin.jpg'
+        imagen: '../../static/images/prismaticos.jpeg'
     },
     {
         id: 4,
-        nombre: 'Achicadores-Baldes',
+        nombre: 'Achicador Balde',
         precio: 2.59,
         stock: 2,
-        imagen: 'fresas.jpg'
+        imagen: '../../static/images/achicador.jpg'
     },
     {
         id: 5,
-        nombre: 'Reflectore Radar Barco',
+        nombre: 'Reflector Radar Barco',
         precio: 18.60,
         stock: 30,
-        imagen: 'calabacin.jpg'
+        imagen: '../../static/images/reflector.jpg'
     },
     {
         id: 6,
         nombre: 'Aletas Estabilizadoras ',
         precio: 21.75,
         stock: 16,
-        imagen: 'fresas.jpg'
+        imagen: '../../static/images/aletaEstabilizadora.jpeg'
     },
     {
         id: 7,
-        nombre: 'Tubo ZIP Silver',
+        nombre: 'Tubo + Gafas',
         precio: 8.30,
         stock: 5,
-        imagen: 'calabacin.jpg'
+        imagen: '../../static/images/tubo.jpg'
     },
     {
         id: 8,
         nombre: 'Cuerda Esqui',
         precio: 36.21,
         stock: 80,
-        imagen: 'fresas.jpg'
+        imagen: '../../static/images/cuerda.jpg'
     },
     {
         id: 9,
         nombre: 'Paddle Surf 365 IMN',
         precio: 605.92,
-        imagen: 'calabacin.jpg'
+        imagen: '../../static/images/paddle-surf.jpg'
     },
     {
         id: 10,
         nombre: 'Caja Estanca Amarilla',
         precio: 63.56,
         stock: 10,
-        imagen: 'fresas.jpg'
+        imagen: '../../static/images/caja.png'
     }
 
 ];
