@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head'); %> 
+</head>
+
+<body style="width: 100%;">
+    <div class="container">
+        <header>
+            <%- include('../partials/header'); %>
+        </header>
+        <main>
+            <div class="jumbotron p-1 text-center" style="background:#EAF2F8  !important">
+                <h2>Our products</h2>
+                <p>Everything you need to enjoy</p>
+            </div>
+        </main>
+        <div class="product-container">
+            <div class="row">
+                <!-- Elementos generados a partir del JSON -->
+                <main id="items" class="col-sm-8 row" style="margin-top: 20px; margin-left: 10px;">
+                    
+                </main>
+                <!-- Carrito -->
+                <aside class="col-sm-4" style="margin-top: 20px;">
+                    <form method="post" action="cobrar">
+                        <h2>Carrito</h2>
+                    <!-- Elementos del carrito x unidades -->
+                    <ul id="carrito" class="list-group"></ul>
+                    <hr>
+                    <!-- Precio total -->
+                    <p class="text-right">Total: <span id="total"></span>&euro;</p>
+                    <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
+                    <button id="boton-pagar" class="btn btn-success">Pagar</button>
+                    </form>
+                </aside>
+            </div>
+        </div>
+        <footer>
+            <%- include('../partials/footer'); %>
+        </footer>
+    </div>
+    <script src="../../static/js/utils.js"></script>
+</body>
+</html>

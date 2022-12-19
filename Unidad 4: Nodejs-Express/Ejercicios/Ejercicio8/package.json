@@ -1,0 +1,21 @@
+{
+  "name": "ejercicio8",
+  "version": "1.0.0",
+  "description": "Web dinámica generador de factura",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "ejs"
+  ],
+  "author": "Claudia Y Lopez Lafita",
+  "license": "ISC",
+  "dependencies": {
+    "body-parse": "^0.1.0",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2"
+  }
+}
