@@ -95,7 +95,7 @@ function renderizarProductos() {
         const miNodoCardBody = document.createElement('div');
         miNodoCardBody.classList.add('card-body');
         // Titulo
-        const miNodoTitle = document.createElement('h5');
+        const miNodoTitle = document.createElement('h6');
         miNodoTitle.classList.add('card-title');
         miNodoTitle.textContent = info.nombre;
         // Imagen
@@ -131,7 +131,6 @@ function anyadirProductoAlCarrito(evento) {
     carrito.push(evento.target.getAttribute('marcador'))
     // Actualizamos el carrito 
     renderizarCarrito();
-
 }
 
 /**
@@ -156,6 +155,7 @@ function renderizarCarrito() {
         }, 0);
         // Creamos el nodo del item del carrito
         const miNodo = document.createElement('li');
+        miNodo.setAttribute('name', `${miItem[0].nombre}`);
         miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
         miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0].nombre} - ${miItem[0].precio}${moneda}`;
         // Boton de borrar

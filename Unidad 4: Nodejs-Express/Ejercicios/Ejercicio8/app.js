@@ -15,8 +15,24 @@ app.get('/', (req, res) => {
     res.render('pages/index.ejs');
 });
 
-// app.post('/usuario', (req, res) => {
-    //https://expressjs.com/en/starter/static-files.html
-// });    
+app.post('/cobrar', (req, res) => {
+    let navbar = document.getElementById("carrito").querySelectorAll('li');
+    let listProducts=[];
+
+    navbar.forEach((item, index) => {
+        
+    });
+    //obtener los elementos del form carrito
+    baseDatos.validarListaProductos(usuario.dni).then((mensajeResultante) => {
+        res.render('factura.ejs',{
+            //imprimir los elementos en pantalla
+        });
+    }).catch((mensajeResultante) => {
+        res.render('facturaError.ejs',{mensajeError: mensajeResultante});
+    });
+});    
+
+//https://expressjs.com/en/starter/static-files.html
+
 
 app.listen(port,() => console.log(`server listening on port ${port}`));
