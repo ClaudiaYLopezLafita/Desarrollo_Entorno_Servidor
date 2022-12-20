@@ -7,7 +7,7 @@ app.use(bodyParser.urlencoded({ extended:true}));
 const baseDatos = require('./public/js/baseDatos.js');
 
 //
-app.use(express.static('public'));
+app.use(express.static(__dirname+'/public'));
 
 app.get('/', (req, res) => {
     res.render('formulario.ejs');
