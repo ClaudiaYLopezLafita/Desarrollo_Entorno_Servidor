@@ -4,11 +4,12 @@ const port = 8080;
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended:true}));
-const baseDatos = require('./static/js/baseDatos.js');
+const baseDatos = require('./public/js/baseDatos.js');
 
 app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/public'));
 
-app.use('/static', express.static('static'));
+// app.use('/static', express.static('static'));
 
 app.get('/', (req, res) => {
     res.render('pages/index.ejs');

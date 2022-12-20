@@ -5,69 +5,69 @@ const baseDeDatos = [
         nombre: 'Aletas',
         precio: 9.99,
         stock: 10,
-        imagen: '../../static/images/aletas.jpg'
+        imagen: 'images/aletas.jpg'
     },
     {
         id: 2,
         nombre: 'Chaleco Salvavida',
         precio: 12.2,
         stock: 30,
-        imagen: '../../static/images/chaleco.jpeg'
+        imagen: 'images/chaleco.jpeg'
     },
     {
         id: 3,
         nombre: 'Prismatico Marino',
         precio: 40.65,
         stock: 15,
-        imagen: '../../static/images/prismaticos.jpeg'
+        imagen: 'images/prismaticos.jpeg'
     },
     {
         id: 4,
         nombre: 'Achicador Balde',
         precio: 2.59,
         stock: 2,
-        imagen: '../../static/images/achicador.jpg'
+        imagen: 'images/achicador.jpg'
     },
     {
         id: 5,
         nombre: 'Reflector Radar Barco',
         precio: 18.60,
         stock: 30,
-        imagen: '../../static/images/reflector.jpg'
+        imagen: 'images/reflector.jpg'
     },
     {
         id: 6,
         nombre: 'Aletas Estabilizadoras ',
         precio: 21.75,
         stock: 16,
-        imagen: '../../static/images/aletaEstabilizadora.jpeg'
+        imagen: 'images/aletaEstabilizadora.jpeg'
     },
     {
         id: 7,
         nombre: 'Tubo + Gafas',
         precio: 8.30,
         stock: 5,
-        imagen: '../../static/images/tubo.jpg'
+        imagen: 'images/tubo.jpg'
     },
     {
         id: 8,
         nombre: 'Cuerda Esqui',
         precio: 36.21,
         stock: 80,
-        imagen: '../../static/images/cuerda.jpg'
+        imagen: 'images/cuerda.jpg'
     },
     {
         id: 9,
         nombre: 'Paddle Surf 365 IMN',
         precio: 605.92,
-        imagen: '../../static/images/paddle-surf.jpg'
+        imagen: 'images/paddle-surf.jpg'
     },
     {
         id: 10,
         nombre: 'Caja Estanca Amarilla',
         precio: 63.56,
         stock: 10,
-        imagen: '../../static/images/caja.png'
+        imagen: 'images/caja.png'
     }
 
 ];
