@@ -27,11 +27,21 @@ aside{
     color: red;
 }
 
-@media screen and (min-width: 375px) and (max-width: 667px) and (orientation : portrait) {
+.list-group-item{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+.list-group-item button{
+    height: 25px;
+}
+
+/* @media screen and (min-width: 375px) and (max-width: 667px) and (orientation : portrait) {
     #items{
         display: flex;
         flex-direction: column
     }
-}
+} */
 
 /*https://www.youtube.com/watch?v=ZvgaSmLuIAQ*/

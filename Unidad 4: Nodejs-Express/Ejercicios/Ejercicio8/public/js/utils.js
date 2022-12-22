@@ -60,6 +60,7 @@ const baseDeDatos = [
         id: 9,
         nombre: 'Paddle Surf 365 IMN',
         precio: 605.92,
+        stock: 0,
         imagen: 'images/paddle-surf.jpg'
     },
     {
@@ -157,7 +158,8 @@ function renderizarCarrito() {
         const miNodo = document.createElement('li');
         miNodo.setAttribute('name', `${miItem[0].nombre}`);
         miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
-        miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0].nombre} - ${miItem[0].precio}${moneda}`;
+        const miProducto = document.createElement('p');
+        miProducto.textContent = `${numeroUnidadesItem} x ${miItem[0].nombre} - ${miItem[0].precio}${moneda}`;
         // Boton de borrar
         const miBoton = document.createElement('button');
         miBoton.classList.add('btn', 'btn-outline-danger', 'p-1');
@@ -166,6 +168,7 @@ function renderizarCarrito() {
         miBoton.dataset.item = item;
         miBoton.addEventListener('click', borrarItemCarrito);
         // Mezclamos nodos
+        miNodo.appendChild(miProducto);
         miNodo.appendChild(miBoton);
         DOMcarrito.appendChild(miNodo);
     });
@@ -203,12 +206,12 @@ function calcularTotal() {
 }
 
 /**
- * Varia el carrito y vuelve a dibujarlo
+ * Varia el carrito
  */
 function vaciarCarrito() {
     // Limpiamos los productos guardados
     carrito = [];
-    // Renderizamos los cambios
+    // generamos los cambios
     renderizarCarrito();
 }
 

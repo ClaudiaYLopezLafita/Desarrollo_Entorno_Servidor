@@ -16,16 +16,17 @@ app.get('/', (req, res) => {
 });
 
 app.post('/cobrar', (req, res) => {
-    let navbar = document.getElementById("carrito").querySelectorAll('li');
-    let listProducts=[];
+    let products=[];
 
-    navbar.forEach((item, index) => {
-        
-    });
-    //obtener los elementos del form carrito
-    baseDatos.validarListaProductos(usuario.dni).then((mensajeResultante) => {
+    let listProduct = document.getElementById('carrito').querySelectorAll('li');
+    listProduct.forEach((product)=>{
+        let texto = product.getElementsByTagName('p')[0].innerText
+        products.push(texto);
+    })
+
+    baseDatos.validarListaProductos(products).then((mensajeResultante) => {
         res.render('factura.ejs',{
-            //imprimir los elementos en pantalla
+            
         });
     }).catch((mensajeResultante) => {
         res.render('facturaError.ejs',{mensajeError: mensajeResultante});
@@ -33,6 +34,8 @@ app.post('/cobrar', (req, res) => {
 });    
 
 //https://expressjs.com/en/starter/static-files.html
+//https://www.youtube.com/watch?v=Pri0AHpLQA0 --> minuto 1:27:42
+
 
 
 app.listen(port,() => console.log(`server listening on port ${port}`));
