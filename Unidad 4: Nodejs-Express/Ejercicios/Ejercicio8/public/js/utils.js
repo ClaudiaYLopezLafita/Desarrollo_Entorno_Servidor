@@ -4,7 +4,7 @@ const baseDeDatos = [
         id: 1,
         nombre: 'Aletas',
         precio: 9.99,
-        stock: 10,
+        stock: 0,
         imagen: 'images/aletas.jpg'
     },
     {

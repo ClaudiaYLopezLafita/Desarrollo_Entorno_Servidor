@@ -1,3 +1,9 @@
+if (typeof window !== 'undefined') {
+    console.log('You are on the browser')
+    } else {
+    console.log('You are on the server')
+}
+
 const express = require('express');
 const app = express();
 const port = 8080;
@@ -14,25 +20,24 @@ app.use(express.static(__dirname + '/public'));
 app.get('/', (req, res) => {
     res.render('pages/index.ejs');
 });
-
+//https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Fetching_data
+debugger
 app.post('/cobrar', (req, res) => {
-    let products=[];
+    let products=[
 
-    let listProduct = document.getElementById('carrito').querySelectorAll('li');
-    listProduct.forEach((product)=>{
-        let texto = product.getElementsByTagName('p')[0].innerText
-        products.push(texto);
-    })
+    ];
 
-    baseDatos.validarListaProductos(products).then((mensajeResultante) => {
-        res.render('factura.ejs',{
+    res.render('pages/facturarError.ejs',{mensajeError: document.getElementById('carrito')});
+    
+    // baseDatos.validarListaProductos(products).then((mensajeResultante) => {
+    //     res.render('pages/factura.ejs',{
             
-        });
-    }).catch((mensajeResultante) => {
-        res.render('facturaError.ejs',{mensajeError: mensajeResultante});
-    });
+    //     });
+    // }).catch((mensajeResultante) => {
+    //         res.render('pages/facturarError.ejs',{mensajeError: 'mensajeResultante'});
+    // });
 });    
-
+//https://stackdiary.com/guides/referenceerror-document-is-not-defined/
 //https://expressjs.com/en/starter/static-files.html
 //https://www.youtube.com/watch?v=Pri0AHpLQA0 --> minuto 1:27:42
 
