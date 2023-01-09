@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
 debugger
 app.post('/cobrar', (req, res) => {
     let products=[
-
+        // obtenemos un json
     ];
 
     res.render('pages/facturarError.ejs',{mensajeError: document.getElementById('carrito')});
